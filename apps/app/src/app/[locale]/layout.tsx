@@ -31,16 +31,16 @@ export default function RootLayout({
           "antialiased",
         )}
       >
-        <ThemeProvider
+        {/* <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-        >
-          {children}
+        > */}
+        {children}
 
-          <Footer />
-        </ThemeProvider>
+        {/* <Footer /> */}
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );

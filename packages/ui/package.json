@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "sideEffects": false,
-  "files": ["tailwind.config.ts", "postcss.config.js", "globals.css"],
+  "files": [
+    "tailwind.config.ts",
+    "postcss.config.js",
+    "globals.css"
+  ],
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "lint": "biome check .",
@@ -16,26 +20,43 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwindcss": "^3.4.10",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "@types/js-cookie": "^3.0.6"
   },
   "exports": {
     "./globals.css": "./src/globals.css",
     "./cn": "./src/utils/cn.ts",
+    "./hooks": "./src/hooks/index.ts",
     "./button": "./src/components/button.tsx",
     "./input": "./src/components/input.tsx",
     "./tooltip": "./src/components/tooltip.tsx",
     "./dialog": "./src/components/dialog.tsx",
     "./icons": "./src/components/icons.tsx",
+    "./label": "./src/components/label.tsx",
+    "./wordmark": "./src/components/wordmark.tsx",
+    "./animated-size-container": "./src/components/animated-size-container.tsx",
+    "./blur-image": "./src/components/blur-image.tsx",
+    "./client-only": "./src/components/client-only.tsx",
+    "./popup": "./src/components/popup.tsx",
+    "./radio-group": "./src/components/radio-group.tsx",
     "./tailwind.config": "./tailwind.config.ts",
+    "./popover": "./src/components/popover.tsx",
+    "./max-width-wrapper": "./src/components/max-width-wrapper.tsx",
     "./postcss": "./postcss.config.js"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-tooltip": "^1.1.2",
+    "@radix-ui/react-radio-group": "^1.1.3",
     "class-variance-authority": "^0.7.0",
+    "framer-motion": "^10.16.16",
     "lucide-react": "^0.438.0",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss-animate": "^1.0.7"
+    "js-cookie": "^3.0.5",
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^0.9.1"
   }
 }
