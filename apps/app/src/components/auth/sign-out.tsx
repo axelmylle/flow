@@ -12,12 +12,9 @@ export function SignOut() {
   };
 
   return (
-    <Button
-      onClick={handleSignOut}
-      variant="outline"
-      className="font-mono gap-2 flex items-center"
-      icon={<Icons.SignOut className="size-4" />}
-      text="Sign out"
-    />
+    <Button onClick={handleSignOut} variant="outline">
+      <Icons.SignOut className="size-4 mr-2" />
+      Sign out
+    </Button>
   );
 }

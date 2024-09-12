@@ -21,13 +21,14 @@ export default function Welcome() {
           <Wordmark className="relative h-16" />
         </div>
         <h1 className="animate-slide-up-fade mt-10 text-2xl font-medium [--offset:10px] [animation-delay:250ms] [animation-duration:1s] [animation-fill-mode:both]">
-          Welcome to Dub
+          Welcome to Gigflow
         </h1>
         <p className="animate-slide-up-fade mt-2 text-gray-500 [--offset:10px] [animation-delay:500ms] [animation-duration:1s] [animation-fill-mode:both]">
-          Dub gives you marketing superpowers with short links that stand out.
+          Let's connect you with exciting freelance opportunities and showcase
+          your skills to top clients.
         </p>
         <div className="animate-slide-up-fade mt-10 w-full [--offset:10px] [animation-delay:750ms] [animation-duration:1s] [animation-fill-mode:both]">
-          <NextButton text="Get started" step="plan" />
+          <NextButton step="basic-info" />
         </div>
       </div>
     </>

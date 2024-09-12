@@ -1,5 +1,5 @@
-import { GoogleSignin } from "@/components/google-signin";
-import { LinkedInSignin } from "@/components/linkedin-signin";
+import { GoogleSignin } from "@/components/auth/google-signin";
+import { LinkedInSignin } from "@/components/auth/linkedin-signin";
 import Image from "next/image";
 
 export const metadata = {

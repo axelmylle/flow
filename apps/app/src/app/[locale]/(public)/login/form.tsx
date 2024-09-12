@@ -89,8 +89,6 @@ export default function LoginForm() {
   const GoogleButton = () => {
     return (
       <Button
-        text="Continue with Google"
-        variant="secondary"
         onClick={() => {
           setClickedMethod("google");
           setLastUsedAuthMethod("google");
@@ -101,18 +99,21 @@ export default function LoginForm() {
             },
           });
         }}
+        variant="outline"
+        className="w-full"
         loading={clickedMethod === "google"}
         disabled={clickedMethod && clickedMethod !== "google"}
-        icon={<Icons.Google className="size-4" />}
-      />
+      >
+        <Icons.Google className="size-4 mr-2" />
+        Continue with Google
+      </Button>
     );
   };
 
   const LinkedInButton = () => {
     return (
       <Button
-        text="Continue with LinkedIn"
-        variant="secondary"
+        variant="outline"
         onClick={() => {
           setClickedMethod("linkedin");
           setLastUsedAuthMethod("linkedin");
@@ -123,10 +124,13 @@ export default function LoginForm() {
             },
           });
         }}
+        className="w-full"
         loading={clickedMethod === "linkedin"}
         disabled={clickedMethod && clickedMethod !== "linkedin"}
-        icon={<Icons.Linkedin className="size-4 text-black" />}
-      />
+      >
+        <Icons.Linkedin className="size-4 mr-2" />
+        Continue with Linkedin
+      </Button>
     );
   };
 
@@ -351,15 +355,7 @@ const SignInWithEmail = () => {
       )}
 
       <Button
-        text={`Continue with ${password ? "Password" : "Email"}`}
-        variant="secondary"
-        icon={
-          password ? (
-            <Icons.InputPassword className="size-4 text-gray-600" />
-          ) : (
-            <Mail className="size-4 text-gray-600" />
-          )
-        }
+        variant="outline"
         {...(authMethod !== "email" && {
           type: "button",
           onClick: (e) => {
@@ -370,7 +366,14 @@ const SignInWithEmail = () => {
         })}
         loading={checkingEmailPassword || clickedMethod === "email"}
         disabled={clickedMethod && clickedMethod !== "email"}
-      />
+      >
+        {password ? (
+          <Icons.InputPassword className="size-4 text-gray-600 mr-2" />
+        ) : (
+          <Mail className="size-4 text-gray-600 mr-2" />
+        )}{" "}
+        Continue with {password ? "Password" : "Email"}
+      </Button>
     </form>
   );
 };

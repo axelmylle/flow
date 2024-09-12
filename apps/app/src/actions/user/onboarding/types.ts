@@ -1,11 +1,9 @@
 export const ONBOARDING_STEPS = [
-  "workspace",
-  "link",
-  "domain",
-  "domain/custom",
-  "invite",
-  "plan",
-  "completed",
+  "basic-info",
+  "preferences",
+  "skills",
+  "experience",
+  "education",
 ] as const;
 
 export type OnboardingStep = (typeof ONBOARDING_STEPS)[number];

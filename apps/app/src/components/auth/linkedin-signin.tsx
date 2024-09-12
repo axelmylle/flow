@@ -16,11 +16,8 @@ export function LinkedInSignin() {
   };
 
   return (
-    <Button
-      onClick={handleSignin}
-      variant="outline"
-      className="font-mono"
-      text="Sign in with LinkedIn"
-    />
+    <Button onClick={handleSignin} variant="outline" className="font-mono">
+      Sign in with Linkedin
+    </Button>
   );
 }

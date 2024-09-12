@@ -1,5 +1,5 @@
+import { setOnboardingProgress } from "@/actions/user/onboarding/set-onboarding-progress";
 import type { OnboardingStep } from "@/actions/user/onboarding/types";
-import { setOnboardingProgress } from "@/lib/actions/set-onboarding-progress";
 import { useAction } from "next-safe-action/hooks";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
@@ -11,9 +11,7 @@ export function useOnboardingProgress() {
   const searchParams = useSearchParams();
 
   const { execute, executeAsync, isExecuting, hasSucceeded } = useAction(
-    () => {
-      return true;
-    },
+    setOnboardingProgress,
     {
       onSuccess: () => {
         console.log("Onboarding progress updated");

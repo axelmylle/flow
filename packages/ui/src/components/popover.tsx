@@ -1,13 +1,53 @@
 "use client";
 
 import * as PopoverPrimitive from "@radix-ui/react-popover";
-import type { PropsWithChildren, ReactNode } from "react";
+import * as React from "react";
 import { Drawer } from "vaul";
 import { useMediaQuery } from "../hooks";
 import { cn } from "../utils";
 
-export type PopoverProps = PropsWithChildren<{
-  content: ReactNode | string;
+const Popover = PopoverPrimitive.Root;
+
+const PopoverTrigger = PopoverPrimitive.Trigger;
+
+const PopoverContent = React.forwardRef<
+  React.ElementRef<typeof PopoverPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
+>(({ className, align = "center", sideOffset = 4, ...props }, ref) => (
+  <PopoverPrimitive.Portal>
+    <PopoverPrimitive.Content
+      ref={ref}
+      align={align}
+      sideOffset={sideOffset}
+      className={cn(
+        "z-50 w-72 border bg-background p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        className,
+      )}
+      {...props}
+    />
+  </PopoverPrimitive.Portal>
+));
+PopoverContent.displayName = PopoverPrimitive.Content.displayName;
+
+const PopoverContentWithoutPortal = React.forwardRef<
+  React.ElementRef<typeof PopoverPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
+>(({ className, align = "center", sideOffset = 4, ...props }, ref) => (
+  <PopoverPrimitive.Content
+    ref={ref}
+    align={align}
+    sideOffset={sideOffset}
+    className={cn(
+      "z-50 w-72 border bg-background p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+      className,
+    )}
+    {...props}
+  />
+));
+
+export interface PopoverProps {
+  children: React.ReactNode;
+  content: React.ReactNode | string;
   align?: "center" | "start" | "end";
   openPopover: boolean;
   setOpenPopover: (open: boolean) => void;
@@ -16,9 +56,9 @@ export type PopoverProps = PropsWithChildren<{
   collisionBoundary?: Element | Element[];
   sticky?: "partial" | "always";
   onEscapeKeyDown?: (event: KeyboardEvent) => void;
-}>;
+}
 
-export function Popover({
+function ResponsivePopover({
   children,
   content,
   align = "center",
@@ -58,16 +98,15 @@ export function Popover({
   }
 
   return (
-    <PopoverPrimitive.Root open={openPopover} onOpenChange={setOpenPopover}>
-      <PopoverPrimitive.Trigger className="sm:inline-flex" asChild>
+    <Popover open={openPopover} onOpenChange={setOpenPopover}>
+      <PopoverTrigger className="sm:inline-flex" asChild>
         {children}
-      </PopoverPrimitive.Trigger>
+      </PopoverTrigger>
       <PopoverPrimitive.Portal>
-        <PopoverPrimitive.Content
-          sideOffset={8}
+        <PopoverContent
           align={align}
           className={cn(
-            "animate-slide-up-fade z-50 items-center rounded-lg border border-gray-200 bg-white drop-shadow-lg sm:block",
+            "p-0 animate-slide-up-fade z-50 items-center rounded-lg border border-gray-200 bg-white drop-shadow-lg sm:block",
             popoverContentClassName,
           )}
           sticky={sticky}
@@ -75,8 +114,16 @@ export function Popover({
           onEscapeKeyDown={onEscapeKeyDown}
         >
           {content}
-        </PopoverPrimitive.Content>
+        </PopoverContent>
       </PopoverPrimitive.Portal>
-    </PopoverPrimitive.Root>
+    </Popover>
   );
 }
+
+export {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverContentWithoutPortal,
+  ResponsivePopover,
+};

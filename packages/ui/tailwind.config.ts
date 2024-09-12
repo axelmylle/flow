@@ -1,3 +1,4 @@
+import forms from "@tailwindcss/forms";
 import type { Config } from "tailwindcss";
 
 const config = {
@@ -62,6 +63,8 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        // Custom spinner animation (for loading-spinner)
+
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -70,14 +73,23 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        spinner: {
+          "0%": {
+            opacity: "1",
+          },
+          "100%": {
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        spinner: "spinner 1.2s linear infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), forms],
 } satisfies Config;
 
 export default config;

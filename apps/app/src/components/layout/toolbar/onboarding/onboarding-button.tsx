@@ -3,7 +3,7 @@
 import { Button } from "@v1/ui/button";
 import { useLocalStorage, useMediaQuery } from "@v1/ui/hooks";
 import { Icons } from "@v1/ui/icons";
-import { Popover } from "@v1/ui/popover";
+import { Popover, ResponsivePopover } from "@v1/ui/popover";
 
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
@@ -50,7 +50,7 @@ function OnboardingButtonInner({
     return [
       {
         display: "Complete your profile",
-        cta: `/${slug}`,
+        cta: `/onboarding`,
         checked: false, //linksCount > 0,
       },
       {
@@ -71,7 +71,7 @@ function OnboardingButtonInner({
   const completedTasks = tasks.filter((task) => task.checked).length;
 
   return loading || completedTasks === tasks.length ? null : (
-    <Popover
+    <ResponsivePopover
       align="end"
       popoverContentClassName="rounded-xl"
       content={
@@ -140,7 +140,7 @@ function OnboardingButtonInner({
           {Math.round((completedTasks / tasks.length) * 100)}% complete
         </span>
       </button>
-    </Popover>
+    </ResponsivePopover>
   );
 }
 
@@ -161,7 +161,7 @@ function OnboardingMenu({ onHideForever }: { onHideForever: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Popover
+    <ResponsivePopover
       align="end"
       content={
         <div className="p-1">
@@ -179,6 +179,6 @@ function OnboardingMenu({ onHideForever }: { onHideForever: () => void }) {
       <MiniButton>
         <Icons.ThreeDots className="size-4" />
       </MiniButton>
-    </Popover>
+    </ResponsivePopover>
   );
 }

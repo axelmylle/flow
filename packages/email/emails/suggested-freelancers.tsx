@@ -44,7 +44,7 @@ export default function JobSuggestionEmail() {
               <ul className="list-none p-0">
                 <li className="flex items-center mb-4">
                   <Img
-                    src={`${baseUrl}/images/john-doe.jpg`}
+                    src={"https://github.com/shadcn.png"}
                     width="50"
                     height="50"
                     alt="John Doe"
@@ -57,7 +57,7 @@ export default function JobSuggestionEmail() {
                 </li>
                 <li className="flex items-center mb-4">
                   <Img
-                    src={`${baseUrl}/images/jane-smith.jpg`}
+                    src={"https://github.com/shadcn.png"}
                     width="50"
                     height="50"
                     alt="Jane Smith"
@@ -70,7 +70,7 @@ export default function JobSuggestionEmail() {
                 </li>
                 <li className="flex items-center mb-4">
                   <Img
-                    src={`${baseUrl}/images/alex-johnson.jpg`}
+                    src={"https://github.com/shadcn.png"}
                     width="50"
                     height="50"
                     alt="Alex Johnson"

@@ -16,11 +16,8 @@ export function GoogleSignin() {
   };
 
   return (
-    <Button
-      onClick={handleSignin}
-      variant="outline"
-      className="font-mono"
-      text="Sign in with Google"
-    />
+    <Button onClick={handleSignin} variant="outline" className="font-mono">
+      Sign in with Google
+    </Button>
   );
 }

@@ -12,11 +12,12 @@ export function NextButton({
 
   return (
     <Button
-      variant="primary"
-      text="Next"
+      variant="default"
       onClick={() => continueTo(step)}
       loading={isLoading || isSuccessful}
       {...rest}
-    />
+    >
+      Next
+    </Button>
   );
 }
