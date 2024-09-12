@@ -32,8 +32,7 @@ INSERT INTO
     reauthentication_token,
     reauthentication_sent_at,
     is_sso_user,
-    deleted_at,
-    is_anonymous
+    deleted_at
   )
 VALUES
   (
@@ -69,8 +68,7 @@ VALUES
     '',
     NULL,
     false,
-    NULL,
-    false
+    NULL
   );
 
 INSERT INTO
