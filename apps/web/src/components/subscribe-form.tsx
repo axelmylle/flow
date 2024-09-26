@@ -12,7 +12,11 @@ function SubmitButton() {
 
   return (
     <Button type="submit" className="ml-auto rounded-full">
-      {pending ? <Icons.Loader className="size-4" /> : "Subscribe"}
+      {pending ? (
+        <Icons.Loader className="size-4 loading-spinner" />
+      ) : (
+        "Subscribe"
+      )}
     </Button>
   );
 }
@@ -48,14 +52,14 @@ export function SubscribeForm({ group, placeholder, className }: Props) {
           </div>
         ) : (
           <form
-            className="flex flex-col gap-4"
+            className="flex flex-col sm:flex-row gap-2"
             action={async (formData) => {
               setSubmitted(true);
               await subscribeAction(formData, group);
 
-              setTimeout(() => {
-                setSubmitted(false);
-              }, 5000);
+              // setTimeout(() => {
+              //   setSubmitted(false);
+              // }, 5000);
             }}
           >
             <Input

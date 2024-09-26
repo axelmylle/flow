@@ -7,6 +7,12 @@ const nextConfig = {
   experimental: {
     instrumentationHook: process.env.NODE_ENV === "production",
   },
+  // Add logging configuration
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
 };
 
 export default withSentryConfig(nextConfig, {

@@ -1,5 +1,6 @@
 "use client";
 
+import { updateFreelancerAction } from "@/actions/freelancer/update-freelancer-action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@v1/ui/button";
 import { cn } from "@v1/ui/cn";
@@ -11,6 +12,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@v1/ui/form";
+import { useMediaQuery } from "@v1/ui/hooks";
 import { Icons } from "@v1/ui/icons";
 import { RadioGroup, RadioGroupItem } from "@v1/ui/radio-group";
 import {
@@ -20,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@v1/ui/select";
+import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -38,6 +41,11 @@ const formSchema = z.object({
 
 export function WorkTypeSelector() {
   const { continueTo, isLoading, isSuccessful } = useOnboardingProgress();
+
+  const action = useAction(updateFreelancerAction);
+
+  const { isMobile } = useMediaQuery();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,9 +56,13 @@ export function WorkTypeSelector() {
 
   const watchWorkType = form.watch("workType");
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    continueTo("skills");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await action.execute({
+      preferred_work_style: values.workType,
+      office_days: values.workType === "hybrid" ? values.officeDays : null,
+    });
+
+    continueTo("vat");
   }
 
   return (

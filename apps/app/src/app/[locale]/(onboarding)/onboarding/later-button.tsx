@@ -26,7 +26,7 @@ export function LaterButton({
     >
       <Icons.LoadingSpinner
         className={cn(
-          "size-3 transition-opacity",
+          "size-3 transition-opacity ",
           !(isLoading || isSuccessful) && "opacity-0",
         )}
       />

@@ -2,6 +2,7 @@ import { SignOut } from "@/components/auth/sign-out";
 import { getI18n } from "@/locales/server";
 import { getUser } from "@v1/supabase/queries";
 import { Button } from "@v1/ui/button";
+import PageClient from "./page-client";
 
 export const metadata = {
   title: "Home",
@@ -13,9 +14,10 @@ export default async function Page() {
 
   return (
     <div className="flex flex-col items-center justify-center">
+      <PageClient />
       <div className="flex flex-col items-center justify-center gap-4">
         <p>{t("welcome", { name: data?.user?.email })}</p>
-        <div className="flex w-full relative">
+        {/* <div className="flex w-full relative">
           <div className="group relative w-full max-w-2xl h-48 overflow-hidden rounded-2xl border border-gray-200 bg-white/40 p-6 shadow-md shadow-gray-400/10 backdrop-blur-sm transition-all duration-75 hover:bg-white">
             <div className="flex flex-col gap-2 z-10 relative">
               <h3 className="text-xl font-semibold text-gray-800">
@@ -382,7 +384,7 @@ export default async function Page() {
               </svg>
             </div>
           </div>
-        </div>
+        </div> */}
         <SignOut />
       </div>
     </div>

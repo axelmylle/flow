@@ -3,7 +3,9 @@ export const ONBOARDING_STEPS = [
   "preferences",
   "skills",
   "experience",
+  "vat",
   "education",
+  "completed",
 ] as const;
 
 export type OnboardingStep = (typeof ONBOARDING_STEPS)[number];

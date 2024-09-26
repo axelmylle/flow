@@ -1,5 +1,5 @@
-import { cn } from "@dub/utils";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps, cva } from "class-variance-authority";
+import { cn } from "../utils";
 
 const badgeVariants = cva(
   "max-w-fit rounded-full border px-2 py-px text-xs font-medium capitalize whitespace-nowrap",

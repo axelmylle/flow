@@ -28,7 +28,10 @@
     "zod": "^3.23.8",
     "@hookform/resolvers": "^3.9.0",
     "zod-openapi": "^2.19.0",
-    "react-hook-form": "^7.52.2"
+    "react-hook-form": "^7.52.2",
+    "react-confetti": "^6.1.0",
+    "use-debounce": "^10.0.3",
+    "@radix-ui/react-hover-card": "^1.1.1"
   },
   "devDependencies": {
     "@sentry/nextjs": "^8",

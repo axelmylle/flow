@@ -15,3 +15,23 @@ export async function updateUser(userId: string, data: TablesUpdate<"users">) {
     throw error;
   }
 }
+
+export async function updateFreelancer(
+  freelancerId: string,
+  data: TablesUpdate<"freelancers">,
+) {
+  const supabase = createClient();
+
+  try {
+    const result = await supabase
+      .from("freelancers")
+      .update(data)
+      .eq("id", freelancerId);
+
+    return result;
+  } catch (error) {
+    logger.error(error);
+
+    throw error;
+  }
+}
