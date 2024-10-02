@@ -34,7 +34,7 @@ export async function NavUser({
     supabase.auth.signOut();
     redirect("/");
   };
-  console.log("user", user);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="w-full rounded-md outline-none ring-ring hover:bg-accent focus-visible:ring-2 data-[state=open]:bg-accent">

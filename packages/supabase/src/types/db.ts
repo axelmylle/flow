@@ -9,6 +9,138 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      bank_accounts: {
+        Row: {
+          account_id: string
+          balance: number | null
+          bank_connection_id: string | null
+          base_balance: number | null
+          base_currency: string | null
+          created_at: string
+          created_by: string
+          currency: string | null
+          enabled: boolean
+          id: string
+          manual: boolean | null
+          name: string | null
+          team_id: string
+          type: Database["public"]["Enums"]["account_type"] | null
+        }
+        Insert: {
+          account_id: string
+          balance?: number | null
+          bank_connection_id?: string | null
+          base_balance?: number | null
+          base_currency?: string | null
+          created_at?: string
+          created_by: string
+          currency?: string | null
+          enabled?: boolean
+          id?: string
+          manual?: boolean | null
+          name?: string | null
+          team_id: string
+          type?: Database["public"]["Enums"]["account_type"] | null
+        }
+        Update: {
+          account_id?: string
+          balance?: number | null
+          bank_connection_id?: string | null
+          base_balance?: number | null
+          base_currency?: string | null
+          created_at?: string
+          created_by?: string
+          currency?: string | null
+          enabled?: boolean
+          id?: string
+          manual?: boolean | null
+          name?: string | null
+          team_id?: string
+          type?: Database["public"]["Enums"]["account_type"] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bank_accounts_bank_connection_id_fkey"
+            columns: ["bank_connection_id"]
+            isOneToOne: false
+            referencedRelation: "bank_connections"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bank_accounts_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_bank_accounts_company_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bank_connections: {
+        Row: {
+          access_token: string | null
+          created_at: string
+          enrollment_id: string | null
+          error_details: string | null
+          expires_at: string | null
+          id: string
+          institution_id: string
+          last_accessed: string | null
+          logo_url: string | null
+          name: string
+          provider: Database["public"]["Enums"]["bank_providers"] | null
+          reference_id: string | null
+          status: Database["public"]["Enums"]["connection_status"] | null
+          team_id: string
+        }
+        Insert: {
+          access_token?: string | null
+          created_at?: string
+          enrollment_id?: string | null
+          error_details?: string | null
+          expires_at?: string | null
+          id?: string
+          institution_id: string
+          last_accessed?: string | null
+          logo_url?: string | null
+          name: string
+          provider?: Database["public"]["Enums"]["bank_providers"] | null
+          reference_id?: string | null
+          status?: Database["public"]["Enums"]["connection_status"] | null
+          team_id: string
+        }
+        Update: {
+          access_token?: string | null
+          created_at?: string
+          enrollment_id?: string | null
+          error_details?: string | null
+          expires_at?: string | null
+          id?: string
+          institution_id?: string
+          last_accessed?: string | null
+          logo_url?: string | null
+          name?: string
+          provider?: Database["public"]["Enums"]["bank_providers"] | null
+          reference_id?: string | null
+          status?: Database["public"]["Enums"]["connection_status"] | null
+          team_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_company_id"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       freelancers: {
         Row: {
           bio: string | null
@@ -59,38 +191,212 @@ export type Database = {
           },
         ]
       }
-      posts: {
+      teams: {
         Row: {
-          content: string
+          base_currency: string | null
           created_at: string
+          document_classification: boolean | null
+          email: string | null
           id: string
-          title: string
-          updated_at: string
-          user_id: string
+          inbox_email: string | null
+          inbox_forwarding: boolean | null
+          inbox_id: string | null
+          logo_url: string | null
+          name: string | null
         }
         Insert: {
-          content: string
+          base_currency?: string | null
           created_at?: string
+          document_classification?: boolean | null
+          email?: string | null
           id?: string
-          title: string
-          updated_at?: string
-          user_id: string
+          inbox_email?: string | null
+          inbox_forwarding?: boolean | null
+          inbox_id?: string | null
+          logo_url?: string | null
+          name?: string | null
         }
         Update: {
-          content?: string
+          base_currency?: string | null
           created_at?: string
+          document_classification?: boolean | null
+          email?: string | null
           id?: string
-          title?: string
-          updated_at?: string
-          user_id?: string
+          inbox_email?: string | null
+          inbox_forwarding?: boolean | null
+          inbox_id?: string | null
+          logo_url?: string | null
+          name?: string | null
+        }
+        Relationships: []
+      }
+      transaction_categories: {
+        Row: {
+          color: string | null
+          company_id: string
+          created_at: string | null
+          description: string | null
+          embedding: string | null
+          id: string
+          name: string
+          slug: string
+          system: boolean | null
+          vat: number | null
+        }
+        Insert: {
+          color?: string | null
+          company_id: string
+          created_at?: string | null
+          description?: string | null
+          embedding?: string | null
+          id?: string
+          name: string
+          slug: string
+          system?: boolean | null
+          vat?: number | null
+        }
+        Update: {
+          color?: string | null
+          company_id?: string
+          created_at?: string | null
+          description?: string | null
+          embedding?: string | null
+          id?: string
+          name?: string
+          slug?: string
+          system?: boolean | null
+          vat?: number | null
         }
         Relationships: [
           {
-            foreignKeyName: "fk_posts_user"
-            columns: ["user_id"]
+            foreignKeyName: "transaction_categories_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      transactions: {
+        Row: {
+          amount: number
+          amount_text: string | null
+          assigned_id: string | null
+          balance: number | null
+          bank_account_id: string | null
+          base_amount: number | null
+          base_currency: string | null
+          calculated_vat: number | null
+          category: Database["public"]["Enums"]["transactioncategories"] | null
+          category_slug: string | null
+          company_id: string
+          created_at: string
+          currency: string
+          date: string
+          description: string | null
+          frequency: Database["public"]["Enums"]["transaction_frequency"] | null
+          fts_vector: unknown | null
+          id: string
+          internal_id: string
+          is_fulfilled: boolean | null
+          manual: boolean | null
+          method: Database["public"]["Enums"]["transactionmethods"]
+          name: string
+          note: string | null
+          recurring: boolean | null
+          status: Database["public"]["Enums"]["transactionstatus"] | null
+          updated_at: string | null
+        }
+        Insert: {
+          amount: number
+          amount_text?: string | null
+          assigned_id?: string | null
+          balance?: number | null
+          bank_account_id?: string | null
+          base_amount?: number | null
+          base_currency?: string | null
+          calculated_vat?: number | null
+          category?: Database["public"]["Enums"]["transactioncategories"] | null
+          category_slug?: string | null
+          company_id: string
+          created_at?: string
+          currency: string
+          date: string
+          description?: string | null
+          frequency?:
+            | Database["public"]["Enums"]["transaction_frequency"]
+            | null
+          fts_vector?: unknown | null
+          id?: string
+          internal_id: string
+          is_fulfilled?: boolean | null
+          manual?: boolean | null
+          method: Database["public"]["Enums"]["transactionmethods"]
+          name: string
+          note?: string | null
+          recurring?: boolean | null
+          status?: Database["public"]["Enums"]["transactionstatus"] | null
+          updated_at?: string | null
+        }
+        Update: {
+          amount?: number
+          amount_text?: string | null
+          assigned_id?: string | null
+          balance?: number | null
+          bank_account_id?: string | null
+          base_amount?: number | null
+          base_currency?: string | null
+          calculated_vat?: number | null
+          category?: Database["public"]["Enums"]["transactioncategories"] | null
+          category_slug?: string | null
+          company_id?: string
+          created_at?: string
+          currency?: string
+          date?: string
+          description?: string | null
+          frequency?:
+            | Database["public"]["Enums"]["transaction_frequency"]
+            | null
+          fts_vector?: unknown | null
+          id?: string
+          internal_id?: string
+          is_fulfilled?: boolean | null
+          manual?: boolean | null
+          method?: Database["public"]["Enums"]["transactionmethods"]
+          name?: string
+          note?: string | null
+          recurring?: boolean | null
+          status?: Database["public"]["Enums"]["transactionstatus"] | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_transactions_assigned_id_fkey"
+            columns: ["assigned_id"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_transactions_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "transactions_bank_account_id_fkey"
+            columns: ["bank_account_id"]
+            isOneToOne: false
+            referencedRelation: "bank_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "transactions_category_slug_company_id_fkey"
+            columns: ["category_slug", "company_id"]
+            isOneToOne: false
+            referencedRelation: "transaction_categories"
+            referencedColumns: ["slug", "company_id"]
           },
         ]
       }
@@ -102,6 +408,7 @@ export type Database = {
           full_name: string | null
           id: string
           locale: string | null
+          team_id: string | null
           updated_at: string | null
         }
         Insert: {
@@ -111,6 +418,7 @@ export type Database = {
           full_name?: string | null
           id: string
           locale?: string | null
+          team_id?: string | null
           updated_at?: string | null
         }
         Update: {
@@ -120,6 +428,7 @@ export type Database = {
           full_name?: string | null
           id?: string
           locale?: string | null
+          team_id?: string | null
           updated_at?: string | null
         }
         Relationships: [
@@ -128,6 +437,13 @@ export type Database = {
             columns: ["id"]
             isOneToOne: true
             referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "users_company_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
             referencedColumns: ["id"]
           },
         ]
@@ -140,7 +456,58 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      account_type:
+        | "depository"
+        | "credit"
+        | "other_asset"
+        | "loan"
+        | "other_liability"
+      bank_providers: "gocardless" | "plaid" | "teller"
+      bankproviders: "gocardless" | "plaid" | "teller"
+      connection_status: "disconnected" | "connected" | "unknown"
+      inbox_status: "processing" | "pending" | "archived" | "new" | "deleted"
+      inbox_type: "invoice" | "expense"
+      reporttypes: "profit" | "revenue" | "burn_rate" | "expense"
+      teamroles: "owner" | "member"
+      trackerstatus: "in_progress" | "completed"
+      transaction_frequency:
+        | "weekly"
+        | "biweekly"
+        | "monthly"
+        | "semi_monthly"
+        | "annually"
+        | "irregular"
+        | "unknown"
+      transactioncategories:
+        | "travel"
+        | "office_supplies"
+        | "meals"
+        | "software"
+        | "rent"
+        | "income"
+        | "equipment"
+        | "transfer"
+        | "internet_and_telephone"
+        | "facilities_expenses"
+        | "activity"
+        | "uncategorized"
+        | "taxes"
+        | "other"
+        | "salary"
+        | "fees"
+      transactionmethods:
+        | "payment"
+        | "card_purchase"
+        | "card_atm"
+        | "transfer"
+        | "other"
+        | "unknown"
+        | "ach"
+        | "interest"
+        | "deposit"
+        | "wire"
+        | "fee"
+      transactionstatus: "posted" | "pending" | "excluded" | "completed"
     }
     CompositeTypes: {
       [_ in never]: never

@@ -1,8 +1,8 @@
-import type { TriggerConfig } from "@trigger.dev/sdk/v3";
+import { defineConfig } from "@trigger.dev/sdk/v3";
 
-export const config: TriggerConfig = {
-  // Replace <your-project-ref> with your project id: https://trigger.dev/docs/trigger-config
+export default defineConfig({
   project: "proj_raxmqnsxepndhqkztsnt",
+  runtime: "node",
   logLevel: "log",
   retries: {
     enabledInDev: true,
@@ -14,4 +14,5 @@ export const config: TriggerConfig = {
       randomize: true,
     },
   },
-};
+  dirs: ["./src/index.ts"],
+});

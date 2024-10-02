@@ -14,7 +14,14 @@ const authMiddleware = (c: Context, next: Next) => {
   }
 
   const { API_SECRET_KEY } = env(c);
+
+  console.log("API_SECRET_KEY:", API_SECRET_KEY);
+
+  const authHeader = c.req.header("Authorization");
+  console.log("Authorization header:", authHeader);
+
   const bearer = bearerAuth({ token: API_SECRET_KEY });
+  console.log("Bearer :", bearer);
 
   return bearer(c, next);
 };

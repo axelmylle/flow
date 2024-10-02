@@ -6,7 +6,29 @@ import { getUser } from "@v1/supabase/queries";
 import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
 import { SidebarLayout, SidebarTrigger } from "@v1/ui/sidebar";
 
+import { getCountryCode } from "@v1/location";
+import dynamic from "next/dynamic";
 import { cookies } from "next/headers";
+
+const ConnectTransactionsModal = dynamic(
+  () =>
+    import("@/components/transactions/modals/connect-transactions-modal").then(
+      (mod) => mod.ConnectTransactionsModal,
+    ),
+  {
+    ssr: false,
+  },
+);
+
+const SelectBankAccountsModal = dynamic(
+  () =>
+    import("@/components/transactions/modals/select-bank-accounts").then(
+      (mod) => mod.SelectBankAccountsModal,
+    ),
+  {
+    ssr: false,
+  },
+);
 
 export default async function Layout({
   children,
@@ -15,6 +37,9 @@ export default async function Layout({
   const {
     data: { user },
   } = await getUser();
+
+  const countryCode = getCountryCode();
+
   return (
     <div>
       <SidebarLayout>
@@ -29,6 +54,8 @@ export default async function Layout({
       </SidebarLayout>
       <UserSurveyPopup />
 
+      <ConnectTransactionsModal countryCode={countryCode} />
+      <SelectBankAccountsModal />
       <Toolbar show={["onboarding"]} />
     </div>
   );

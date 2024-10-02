@@ -16,6 +16,51 @@ export async function getUser() {
     throw error;
   }
 }
+export async function getCurrentUserTeamQuery(supabase: Client) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session?.user) {
+    return;
+  }
+  return getUserQuery(supabase, session.user?.id);
+}
+
+type GetUserInviteQueryParams = {
+  code: string;
+  email: string;
+};
+
+export async function getUserInviteQuery(
+  supabase: Client,
+  params: GetUserInviteQueryParams,
+) {
+  return supabase
+    .from("user_invites")
+    .select("*")
+    .eq("code", params.code)
+    .eq("email", params.email)
+    .single();
+}
+
+export async function getUserQuery(supabase: Client, userId: string) {
+  return supabase
+    .from("users")
+    .select(
+      `
+      *,
+      team:team_id(*)
+    `,
+    )
+    .eq("id", userId)
+    .single()
+    .throwOnError();
+}
+
+export async function getTeamSettingsQuery(supabase: Client, teamId: string) {
+  return supabase.from("teams").select("*").eq("id", teamId).single();
+}
 
 export type GetTransactionsParams = {
   to: number;
@@ -204,4 +249,30 @@ export async function getPosts() {
     logger.error(error);
     throw error;
   }
+}
+
+export type GetTeamBankAccountsParams = {
+  teamId: string;
+  enabled?: boolean;
+};
+
+export async function getTeamBankAccountsQuery(
+  supabase: Client,
+  params: GetTeamBankAccountsParams,
+) {
+  const { teamId, enabled } = params;
+
+  const query = supabase
+    .from("bank_accounts")
+    .select("*, bank:bank_connections(*)")
+    .eq("team_id", teamId)
+    .order("created_at", { ascending: true })
+    .order("name", { ascending: false })
+    .throwOnError();
+
+  if (enabled) {
+    query.eq("enabled", enabled);
+  }
+
+  return query;
 }

@@ -1,7 +1,11 @@
 {
   "name": "v1",
   "private": true,
-  "workspaces": ["packages/*", "apps/*", "tooling/*"],
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "tooling/*"
+  ],
   "scripts": {
     "build": "turbo build",
     "clean": "git clean -xdf node_modules",
@@ -12,6 +16,7 @@
     "dev:app": "turbo dev --filter=@v1/app",
     "start:web": "turbo start --filter=@v1/web",
     "start:app": "turbo start --filter=@v1/app",
+    "jobs:app": "turbo jobs --filter=@v1/jobs",
     "test": "turbo test --parallel",
     "format": "biome format --write .",
     "lint": "turbo lint && bun lint:repo",
@@ -25,5 +30,8 @@
     "turbo": "2.1.1",
     "typescript": "^5.5.4"
   },
+  "trustedDependencies": [
+    "@trigger.dev/sdk"
+  ],
   "packageManager": "bun@1.1.26"
 }

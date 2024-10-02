@@ -85,9 +85,10 @@ type SearchResult = {
 };
 
 app.openapi(indexRoute, async (c) => {
+  console.log("indexRoute");
+
   const envs = env(c);
   const { countryCode, q = "*", limit = "50" } = c.req.valid("query");
-
   const typesense = SearchClient(envs);
 
   const searchParameters = {
@@ -98,6 +99,7 @@ app.openapi(indexRoute, async (c) => {
   };
 
   try {
+    console.log("here");
     const result = await typesense
       .collections("institutions")
       .documents()
@@ -105,6 +107,7 @@ app.openapi(indexRoute, async (c) => {
 
     const resultString: string =
       typeof result === "string" ? result : JSON.stringify(result);
+    console.log("here");
 
     const data: SearchResult = JSON.parse(resultString);
 

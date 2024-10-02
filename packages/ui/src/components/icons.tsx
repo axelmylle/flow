@@ -1,15 +1,23 @@
+import { MagicWandIcon } from "@radix-ui/react-icons";
 import {
+  AlertCircle,
+  ArrowLeft,
   Briefcase,
   Building,
   Calendar,
   Check,
   ChevronDown,
+  CircleX,
   Clock,
   Copy,
+  DollarSign,
   Laptop,
   Loader2,
   LogOut,
+  LucidePlugZap,
   MapPin,
+  RefreshCcw,
+  Star,
 } from "lucide-react";
 import type { SVGProps } from "react";
 import { cn } from "../utils";
@@ -19,6 +27,14 @@ export const Icons = {
   Copy,
   Briefcase,
   MapPin,
+  AI: MagicWandIcon,
+  Reconnect: LucidePlugZap,
+  Refresh: RefreshCcw,
+  Error: CircleX,
+  ArrowBack: ArrowLeft,
+  AlertCircle: AlertCircle,
+  DollarSign: DollarSign,
+  Star: Star,
   Cards: function Cards(props: SVGProps<SVGSVGElement>) {
     return (
       <svg

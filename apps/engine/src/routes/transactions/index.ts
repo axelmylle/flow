@@ -38,6 +38,8 @@ const indexRoute = createRoute({
 
 app.openapi(indexRoute, async (c) => {
   const envs = env(c);
+  console.log(c.req.valid("query"), "hi");
+  console.log(c.req.valid("query"), "hi");
   const { provider, accountId, accountType, latest, accessToken } =
     c.req.valid("query");
 

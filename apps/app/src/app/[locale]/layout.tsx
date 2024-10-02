@@ -1,10 +1,13 @@
 import "@v1/ui/globals.css";
 import { Footer } from "@/components/footer";
 import { cn } from "@v1/ui/cn";
+import { Toaster } from "@v1/ui/toaster";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import type { ReactElement } from "react";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "Create v1",
@@ -20,9 +23,11 @@ export const viewport = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  params: { locale },
+}: {
+  children: ReactElement;
+  params: { locale: string };
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -31,16 +36,8 @@ export default function RootLayout({
           "antialiased",
         )}
       >
-        {/* <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        > */}
-        {children}
-
-        {/* <Footer /> */}
-        {/* </ThemeProvider> */}
+        <Providers locale={locale}>{children}</Providers>
+        <Toaster />
       </body>
     </html>
   );

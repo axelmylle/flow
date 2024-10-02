@@ -11,15 +11,12 @@ export const updateFreelancerAction = authActionClient
     name: "update-freelancer",
   })
   .action(async ({ parsedInput: data, ctx: { user, supabase } }) => {
-    console.log("-----", user.id);
-
     const { data: freelancer, error } = await supabase
       .from("freelancers")
       .select("*")
       .eq("user_id", user.id)
       .single();
 
-    console.log(user.id, freelancer, error?.message);
     if (!freelancer) {
       throw new Error("Freelancer not found", error.message);
     }

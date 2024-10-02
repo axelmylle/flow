@@ -14,11 +14,11 @@ export async function getInstitutions(
   const gocardless = new GoCardLessProvider(params);
   const teller = new TellerProvider(params);
   const plaid = new PlaidProvider(params);
-
+  console.log(gocardless);
   const result = await Promise.all([
-    teller.getInstitutions(),
+    // teller.getInstitutions(),
     gocardless.getInstitutions({ countryCode }),
-    plaid.getInstitutions({ countryCode }),
+    // plaid.getInstitutions({ countryCode }),
   ]);
 
   return result.flat();

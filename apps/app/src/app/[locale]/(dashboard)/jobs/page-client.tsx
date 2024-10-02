@@ -10,48 +10,119 @@ import { Icons } from "@v1/ui/icons";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { JobList } from "./list";
+// ... existing imports ...
+
 export const mockJobs = [
   {
     id: "1",
-    title: "Senior Frontend Developer",
-    company: "TechCorp",
-    location: "Remote",
-    salary: "$120k - $150k",
-    postedDate: "2023-06-15",
+    title: "Senior Full Stack Developer",
+    company: "TechBrussels",
+    location: "Brussels, Belgium (Hybrid)",
+    salary: "€70,000 - €90,000 per year",
+    rate: "€500 - €600 per day",
+    postedDate: "2023-07-01",
+    description:
+      "Seeking an experienced full stack developer to work on our flagship SaaS product. Strong skills in React, Node.js, and AWS required.",
+    duration: "Long-term contract",
+    clientRating: 4.8,
+    clientIndustry: "Software Development",
+    requiredSkills: ["React", "Node.js", "AWS", "TypeScript", "MongoDB"],
+    startDate: "2023-08-01",
+    applicationDeadline: "2023-07-15",
+    contractType: "Full-time",
+    matchPercentage: 80,
   },
   {
     id: "2",
-    title: "Full Stack Engineer",
-    company: "StartupX",
-    location: "New York, NY",
-    salary: "$100k - $130k",
-    postedDate: "2023-06-14",
+    title: "DevOps Engineer",
+    company: "AntwerpIT Solutions",
+    location: "Antwerp, Belgium (Remote)",
+    salary: "€65,000 - €85,000 per year",
+    rate: "€450 - €550 per day",
+    postedDate: "2023-06-28",
+    description:
+      "Join our DevOps team to streamline our CI/CD pipelines and manage cloud infrastructure. Experience with Kubernetes and Azure is a must.",
+    duration: "Permanent",
+    clientRating: 4.6,
+    clientIndustry: "Cloud Services",
+    requiredSkills: ["Kubernetes", "Azure", "Docker", "Jenkins", "Terraform"],
+    startDate: "2023-08-15",
+    applicationDeadline: "2023-07-20",
+    contractType: "Full-time",
+    matchPercentage: 90,
   },
   {
     id: "3",
-    title: "UI/UX Designer",
-    company: "DesignHub",
-    location: "San Francisco, CA",
-    salary: "$90k - $120k",
-    postedDate: "2023-06-13",
+    title: "Data Scientist",
+    company: "GhentAI",
+    location: "Ghent, Belgium (On-site)",
+    salary: "€60,000 - €80,000 per year",
+    rate: "€400 - €500 per day",
+    postedDate: "2023-06-30",
+    description:
+      "Looking for a data scientist to work on cutting-edge AI projects. Strong background in machine learning and statistical analysis required.",
+    duration: "Initial 1-year contract",
+    clientRating: 4.9,
+    clientIndustry: "Artificial Intelligence",
+    requiredSkills: [
+      "Python",
+      "TensorFlow",
+      "PyTorch",
+      "SQL",
+      "Data Visualization",
+    ],
+    startDate: "2023-09-01",
+    applicationDeadline: "2023-07-25",
+    contractType: "Full-time",
+    matchPercentage: 50,
   },
   {
     id: "4",
-    title: "DevOps Engineer",
-    company: "CloudSystems",
-    location: "Remote",
-    salary: "$110k - $140k",
-    postedDate: "2023-06-12",
+    title: "Frontend Developer",
+    company: "LeuvenTech",
+    location: "Leuven, Belgium (Flexible)",
+    salary: "€45,000 - €65,000 per year",
+    rate: "€350 - €450 per day",
+    postedDate: "2023-07-02",
+    description:
+      "Seeking a creative frontend developer to work on responsive web applications. Experience with modern JavaScript frameworks is essential.",
+    duration: "Long-term contract",
+    clientRating: 4.7,
+    clientIndustry: "Web Development",
+    requiredSkills: ["React", "Vue.js", "CSS3", "HTML5", "JavaScript"],
+    startDate: "2023-08-15",
+    applicationDeadline: "2023-07-30",
+    contractType: "Full-time",
+    matchPercentage: 80,
   },
   {
     id: "5",
-    title: "Data Scientist",
-    company: "AI Innovations",
-    location: "Boston, MA",
-    salary: "$130k - $160k",
-    postedDate: "2023-06-11",
+    title: "Cybersecurity Specialist",
+    company: "BruggeSecure",
+    location: "Bruges, Belgium (Hybrid)",
+    salary: "€70,000 - €95,000 per year",
+    rate: "€500 - €650 per day",
+    postedDate: "2023-06-29",
+    description:
+      "Join our team to enhance and maintain our clients' cybersecurity infrastructure. CISSP certification and experience in penetration testing required.",
+    duration: "Permanent",
+    clientRating: 4.8,
+    clientIndustry: "Cybersecurity",
+    requiredSkills: [
+      "Network Security",
+      "CISSP",
+      "Penetration Testing",
+      "Incident Response",
+      "Security Auditing",
+    ],
+    startDate: "2023-09-01",
+    applicationDeadline: "2023-07-31",
+    contractType: "Full-time",
+    matchPercentage: 40,
   },
 ];
+
+// ... rest of the component ...
 function PageClient() {
   const router = useRouter();
 
@@ -153,12 +224,12 @@ function PageClient() {
         </MaxWidthWrapper>
       </div>
       <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <div>
-          <JobList jobs={mockJobs} />
-        </div>
         <div className="col-span-2">
           <JobList jobs={mockJobs} />
         </div>
+        {/* <div className="col-span-2">
+          <JobList jobs={mockJobs} />
+        </div> */}
       </div>
     </>
   );

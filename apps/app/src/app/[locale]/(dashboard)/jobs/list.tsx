@@ -10,6 +10,17 @@ interface Job {
   location: string;
   salary: string;
   postedDate: string;
+  rate: string;
+  description: string;
+  duration: string;
+  matchPercentage: number;
+
+  clientRating: number;
+  clientIndustry: string;
+  requiredSkills: string[];
+  startDate: string;
+  applicationDeadline: string;
+  contractType: string;
 }
 
 export function JobList({ jobs }: { jobs: Job[] }) {

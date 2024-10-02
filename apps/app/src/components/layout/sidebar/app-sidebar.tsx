@@ -6,6 +6,7 @@ import {
   BookOpen,
   Bot,
   Code2,
+  Cog,
   Eclipse,
   Frame,
   History,
@@ -47,19 +48,12 @@ const data = {
           icon: History,
           description: "View your recent prompts",
         },
-        {
-          title: "Starred",
-          url: "#",
-          icon: Star,
-          description: "Browse your starred prompts",
-        },
-        {
-          title: "Settings",
-          url: "#",
-          icon: Settings2,
-          description: "Configure your playground",
-        },
       ],
+    },
+    {
+      title: "Settings",
+      url: "/settings/account",
+      icon: Cog,
     },
   ],
 

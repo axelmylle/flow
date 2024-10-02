@@ -1,0 +1,18 @@
+{
+  "name": "@v1/import",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test src"
+  },
+  "dependencies": {
+    "change-case": "^5.4.4",
+    "date-fns-tz": "^3.1.3",
+    "uuid": "^10.0.0"
+  }
+}

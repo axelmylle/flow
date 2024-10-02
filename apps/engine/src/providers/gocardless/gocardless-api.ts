@@ -139,9 +139,9 @@ export class GoCardLessApi {
   async getInstitutions(
     params?: GetInstitutionsRequest,
   ): Promise<GetInstitutionsResponse> {
-    const countryCode = params?.countryCode;
+    const countryCode = "BE";
     const cacheKey = `${this.#institutionsCacheKey}_${countryCode}`;
-
+    console.log("cacheKey", cacheKey);
     const institutions = await this.#kv?.get(cacheKey);
 
     if (institutions) {
@@ -149,7 +149,7 @@ export class GoCardLessApi {
     }
 
     const token = await this.#getAccessToken();
-
+    console.log("before");
     const response = await this.#get<GetInstitutionsResponse>(
       "/api/v2/institutions/",
       token,
@@ -160,7 +160,7 @@ export class GoCardLessApi {
         },
       },
     );
-
+    console.log("after");
     this.#kv?.put(cacheKey, JSON.stringify(response), {
       expirationTtl: this.#oneHour,
     });
@@ -338,17 +338,22 @@ export class GoCardLessApi {
   }
 
   async #getApi(accessToken?: string): Promise<XiorInstance> {
-    if (!this.#api) {
-      this.#api = xior.create({
-        baseURL: this.#baseUrl,
-        timeout: 30_000,
-        headers: {
-          Accept: "application/json",
-          ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
-        },
-      });
-    }
+    // if (!this.#api) {
 
+    // }
+
+    console.log("Creating new API instance", {
+      Accept: "application/json",
+      ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+    });
+    this.#api = xior.create({
+      baseURL: this.#baseUrl,
+      timeout: 30_000,
+      headers: {
+        Accept: "application/json",
+        ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
+      },
+    });
     return this.#api;
   }
 
@@ -359,10 +364,33 @@ export class GoCardLessApi {
     config?: XiorRequestConfig,
   ): Promise<TResponse> {
     const api = await this.#getApi(token);
+    console.log("Making GET request to:", this.#baseUrl + path);
+    console.log("With params:", { ...params, ...config?.params });
+    console.log(
+      "With token:",
+      token ? token.substring(0, 10) + "..." : "No token",
+    );
 
-    return api
-      .get<TResponse>(path, { params, ...config })
-      .then(({ data }) => data);
+    try {
+      const response = await api.get<TResponse>(path, {
+        params: { ...params, ...config?.params },
+        ...config,
+      });
+      console.log("Response status:", response.status);
+      console.log("Response headers:", response.headers);
+      return response.data;
+    } catch (error) {
+      console.error("Error in GET request:", error);
+      if (error instanceof xior.XiorError) {
+        console.error("XiorError details:", {
+          message: error.message,
+          status: error.response?.status,
+          data: error.response?.data,
+          headers: error.response?.headers,
+        });
+      }
+      throw error;
+    }
   }
 
   async #post<TResponse>(

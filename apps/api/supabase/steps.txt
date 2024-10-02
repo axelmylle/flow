@@ -1,0 +1,3 @@
+supabase db diff -f {migration_name}
+
+supabase db reset
