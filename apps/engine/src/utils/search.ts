@@ -2,7 +2,6 @@ import type { Bindings } from "@/common/bindings";
 import Typesense from "typesense";
 
 export function SearchClient(envs: Bindings) {
-  console.log(envs.TYPESENSE_API_KEY);
   return new Typesense.Client({
     nodes: [
       {

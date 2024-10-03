@@ -230,10 +230,141 @@ export type Database = {
         }
         Relationships: []
       }
+      tracker_entries: {
+        Row: {
+          assigned_id: string | null
+          billed: boolean | null
+          created_at: string | null
+          currency: string | null
+          date: string | null
+          description: string | null
+          duration: number | null
+          id: string
+          project_id: string | null
+          project_members: Json | null
+          rate: number | null
+          start: string | null
+          stop: string | null
+          team_id: string | null
+        }
+        Insert: {
+          assigned_id?: string | null
+          billed?: boolean | null
+          created_at?: string | null
+          currency?: string | null
+          date?: string | null
+          description?: string | null
+          duration?: number | null
+          id?: string
+          project_id?: string | null
+          project_members?: Json | null
+          rate?: number | null
+          start?: string | null
+          stop?: string | null
+          team_id?: string | null
+        }
+        Update: {
+          assigned_id?: string | null
+          billed?: boolean | null
+          created_at?: string | null
+          currency?: string | null
+          date?: string | null
+          description?: string | null
+          duration?: number | null
+          id?: string
+          project_id?: string | null
+          project_members?: Json | null
+          rate?: number | null
+          start?: string | null
+          stop?: string | null
+          team_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tracker_entries_assigned_id_fkey"
+            columns: ["assigned_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tracker_entries_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "tracker_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tracker_entries_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tracker_projects: {
+        Row: {
+          billable: boolean | null
+          created_at: string | null
+          currency: string | null
+          description: string | null
+          estimate: number | null
+          get_assigned_users_for_project: Json | null
+          get_project_total_amount: number | null
+          id: string
+          name: string
+          project_members: Json | null
+          rate: number | null
+          status: Database["public"]["Enums"]["trackerstatus"]
+          team_id: string | null
+          total_duration: number | null
+        }
+        Insert: {
+          billable?: boolean | null
+          created_at?: string | null
+          currency?: string | null
+          description?: string | null
+          estimate?: number | null
+          get_assigned_users_for_project?: Json | null
+          get_project_total_amount?: number | null
+          id?: string
+          name: string
+          project_members?: Json | null
+          rate?: number | null
+          status: Database["public"]["Enums"]["trackerstatus"]
+          team_id?: string | null
+          total_duration?: number | null
+        }
+        Update: {
+          billable?: boolean | null
+          created_at?: string | null
+          currency?: string | null
+          description?: string | null
+          estimate?: number | null
+          get_assigned_users_for_project?: Json | null
+          get_project_total_amount?: number | null
+          id?: string
+          name?: string
+          project_members?: Json | null
+          rate?: number | null
+          status?: Database["public"]["Enums"]["trackerstatus"]
+          team_id?: string | null
+          total_duration?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tracker_projects_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       transaction_categories: {
         Row: {
           color: string | null
-          company_id: string
           created_at: string | null
           description: string | null
           embedding: string | null
@@ -241,11 +372,11 @@ export type Database = {
           name: string
           slug: string
           system: boolean | null
+          team_id: string
           vat: number | null
         }
         Insert: {
           color?: string | null
-          company_id: string
           created_at?: string | null
           description?: string | null
           embedding?: string | null
@@ -253,11 +384,11 @@ export type Database = {
           name: string
           slug: string
           system?: boolean | null
+          team_id: string
           vat?: number | null
         }
         Update: {
           color?: string | null
-          company_id?: string
           created_at?: string | null
           description?: string | null
           embedding?: string | null
@@ -265,12 +396,13 @@ export type Database = {
           name?: string
           slug?: string
           system?: boolean | null
+          team_id?: string
           vat?: number | null
         }
         Relationships: [
           {
             foreignKeyName: "transaction_categories_company_id_fkey"
-            columns: ["company_id"]
+            columns: ["team_id"]
             isOneToOne: false
             referencedRelation: "teams"
             referencedColumns: ["id"]
@@ -289,7 +421,6 @@ export type Database = {
           calculated_vat: number | null
           category: Database["public"]["Enums"]["transactioncategories"] | null
           category_slug: string | null
-          company_id: string
           created_at: string
           currency: string
           date: string
@@ -305,6 +436,7 @@ export type Database = {
           note: string | null
           recurring: boolean | null
           status: Database["public"]["Enums"]["transactionstatus"] | null
+          team_id: string
           updated_at: string | null
         }
         Insert: {
@@ -318,7 +450,6 @@ export type Database = {
           calculated_vat?: number | null
           category?: Database["public"]["Enums"]["transactioncategories"] | null
           category_slug?: string | null
-          company_id: string
           created_at?: string
           currency: string
           date: string
@@ -336,6 +467,7 @@ export type Database = {
           note?: string | null
           recurring?: boolean | null
           status?: Database["public"]["Enums"]["transactionstatus"] | null
+          team_id: string
           updated_at?: string | null
         }
         Update: {
@@ -349,7 +481,6 @@ export type Database = {
           calculated_vat?: number | null
           category?: Database["public"]["Enums"]["transactioncategories"] | null
           category_slug?: string | null
-          company_id?: string
           created_at?: string
           currency?: string
           date?: string
@@ -367,6 +498,7 @@ export type Database = {
           note?: string | null
           recurring?: boolean | null
           status?: Database["public"]["Enums"]["transactionstatus"] | null
+          team_id?: string
           updated_at?: string | null
         }
         Relationships: [
@@ -379,7 +511,7 @@ export type Database = {
           },
           {
             foreignKeyName: "public_transactions_company_id_fkey"
-            columns: ["company_id"]
+            columns: ["team_id"]
             isOneToOne: false
             referencedRelation: "teams"
             referencedColumns: ["id"]
@@ -393,10 +525,10 @@ export type Database = {
           },
           {
             foreignKeyName: "transactions_category_slug_company_id_fkey"
-            columns: ["category_slug", "company_id"]
+            columns: ["category_slug", "team_id"]
             isOneToOne: false
             referencedRelation: "transaction_categories"
-            referencedColumns: ["slug", "company_id"]
+            referencedColumns: ["slug", "team_id"]
           },
         ]
       }
@@ -444,6 +576,45 @@ export type Database = {
             columns: ["team_id"]
             isOneToOne: false
             referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users_on_team: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["teamroles"] | null
+          team_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["teamroles"] | null
+          team_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["teamroles"] | null
+          team_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "users_on_team_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "users_on_team_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]

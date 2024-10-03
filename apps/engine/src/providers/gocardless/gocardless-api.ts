@@ -139,9 +139,9 @@ export class GoCardLessApi {
   async getInstitutions(
     params?: GetInstitutionsRequest,
   ): Promise<GetInstitutionsResponse> {
-    const countryCode = "BE";
+    const countryCode = params?.countryCode ?? "BE";
     const cacheKey = `${this.#institutionsCacheKey}_${countryCode}`;
-    console.log("cacheKey", cacheKey);
+
     const institutions = await this.#kv?.get(cacheKey);
 
     if (institutions) {
@@ -149,7 +149,7 @@ export class GoCardLessApi {
     }
 
     const token = await this.#getAccessToken();
-    console.log("before");
+
     const response = await this.#get<GetInstitutionsResponse>(
       "/api/v2/institutions/",
       token,
@@ -160,7 +160,7 @@ export class GoCardLessApi {
         },
       },
     );
-    console.log("after");
+
     this.#kv?.put(cacheKey, JSON.stringify(response), {
       expirationTtl: this.#oneHour,
     });

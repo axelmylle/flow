@@ -34,14 +34,6 @@ export const connectBankAccountAction = authActionClient
       const data = result?.data;
       const selectedCurrency = getMostFrequentCurrency(accounts);
 
-      console.log("connect-bank-account", {
-        provider,
-        accounts,
-        accessToken,
-        enrollmentId,
-        referenceId,
-      });
-
       // Update team settings with base currency if not set
       if (!data?.base_currency && selectedCurrency && teamId) {
         await supabase
@@ -51,8 +43,8 @@ export const connectBankAccountAction = authActionClient
           })
           .eq("id", teamId);
       }
-      console.log("befor createBankAccounts");
-      await createBankAccounts(supabase, {
+
+      const bankAccounts = await createBankAccounts(supabase, {
         accessToken,
         enrollmentId,
         referenceId,
@@ -61,16 +53,14 @@ export const connectBankAccountAction = authActionClient
         accounts,
         provider,
       });
-      console.log("after createBankAccounts");
 
-      console.log("before sendEvent");
       const event = await client.sendEvent({
         name: Events.TRANSACTIONS_INITIAL_SYNC,
         payload: {
           teamId,
         },
       });
-      console.log("after sendEvent");
+
       revalidateTag(`bank_accounts_${teamId}`);
       revalidateTag(`bank_accounts_currencies_${teamId}`);
       revalidateTag(`bank_connections_${teamId}`);

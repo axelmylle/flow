@@ -5,9 +5,11 @@ import {
   Bird,
   BookOpen,
   Bot,
+  Clock,
   Code2,
   Cog,
   Eclipse,
+  EuroIcon,
   Frame,
   History,
   LifeBuoy,
@@ -32,6 +34,7 @@ import {
   SidebarLabel,
 } from "@v1/ui/sidebar";
 
+import { createClient } from "@v1/supabase/client";
 import { NavUser } from "./nav-user";
 import { SkillsProgressCard } from "./skills-card";
 const data = {
@@ -51,8 +54,23 @@ const data = {
       ],
     },
     {
+      title: "Time Tracking",
+      url: "/tracker",
+      icon: Clock,
+    },
+    {
+      title: "Transactions",
+      url: "/transactions",
+      icon: EuroIcon,
+    },
+    {
       title: "Settings",
-      url: "/settings/account",
+      url: "/settings/accounts",
+      icon: Cog,
+    },
+    {
+      title: "Settings",
+      url: "/settings/accounts",
       icon: Cog,
     },
   ],
@@ -120,7 +138,7 @@ const data = {
   ],
 };
 
-export function AppSidebar({ user }: { user: any }) {
+export async function AppSidebar({ user }) {
   return (
     <Sidebar>
       <SidebarHeader>

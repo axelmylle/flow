@@ -26,6 +26,10 @@ export async function NavUser({
     name: string;
     email: string;
     avatar: string;
+    user_metadata: {
+      avatar_url: string;
+      full_name: string;
+    };
   };
 }) {
   const supabase = createClient();
@@ -48,7 +52,9 @@ export async function NavUser({
             <AvatarFallback className="rounded-md">CN</AvatarFallback>
           </Avatar>
           <div className="grid flex-1 leading-none">
-            <div className="font-medium">{user.user_metadata.name}</div>
+            <div className="font-medium">
+              {user.user_metadata?.name ?? "john doe"}
+            </div>
             <div className="overflow-hidden text-xs text-muted-foreground">
               <div className="line-clamp-1">{user.email}</div>
             </div>

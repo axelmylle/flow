@@ -49,7 +49,7 @@ export class Provider {
           gocardless.getHealthCheck(),
           teller.getHealthCheck(),
         ]);
-
+      console.log(isGocardlessHealthy);
       return {
         plaid: {
           healthy: isPlaidHealthy,

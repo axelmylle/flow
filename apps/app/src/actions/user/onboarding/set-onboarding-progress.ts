@@ -18,7 +18,7 @@ export const setOnboardingProgress = authActionClient
   })
   .action(async ({ ctx, parsedInput }) => {
     const { onboardingStep } = parsedInput;
-    console.log("onboardingStep", onboardingStep, "hi");
+
     try {
       await client.set(`onboarding-step:${ctx.user.id}`, onboardingStep);
     } catch (e) {

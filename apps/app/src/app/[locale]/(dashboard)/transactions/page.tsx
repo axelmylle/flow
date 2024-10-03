@@ -1,124 +1,128 @@
-// import { Cookies } from "@/utils/constants";
-// import {
-//   getCategories,
-//   getTeamBankAccounts,
-//   getTeamMembers,
-//   getUser,
-// } from "@v1/supabase/queries";
-// import type { Metadata } from "next";
-// import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-// import { cookies } from "next/headers";
-// import { Suspense } from "react";
-// import { searchParamsCache } from "./search-params";
+import { Cookies } from "@/utils/constants";
 
-// export const metadata: Metadata = {
-//   title: "Transactions | Midday",
-// };
+import { TransactionsSearchFilter } from "@/components/transactions/transactions-search-filter";
+import {
+  getCategories,
+  getTeamBankAccounts,
+  getTeamMembers,
+  getUser,
+} from "@v1/supabase/cached-queries";
+import type { Metadata } from "next";
 
-// export default async function Transactions({
-//   searchParams,
-// }: {
-//   searchParams: Record<string, string | string[] | undefined>;
-// }) {
-//   const {
-//     q: query,
-//     page,
-//     attachments,
-//     start,
-//     end,
-//     categories,
-//     assignees,
-//     statuses,
-//     recurring,
-//     accounts,
-//   } = searchParamsCache.parse(searchParams);
+import { ErrorFallback } from "@/components/error-fallback";
+import { Table } from "@/components/transactions/tables";
+import { NoAccounts } from "@/components/transactions/tables/empty-states";
+import { Loading } from "@/components/transactions/tables/loading";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import { cookies } from "next/headers";
+import { Suspense } from "react";
+import { searchParamsCache } from "./search-params";
 
-//   // Move this in a suspense
-//   const [accountsData, categoriesData, teamMembersData, userData] =
-//     await Promise.all([
-//       getTeamBankAccounts(),
-//       getCategories(),
-//       getTeamMembers(),
-//       getUser(),
-//     ]);
+export const metadata: Metadata = {
+  title: "Transactions | Midday",
+};
 
-//   const filter = {
-//     attachments,
-//     start,
-//     end,
-//     categories,
-//     assignees,
-//     statuses,
-//     recurring,
-//     accounts,
-//   };
+export default async function Transactions({
+  searchParams,
+}: {
+  searchParams: Record<string, string | string[] | undefined>;
+}) {
+  const {
+    q: query,
+    page,
+    attachments,
+    start,
+    end,
+    categories,
+    assignees,
+    statuses,
+    recurring,
+    accounts,
+  } = searchParamsCache.parse(searchParams);
 
-//   const sort = searchParams?.sort?.split(":");
-//   const hideConnectFlow = cookies().has(Cookies.HideConnectFlow);
+  // Move this in a suspense
+  const [accountsData, categoriesData, teamMembersData, userData] =
+    await Promise.all([
+      getTeamBankAccounts(),
+      getCategories(),
+      getTeamMembers(),
+      getUser(),
+    ]);
 
-//   const isOpen = Boolean(searchParams.step);
-//   const isEmpty = !accountsData?.data?.length && !isOpen;
-//   const loadingKey = JSON.stringify({
-//     page,
-//     filter,
-//     sort,
-//     query,
-//   });
+  const filter = {
+    attachments,
+    start,
+    end,
+    categories,
+    assignees,
+    statuses,
+    recurring,
+    accounts,
+  };
 
-//   return (
-//     <>
-//       <div className="flex justify-between py-6">
-//         <TransactionsSearchFilter
-//           placeholder="Search or type filter"
-//           categories={[
-//             ...categoriesData?.data?.map((category) => ({
-//               slug: category.slug,
-//               name: category.name,
-//             })),
-//             {
-//               // TODO, move this to the database
-//               id: "uncategorized",
-//               name: "Uncategorized",
-//               slug: "uncategorized",
-//             },
-//           ]}
-//           accounts={accountsData?.data?.map((account) => ({
-//             id: account.id,
-//             name: account.name,
-//             currency: account.currency,
-//           }))}
-//           members={teamMembersData?.data?.map((member) => ({
-//             id: member?.user?.id,
-//             name: member.user?.full_name,
-//           }))}
-//         />
-//         <TransactionsActions isEmpty={isEmpty} />
-//       </div>
+  const sort = searchParams?.sort?.split(":");
+  const hideConnectFlow = cookies().has(Cookies.HideConnectFlow);
+  console.log();
+  const isOpen = Boolean(searchParams.step);
+  const isEmpty = !accountsData?.data?.length && !isOpen;
+  const loadingKey = JSON.stringify({
+    page,
+    filter,
+    sort,
+    query,
+  });
+  console.log("hello", accountsData?.data?.length, !isOpen);
 
-//       {isEmpty ? (
-//         <div className="relative h-[calc(100vh-200px)] overflow-hidden">
-//           <NoAccounts />
-//           <Loading isEmpty />
-//         </div>
-//       ) : (
-//         <ErrorBoundary errorComponent={ErrorFallback}>
-//           <Suspense fallback={<Loading />} key={loadingKey}>
-//             <Table filter={filter} page={page} sort={sort} query={query} />
-//           </Suspense>
-//         </ErrorBoundary>
-//       )}
+  return (
+    <>
+      <div className="flex justify-between py-6">
+        <TransactionsSearchFilter
+          placeholder="Search or type filter"
+          categories={[
+            ...categoriesData?.data?.map((category) => ({
+              slug: category.slug,
+              name: category.name,
+            })),
+            {
+              // TODO, move this to the database
+              id: "uncategorized",
+              name: "Uncategorized",
+              slug: "uncategorized",
+            },
+          ]}
+          accounts={accountsData?.data?.map((account) => ({
+            id: account.id,
+            name: account.name,
+            currency: account.currency,
+          }))}
+          members={teamMembersData?.data?.map((member) => ({
+            id: member?.user?.id,
+            name: member.user?.full_name,
+          }))}
+        />
+        {/* <TransactionsActions isEmpty={isEmpty} /> */}
+      </div>
 
-//       <TransactionsModal defaultOpen={isEmpty && !hideConnectFlow} />
-//       <CreateTransactionSheet
-//         categories={categoriesData?.data}
-//         userId={userData?.data?.id}
-//         accountId={accountsData?.data?.at(0)?.id}
-//         currency={accountsData?.data?.at(0)?.currency}
-//       />
-//     </>
-//   );
-// }
-
-export default async function Transactions() {
-  return <div>Transactions</div>;
+      {isEmpty ? (
+        <div className="relative h-[calc(100vh-200px)] overflow-hidden">
+          <NoAccounts />
+          <Loading isEmpty />
+        </div>
+      ) : (
+        <ErrorBoundary errorComponent={ErrorFallback}>
+          <Suspense fallback={<Loading />} key={loadingKey}>
+            <Table filter={filter} page={page} sort={sort} query={query} />
+          </Suspense>
+        </ErrorBoundary>
+      )}
+      {/*
+      <TransactionsModal defaultOpen={isEmpty && !hideConnectFlow} />
+      <CreateTransactionSheet
+        categories={categoriesData?.data}
+        userId={userData?.data?.id}
+        accountId={accountsData?.data?.at(0)?.id}
+        currency={accountsData?.data?.at(0)?.currency}
+      /> */}
+    </>
+  );
 }

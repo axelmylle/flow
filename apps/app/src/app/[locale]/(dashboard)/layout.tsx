@@ -1,14 +1,17 @@
 import { AppSidebar } from "@/components/layout/sidebar/app-sidebar";
 import Toolbar from "@/components/layout/toolbar/toolbar";
 import UserSurveyPopup from "@/components/layout/user-survey";
-import { getUser } from "@v1/supabase/queries";
+import { getUser } from "@v1/supabase/cached-queries";
 
 import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
 import { SidebarLayout, SidebarTrigger } from "@v1/ui/sidebar";
 
+import { GlobalSheets } from "@/components/tracker/sheets";
 import { getCountryCode } from "@v1/location";
+import { currencies } from "@v1/location/src/currencies";
+import { createClient } from "@v1/supabase/server";
 import dynamic from "next/dynamic";
-import { cookies } from "next/headers";
+import { Suspense } from "react";
 
 const ConnectTransactionsModal = dynamic(
   () =>
@@ -33,10 +36,11 @@ const SelectBankAccountsModal = dynamic(
 export default async function Layout({
   children,
 }: { children: React.ReactNode }) {
-  // This is where your authenticated app lives, add a sidebar, header etc.
+  const client = createClient();
+
   const {
     data: { user },
-  } = await getUser();
+  } = await client.auth.getUser();
 
   const countryCode = getCountryCode();
 
@@ -53,7 +57,9 @@ export default async function Layout({
         </main>
       </SidebarLayout>
       <UserSurveyPopup />
-
+      <Suspense>
+        <GlobalSheets defaultCurrency={currencies[countryCode]} />
+      </Suspense>
       <ConnectTransactionsModal countryCode={countryCode} />
       <SelectBankAccountsModal />
       <Toolbar show={["onboarding"]} />

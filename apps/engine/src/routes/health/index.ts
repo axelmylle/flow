@@ -37,7 +37,7 @@ app.openapi(indexRoute, async (c) => {
   const envs = env(c);
 
   const api = new Provider();
-
+  console.log("envs", envs, { kv: c.env.KV, fetcher: c.env.TELLER_CERT });
   const providers = await api.getHealthCheck({
     kv: c.env.KV,
     fetcher: c.env.TELLER_CERT,
@@ -67,7 +67,7 @@ app.openapi(indexRoute, async (c) => {
   return c.json(
     {
       requestId: c.get("requestId"),
-      message: "Service unhelthy",
+      message: "Service unhealthy",
       code: "bad_request",
     },
     400,

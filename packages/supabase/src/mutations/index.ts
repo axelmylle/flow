@@ -69,17 +69,7 @@ export async function createBankAccounts(
         ).toDateString()
       : undefined;
 
-  console.log("before bank connection", {
-    institution_id: account.institution_id,
-    name: account.bank_name,
-    logo_url: account.logo_url,
-    team_id: teamId,
-    provider,
-    access_token: accessToken,
-    enrollment_id: enrollmentId,
-    reference_id: referenceId,
-    expires_at: expiresAt,
-  });
+  //TODO: check onConflict
   const bankConnection = await supabase
     .from("bank_connections")
     .upsert(
@@ -94,16 +84,12 @@ export async function createBankAccounts(
         reference_id: referenceId,
         expires_at: expiresAt,
       },
-      {
-        onConflict: "institution_id, team_id",
-      },
+      // {
+      //   onConflict: "institution_id, team_id",
+      // },
     )
     .select()
     .single();
-
-  console.log("after bank connection", bankConnection.error);
-  console.log("after bank connection", bankConnection.data);
-  console.log("after bank connection", bankConnection.status);
 
   return supabase
     .from("bank_accounts")
@@ -159,6 +145,31 @@ export async function updateBankAccount(
     .single();
 }
 
+type CreateProjectParams = {
+  name: string;
+  description?: string;
+  estimate?: number;
+  billable?: boolean;
+  rate?: number;
+  currency?: string;
+};
+
+export async function createProject(
+  supabase: Client,
+  params: CreateProjectParams,
+) {
+  const { data: userData } = await getCurrentUserTeamQuery(supabase);
+
+  return supabase
+    .from("tracker_projects")
+    .insert({
+      ...params,
+      team_id: userData?.team_id,
+    })
+    .select()
+    .single();
+}
+
 export async function updateFreelancer(
   freelancerId: string,
   data: TablesUpdate<"freelancers">,
@@ -177,4 +188,17 @@ export async function updateFreelancer(
 
     throw error;
   }
+}
+
+export async function updateTransaction(
+  supabase: Client,
+  id: string,
+  data: any,
+) {
+  return supabase
+    .from("transactions")
+    .update(data)
+    .eq("id", id)
+    .select("id, category, category_slug, team_id, name, status")
+    .single();
 }

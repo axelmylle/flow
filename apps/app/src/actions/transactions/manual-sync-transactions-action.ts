@@ -17,7 +17,6 @@ export const manualSyncTransactionsAction = authActionClient
   })
   .action(
     async ({ parsedInput: { connectionId }, ctx: { user, supabase } }) => {
-      console.log("hi", connectionId);
       try {
         await manualSyncTask.trigger({
           connectionId,

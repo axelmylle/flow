@@ -25,7 +25,7 @@ type FormatAmountParams = {
 export function formatAmount({
   currency,
   amount,
-  locale = "en-US",
+  locale = "nl-BE",
   minimumFractionDigits,
   maximumFractionDigits,
 }: FormatAmountParams) {
