@@ -532,6 +532,51 @@ export type Database = {
           },
         ]
       }
+      user_invites: {
+        Row: {
+          code: string | null
+          created_at: string | null
+          email: string | null
+          id: string
+          invited_by: string | null
+          role: Database["public"]["Enums"]["teamroles"] | null
+          team_id: string | null
+        }
+        Insert: {
+          code?: string | null
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          invited_by?: string | null
+          role?: Database["public"]["Enums"]["teamroles"] | null
+          team_id?: string | null
+        }
+        Update: {
+          code?: string | null
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          invited_by?: string | null
+          role?: Database["public"]["Enums"]["teamroles"] | null
+          team_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_user_invites_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_invites_invited_by_fkey"
+            columns: ["invited_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       users: {
         Row: {
           avatar_url: string | null
@@ -624,7 +669,36 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_profit_v3: {
+        Args: {
+          team_id: string
+          date_from: string
+          date_to: string
+          base_currency?: string
+        }
+        Returns: {
+          date: string
+          value: number
+          currency: string
+        }[]
+      }
+      nanoid: {
+        Args: {
+          size?: number
+          alphabet?: string
+          additionalbytesfactor?: number
+        }
+        Returns: string
+      }
+      nanoid_optimized: {
+        Args: {
+          size: number
+          alphabet: string
+          mask: number
+          step: number
+        }
+        Returns: string
+      }
     }
     Enums: {
       account_type:

@@ -1,7 +1,23 @@
 import { UTCDate } from "@date-fns/utc";
 import { logger } from "@v1/logger";
+import {
+  addDays,
+  endOfMonth,
+  formatISO,
+  isWithinInterval,
+  startOfMonth,
+  subYears,
+} from "date-fns";
 
 import type { Client } from "../types";
+
+export async function getTeamInvitesQuery(supabase: Client, teamId: string) {
+  return supabase
+    .from("user_invites")
+    .select("id, email, code, role, user:invited_by(*), team:team_id(*)")
+    .eq("team_id", teamId)
+    .throwOnError();
+}
 
 export async function getCurrentUserTeamQuery(supabase: Client) {
   const {
@@ -12,6 +28,90 @@ export async function getCurrentUserTeamQuery(supabase: Client) {
     return;
   }
   return getUserQuery(supabase, session.user?.id);
+}
+
+export type GetMetricsParams = {
+  teamId: string;
+  from: string;
+  to: string;
+  currency?: string;
+  type?: "revenue" | "profit";
+};
+
+export async function getMetricsQuery(
+  supabase: Client,
+  params: GetMetricsParams,
+) {
+  const { teamId, from, to, type = "profit", currency } = params;
+
+  // const rpc = type === "profit" ? "get_profit_v3" : "get_revenue_v3";
+
+  const rpc = "get_profit_v3";
+  const fromDate = new UTCDate(from);
+  const toDate = new UTCDate(to);
+
+  const [{ data: prevData }, { data: currentData }] = await Promise.all([
+    supabase.rpc(rpc, {
+      team_id: teamId,
+      date_from: subYears(startOfMonth(fromDate), 1).toDateString(),
+      date_to: subYears(endOfMonth(toDate), 1).toDateString(),
+      base_currency: currency,
+    }),
+    supabase.rpc(rpc, {
+      team_id: teamId,
+      date_from: startOfMonth(fromDate).toDateString(),
+      date_to: endOfMonth(toDate).toDateString(),
+      base_currency: currency,
+    }),
+  ]);
+
+  const prevTotal = prevData?.reduce((value, item) => item.value + value, 0);
+  const currentTotal = currentData?.reduce(
+    (value, item) => item.value + value,
+    0,
+  );
+
+  const baseCurrency = currentData?.at(0)?.currency;
+
+  return {
+    summary: {
+      currentTotal,
+      prevTotal,
+      currency: baseCurrency,
+    },
+    meta: {
+      type,
+      currency: baseCurrency,
+    },
+    result: currentData?.map((record, index) => {
+      const prev = prevData?.at(index);
+
+      return {
+        date: record.date,
+        precentage: {
+          value: getPercentageIncrease(
+            Math.abs(prev?.value),
+            Math.abs(record.value),
+          ),
+          status: record.value > prev?.value ? "positive" : "negative",
+        },
+        current: {
+          date: record.date,
+          value: record.value,
+          currency,
+        },
+        previous: {
+          date: prev?.date,
+          value: prev?.value,
+          currency,
+        },
+      };
+    }),
+  };
+}
+
+export function getPercentageIncrease(a: number, b: number) {
+  return a > 0 && b > 0 ? Math.abs(((a - b) / b) * 100).toFixed() : 0;
 }
 
 type GetUserInviteQueryParams = {
@@ -28,6 +128,23 @@ export async function getUserInviteQuery(
     .select("*")
     .eq("code", params.code)
     .eq("email", params.email)
+    .single();
+}
+
+type GetTrackerProjectQueryParams = {
+  teamId: string;
+  projectId: string;
+};
+
+export async function getTrackerProjectQuery(
+  supabase: Client,
+  params: GetTrackerProjectQueryParams,
+) {
+  return supabase
+    .from("tracker_projects")
+    .select("*")
+    .eq("id", params.projectId)
+    .eq("team_id", params.teamId)
     .single();
 }
 
@@ -113,6 +230,50 @@ export async function getTrackerRecordsByRangeQuery(
       to: params.to,
     },
     data: result,
+  };
+}
+
+type GetTrackerRecordsByDateParams = {
+  teamId: string;
+  date: string;
+  projectId?: string;
+  userId?: string;
+};
+
+export async function getTrackerRecordsByDateQuery(
+  supabase: Client,
+  params: GetTrackerRecordsByDateParams,
+) {
+  const { teamId, projectId, date, userId } = params;
+
+  const query = supabase
+    .from("tracker_entries")
+    .select(
+      "*, assigned:assigned_id(id, full_name, avatar_url), project:project_id(id, name, rate, currency)",
+    )
+    .eq("team_id", teamId)
+    .eq("date", formatISO(new UTCDate(date), { representation: "date" }));
+
+  if (projectId) {
+    query.eq("project_id", projectId);
+  }
+
+  if (userId) {
+    query.eq("assigned_id", userId);
+  }
+
+  const { data } = await query;
+
+  const totalDuration = data?.reduce(
+    (duration, item) => (item?.duration ?? 0) + duration,
+    0,
+  );
+
+  return {
+    meta: {
+      totalDuration,
+    },
+    data,
   };
 }
 
@@ -433,6 +594,35 @@ export async function getTeamMembersQuery(supabase: Client, teamId: string) {
     .eq("team_id", teamId)
     .order("created_at")
     .throwOnError();
+
+  return {
+    data,
+  };
+}
+
+type GetTeamUserParams = {
+  teamId: string;
+  userId: string;
+};
+
+export async function getTeamUserQuery(
+  supabase: Client,
+  params: GetTeamUserParams,
+) {
+  const { data } = await supabase
+    .from("users_on_team")
+    .select(
+      `
+      id,
+      role,
+      team_id,
+      user:users(id, full_name, avatar_url, email)
+    `,
+    )
+    .eq("team_id", params.teamId)
+    .eq("user_id", params.userId)
+    .throwOnError()
+    .single();
 
   return {
     data,

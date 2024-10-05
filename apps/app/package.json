@@ -41,6 +41,7 @@
     "react-confetti": "^6.1.0",
     "use-debounce": "^10.0.3",
     "@uidotdev/usehooks": "^2.4.1",
+    "recharts": "^2.12.7",
     "@v1/engine": "workspace:*",
     "motion-number": "^0.1.7",
     "lottie-react": "^2.4.0",

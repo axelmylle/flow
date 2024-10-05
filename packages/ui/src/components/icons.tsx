@@ -1,11 +1,13 @@
 import {
   DotsHorizontalIcon,
+  DotsVerticalIcon,
   FileIcon,
   MagicWandIcon,
 } from "@radix-ui/react-icons";
 import {
   AlertCircle,
   ArrowLeft,
+  ArrowRight,
   Briefcase,
   Building,
   Calendar,
@@ -36,6 +38,7 @@ import {
   X,
 } from "lucide-react";
 import type { SVGProps } from "react";
+import { MdTrendingDown, MdTrendingUp } from "react-icons/md";
 import { cn } from "../utils";
 
 export const Icons = {
@@ -43,7 +46,12 @@ export const Icons = {
   Copy,
   Search: SearchIcon,
   Filter: FilterIcon,
+  TrendingUp: MdTrendingUp,
+  TrendingDown: MdTrendingDown,
+  Time: Clock,
+  ArrowRightAlt: ArrowRight,
   Repeat: Repeat,
+  Add: Plus,
   Clear: X,
   MoreHoriz: DotsHorizontalIcon,
   Transactions2: (props: any) => (
@@ -67,6 +75,7 @@ export const Icons = {
   Status: CircleDot,
   Info: Info,
   CalendarMonth: Calendar,
+  MoreVertical: DotsVerticalIcon,
   Attachments: FileIcon,
   Accounts: Users2Icon,
   Plus: Plus,

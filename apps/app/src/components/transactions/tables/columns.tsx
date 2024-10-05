@@ -2,7 +2,7 @@
 
 import { FormatAmount } from "@/components/format-amount";
 
-import { AssignedUser } from "@/components/assigned-user";
+import { AssignedUser } from "@/components/users/assigned-user";
 import { formatTransactionDate } from "@/utils/format";
 import type { ColumnDef } from "@tanstack/react-table";
 import {

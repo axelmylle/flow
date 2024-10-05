@@ -4,14 +4,17 @@ import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import {
   type GetCategoriesParams,
+  type GetMetricsParams,
   type GetTeamBankAccountsParams,
   type GetTrackerProjectsQueryParams,
   type GetTrackerRecordsByRangeParams,
   type GetTransactionsParams,
   getCategoriesQuery,
+  getMetricsQuery,
   getTeamBankAccountsQuery,
   getTeamMembersQuery,
   getTeamSettingsQuery,
+  getTeamUserQuery,
   getTrackerProjectsQuery,
   getTrackerRecordsByRangeQuery,
   getTransactionsQuery,
@@ -38,6 +41,28 @@ export const getTrackerRecordsByRange = async (
     {
       tags: [`tracker_entries_${teamId}`],
       revalidate: 180,
+    },
+  )(params);
+};
+
+export const getMetrics = async (params: Omit<GetMetricsParams, "teamId">) => {
+  const supabase = createClient();
+
+  const user = await getUser();
+  const teamId = user?.data?.team_id;
+
+  if (!teamId) {
+    return null;
+  }
+
+  return unstable_cache(
+    async () => {
+      return getMetricsQuery(supabase, { ...params, teamId });
+    },
+    ["metrics", teamId],
+    {
+      tags: [`metrics_${teamId}`],
+      revalidate: 3600,
     },
   )(params);
 };
@@ -198,4 +223,23 @@ export const getTeamMembers = async () => {
       revalidate: 180,
     },
   )(teamId);
+};
+
+export const getTeamUser = async () => {
+  const supabase = createClient();
+  const user = await getUser();
+
+  return unstable_cache(
+    async () => {
+      return getTeamUserQuery(supabase, {
+        userId: user?.data.id,
+        teamId: user?.data.team_id,
+      });
+    },
+    ["team", "user", user?.data.id],
+    {
+      tags: [`team_user_${user?.data.id}`],
+      revalidate: 180,
+    },
+  )(user?.data.id);
 };
