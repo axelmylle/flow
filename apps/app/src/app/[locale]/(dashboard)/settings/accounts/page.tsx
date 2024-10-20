@@ -1,4 +1,6 @@
+import { PageContent } from "@/components/layout/page-content";
 import { ConnectedAccounts } from "@/components/transactions/connected-accounts";
+import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,9 +9,10 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="space-y-12">
-      <ConnectedAccounts />
-      {/* <BaseCurrency /> */}
-    </div>
+    <PageContent title="Connected Accounts">
+      <MaxWidthWrapper className="flex flex-col">
+        <ConnectedAccounts />
+      </MaxWidthWrapper>
+    </PageContent>
   );
 }

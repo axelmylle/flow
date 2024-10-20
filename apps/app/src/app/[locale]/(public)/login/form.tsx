@@ -134,6 +134,99 @@ export default function LoginForm() {
     );
   };
 
+  const SignInWithEmail = () => {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const next = searchParams?.get("next");
+    const { isMobile } = useMediaQuery();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [checkingEmailPassword, setCheckingEmailPassword] = useState(false);
+
+    const {
+      showPasswordField,
+      setShowPasswordField,
+      setClickedMethod,
+      authMethod,
+      setAuthMethod,
+      clickedMethod,
+      setLastUsedAuthMethod,
+      setShowSSOOption,
+    } = useContext(LoginFormContext);
+
+    return (
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+          const { data, error } = await supabase.auth.signInWithOtp({
+            email,
+            options: {
+              // set this to false if you do not want the user to be automatically signed up
+              shouldCreateUser: true,
+              emailRedirectTo: `${window.location.origin}/api/auth/callback`,
+            },
+          });
+          console.log(data, error);
+        }}
+        className="flex flex-col space-y-3"
+      >
+        {authMethod === "email" && (
+          <input
+            id="email"
+            name="email"
+            autoFocus={!isMobile && !showPasswordField}
+            type="email"
+            placeholder="panic@thedis.co"
+            autoComplete="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={cn(
+              "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm",
+              {
+                "pr-10": checkingEmailPassword,
+              },
+            )}
+          />
+        )}
+
+        {showPasswordField && (
+          <div>
+            <Input
+              type="password"
+              autoFocus={!isMobile}
+              value={password}
+              placeholder="Password (optional)"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        )}
+
+        <Button
+          variant="outline"
+          {...(authMethod !== "email" && {
+            type: "button",
+            onClick: (e) => {
+              e.preventDefault();
+              setShowSSOOption(false);
+              setAuthMethod("email");
+            },
+          })}
+          loading={checkingEmailPassword || clickedMethod === "email"}
+          disabled={clickedMethod && clickedMethod !== "email"}
+        >
+          {password ? (
+            <Icons.InputPassword className="size-4 text-gray-600 mr-2" />
+          ) : (
+            <Mail className="size-4 text-gray-600 mr-2" />
+          )}{" "}
+          Continue with {password ? "Password" : "Email"}
+        </Button>
+      </form>
+    );
+  };
+
   const authProviders = [
     {
       method: "google",
@@ -215,165 +308,3 @@ export default function LoginForm() {
     </LoginFormContext.Provider>
   );
 }
-
-const SignInWithEmail = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const next = searchParams?.get("next");
-  const { isMobile } = useMediaQuery();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [checkingEmailPassword, setCheckingEmailPassword] = useState(false);
-
-  const {
-    showPasswordField,
-    setShowPasswordField,
-    setClickedMethod,
-    authMethod,
-    setAuthMethod,
-    clickedMethod,
-    setLastUsedAuthMethod,
-    setShowSSOOption,
-  } = useContext(LoginFormContext);
-
-  return (
-    <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-
-        // Check if the user can enter a password, and if so display the field
-        if (!showPasswordField) {
-          const { success } = emailSchema.safeParse(email);
-
-          if (success) {
-            try {
-              setCheckingEmailPassword(true);
-              const res = await fetch("/api/auth/account-exists", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email }),
-              });
-              setCheckingEmailPassword(false);
-
-              const { accountExists, hasPassword } = await res.json();
-              if (accountExists && hasPassword) {
-                setShowPasswordField(true);
-                return;
-              }
-            } catch (e) {
-              console.error("Failed to determine if user has password", e);
-            }
-          }
-        }
-
-        setClickedMethod("email");
-
-        // fetch("/api/auth/account-exists", {
-        //   method: "POST",
-        //   headers: { "Content-Type": "application/json" },
-        //   body: JSON.stringify({ email }),
-        // }).then(async (res) => {
-        //   if (!res.ok) {
-        //     const error = await res.text();
-        //     toast.error(error);
-        //     setClickedMethod(undefined);
-        //     return;
-        //   }
-        //   const { accountExists, hasPassword } = await res.json();
-        //   if (accountExists) {
-        //     const provider = hasPassword && password ? "credentials" : "email";
-
-        //     signIn(provider, {
-        //       email,
-        //       redirect: false,
-        //       ...(password && { password }),
-        //       ...(next ? { callbackUrl: next } : {}),
-        //     }).then((res) => {
-        //       if (!res) return;
-
-        //       // Handle errors
-        //       if (!res.ok && res.error) {
-        //         if (errorCodes[res.error]) {
-        //           toast.error(errorCodes[res.error]);
-        //         } else {
-        //           toast.error(res.error);
-        //         }
-        //         setClickedMethod(undefined);
-
-        //         return;
-        //       }
-
-        //       // Handle success
-        //       setLastUsedAuthMethod("email");
-        //       if (provider === "email") {
-        //         toast.success("Email sent - check your inbox!");
-        //         setEmail("");
-        //         setClickedMethod(undefined);
-        //       } else if (provider === "credentials") {
-        //         router.push(next ?? "/");
-        //       }
-        //     });
-        //   } else {
-        //     setClickedMethod(undefined);
-        //     toast.error("No account found with that email address.");
-        //   }
-        // });
-      }}
-      className="flex flex-col space-y-3"
-    >
-      {authMethod === "email" && (
-        <input
-          id="email"
-          name="email"
-          autoFocus={!isMobile && !showPasswordField}
-          type="email"
-          placeholder="panic@thedis.co"
-          autoComplete="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className={cn(
-            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm",
-            {
-              "pr-10": checkingEmailPassword,
-            },
-          )}
-        />
-      )}
-
-      {showPasswordField && (
-        <div>
-          <Input
-            type="password"
-            autoFocus={!isMobile}
-            value={password}
-            placeholder="Password (optional)"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-      )}
-
-      <Button
-        variant="outline"
-        {...(authMethod !== "email" && {
-          type: "button",
-          onClick: (e) => {
-            e.preventDefault();
-            setShowSSOOption(false);
-            setAuthMethod("email");
-          },
-        })}
-        loading={checkingEmailPassword || clickedMethod === "email"}
-        disabled={clickedMethod && clickedMethod !== "email"}
-      >
-        {password ? (
-          <Icons.InputPassword className="size-4 text-gray-600 mr-2" />
-        ) : (
-          <Mail className="size-4 text-gray-600 mr-2" />
-        )}{" "}
-        Continue with {password ? "Password" : "Email"}
-      </Button>
-    </form>
-  );
-};

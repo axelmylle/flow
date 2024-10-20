@@ -13,10 +13,10 @@
   },
   "dependencies": {
     "@midday-ai/engine": "^0.1.0-alpha.22",
-    "@trigger.dev/react": "^3.0.9",
-    "@trigger.dev/resend": "^3.0.9",
-    "@trigger.dev/sdk": "^3.0.9",
-    "@trigger.dev/supabase": "^3.0.9",
+    "@trigger.dev/react": "3.0.12",
+    "@trigger.dev/resend": "3.0.12",
+    "@trigger.dev/sdk": "3.0.12",
+    "@trigger.dev/supabase": "3.0.12",
     "@supabase/supabase-js": "2.45.4",
     "change-case": "^5.4.4"
   }

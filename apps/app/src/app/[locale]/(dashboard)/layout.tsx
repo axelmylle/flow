@@ -6,6 +6,7 @@ import { getUser } from "@v1/supabase/cached-queries";
 import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
 import { SidebarLayout, SidebarTrigger } from "@v1/ui/sidebar";
 
+import { MainNav } from "@/components/layout/main-nav";
 import { GlobalSheets } from "@/components/tracker/sheets";
 import { getCountryCode } from "@v1/location";
 import { currencies } from "@v1/location/src/currencies";
@@ -46,23 +47,19 @@ export default async function Layout({
 
   return (
     <div>
-      <SidebarLayout>
-        <AppSidebar user={user} />
-        <main className="flex flex-1 flex-col p-2 transition-all duration-300 ease-in-out">
-          <div className="h-full rounded-md border-2 border-dashed p-2">
-            <SidebarTrigger />
-
-            <MaxWidthWrapper>{children}</MaxWidthWrapper>
-          </div>
-        </main>
-      </SidebarLayout>
-      <UserSurveyPopup />
+      <div className="min-h-screen w-full bg-white">
+        <MainNav user={user} toolContent={null}>
+          {children}
+          <ConnectTransactionsModal countryCode={countryCode} />
+          <SelectBankAccountsModal />
+          <Toolbar show={["onboarding"]} />
+        </MainNav>
+      </div>
+      {/* <ChangelogPopup /> */}
+      <Toolbar show={["onboarding"]} />
       <Suspense>
         <GlobalSheets defaultCurrency={currencies[countryCode]} />
       </Suspense>
-      <ConnectTransactionsModal countryCode={countryCode} />
-      <SelectBankAccountsModal />
-      <Toolbar show={["onboarding"]} />
     </div>
   );
 }

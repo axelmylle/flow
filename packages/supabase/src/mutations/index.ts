@@ -96,7 +96,6 @@ export async function joinTeamByInviteCode(supabase: Client, code: string) {
     code,
     email: session.user.email,
   });
-  console.log(inviteData);
 
   if (inviteData) {
     // Add user team

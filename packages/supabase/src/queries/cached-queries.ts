@@ -11,6 +11,8 @@ import {
   type GetTransactionsParams,
   getCategoriesQuery,
   getMetricsQuery,
+  getSkillByIdQuery,
+  getSkillQuestionsByIdQuery,
   getTeamBankAccountsQuery,
   getTeamMembersQuery,
   getTeamSettingsQuery,
@@ -242,4 +244,17 @@ export const getTeamUser = async () => {
       revalidate: 180,
     },
   )(user?.data.id);
+};
+
+export const getSkillById = async (skillId: string) => {
+  const supabase = createClient();
+  return getSkillByIdQuery(supabase, skillId);
+};
+
+export const getSkillQuestionsBySkillId = async (skillId: string) => {
+  const supabase = createClient();
+
+  return unstable_cache(async () => {
+    return getSkillQuestionsByIdQuery(supabase, skillId);
+  }, ["skill", skillId])(skillId);
 };

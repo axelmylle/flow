@@ -226,7 +226,7 @@ export function TransactionsSearchFilter({
             handleSubmit();
           }}
         >
-          <Icons.Search className="absolute pointer-events-none left-3 top-[11px]" />
+          <Icons.Search className="absolute pointer-events-none size-4 left-3 top-[11px]" />
           <Input
             ref={inputRef}
             placeholder={placeholder}
@@ -249,7 +249,7 @@ export function TransactionsSearchFilter({
                 isOpen && "opacity-100",
               )}
             >
-              <Icons.Filter />
+              <Icons.Filter className="size-4" />
             </button>
           </DropdownMenuTrigger>
         </form>

@@ -1,8 +1,5 @@
-import { SignOut } from "@/components/auth/sign-out";
-import { getI18n } from "@/locales/server";
-import { getUser } from "@v1/supabase/cached-queries";
-import { Button } from "@v1/ui/button";
-import { JobList } from "./list";
+import { PageContent } from "@/components/layout/page-content";
+import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
 import PageClient from "./page-client";
 
 export const metadata = {
@@ -11,8 +8,10 @@ export const metadata = {
 
 export default async function Page() {
   return (
-    <>
-      <PageClient />
-    </>
+    <PageContent title="Jobs">
+      <MaxWidthWrapper className="flex flex-col gap-y-3">
+        <PageClient />
+      </MaxWidthWrapper>
+    </PageContent>
   );
 }

@@ -628,3 +628,38 @@ export async function getTeamUserQuery(
     data,
   };
 }
+
+export async function getSkillByIdQuery(supabase: Client, skillId: string) {
+  console.log("hi");
+
+  const { data, error } = await supabase
+    .schema("skill_assessment")
+    .from("skills")
+    .select(`
+      *,
+      skill_topics:skill_topics(*)
+    `)
+    .eq("id", skillId)
+    .single()
+    .throwOnError();
+
+  return {
+    data,
+  };
+}
+
+export async function getSkillQuestionsByIdQuery(
+  supabase: Client,
+  skillId: string,
+) {
+  const { data, error } = await supabase
+    .schema("skill_assessment")
+    .from("questions")
+    .select(`
+       *
+    `)
+    .eq("skill_id", skillId)
+    .throwOnError();
+
+  return data;
+}

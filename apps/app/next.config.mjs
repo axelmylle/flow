@@ -13,6 +13,9 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  images: {
+    domains: ["logo.clearbit.com"],
+  },
 };
 
 export default withSentryConfig(nextConfig, {

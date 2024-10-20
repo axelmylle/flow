@@ -1,7 +1,15 @@
+import { getUser } from "@v1/supabase/cached-queries";
 import { Wordmark } from "@v1/ui/wordmark";
+import { redirect } from "next/navigation";
 import { NextButton } from "../next-button";
 
-export default function Welcome() {
+export default async function Welcome() {
+  const user = await getUser();
+
+  if (user?.data?.is_onboarded) {
+    return redirect("/");
+  }
+
   return (
     <>
       <div className="relative mx-auto mt-24 flex max-w-sm flex-col items-center px-3 text-center md:mt-32 md:px-8 lg:mt-48">

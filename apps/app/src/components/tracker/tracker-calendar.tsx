@@ -109,28 +109,26 @@ export function TrackerCalendar({
 
   return (
     <div ref={ref}>
-      <div className="mt-8">
-        <CalendarHeader
-          meta={meta}
-          data={data}
-          timeFormat={timeFormat}
-          weekStartsOnMonday={weekStartsOnMonday}
-        />
-        <CalendarGrid
-          firstWeek={firstWeek}
-          calendarDays={calendarDays}
-          currentDate={new TZDate(currentDate, "UTC")}
-          selectedDate={selectedDate}
-          data={data}
-          range={range}
-          localRange={localRange}
-          isDragging={isDragging}
-          weekStartsOnMonday={weekStartsOnMonday}
-          handleMouseDown={handleMouseDown}
-          handleMouseEnter={handleMouseEnter}
-          handleMouseUp={handleMouseUp}
-        />
-      </div>
+      <CalendarHeader
+        meta={meta}
+        data={data}
+        timeFormat={timeFormat}
+        weekStartsOnMonday={weekStartsOnMonday}
+      />
+      <CalendarGrid
+        firstWeek={firstWeek}
+        calendarDays={calendarDays}
+        currentDate={new TZDate(currentDate, "UTC")}
+        selectedDate={selectedDate}
+        data={data}
+        range={range}
+        localRange={localRange}
+        isDragging={isDragging}
+        weekStartsOnMonday={weekStartsOnMonday}
+        handleMouseDown={handleMouseDown}
+        handleMouseEnter={handleMouseEnter}
+        handleMouseUp={handleMouseUp}
+      />
     </div>
   );
 }

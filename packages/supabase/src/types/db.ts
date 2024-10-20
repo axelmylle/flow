@@ -584,6 +584,7 @@ export type Database = {
           email: string
           full_name: string | null
           id: string
+          is_onboarded: boolean
           locale: string | null
           team_id: string | null
           updated_at: string | null
@@ -594,6 +595,7 @@ export type Database = {
           email: string
           full_name?: string | null
           id: string
+          is_onboarded?: boolean
           locale?: string | null
           team_id?: string | null
           updated_at?: string | null
@@ -604,6 +606,7 @@ export type Database = {
           email?: string
           full_name?: string | null
           id?: string
+          is_onboarded?: boolean
           locale?: string | null
           team_id?: string | null
           updated_at?: string | null
@@ -753,6 +756,201 @@ export type Database = {
         | "wire"
         | "fee"
       transactionstatus: "posted" | "pending" | "excluded" | "completed"
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
+  skill_assessment: {
+    Tables: {
+      question_options: {
+        Row: {
+          content: string
+          id: string
+          is_correct: boolean | null
+          question_id: string
+        }
+        Insert: {
+          content: string
+          id?: string
+          is_correct?: boolean | null
+          question_id: string
+        }
+        Update: {
+          content?: string
+          id?: string
+          is_correct?: boolean | null
+          question_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_question_id"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      question_skill_topic_weights: {
+        Row: {
+          question_id: string
+          skill_topic_id: string
+          weight: number
+        }
+        Insert: {
+          question_id: string
+          skill_topic_id: string
+          weight: number
+        }
+        Update: {
+          question_id?: string
+          skill_topic_id?: string
+          weight?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_question_id"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_skill_topic_id"
+            columns: ["skill_topic_id"]
+            isOneToOne: false
+            referencedRelation: "skill_topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      questions: {
+        Row: {
+          content: string
+          correct_answer: string | null
+          created_at: string | null
+          id: string
+          skill_id: string | null
+          type: Database["skill_assessment"]["Enums"]["question_type"]
+        }
+        Insert: {
+          content: string
+          correct_answer?: string | null
+          created_at?: string | null
+          id?: string
+          skill_id?: string | null
+          type: Database["skill_assessment"]["Enums"]["question_type"]
+        }
+        Update: {
+          content?: string
+          correct_answer?: string | null
+          created_at?: string | null
+          id?: string
+          skill_id?: string | null
+          type?: Database["skill_assessment"]["Enums"]["question_type"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_skill_id"
+            columns: ["skill_id"]
+            isOneToOne: false
+            referencedRelation: "skills"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      responses: {
+        Row: {
+          answer: string
+          candidate_id: string
+          created_at: string | null
+          id: string
+          question_id: string
+          score: number
+        }
+        Insert: {
+          answer: string
+          candidate_id: string
+          created_at?: string | null
+          id?: string
+          question_id: string
+          score: number
+        }
+        Update: {
+          answer?: string
+          candidate_id?: string
+          created_at?: string | null
+          id?: string
+          question_id?: string
+          score?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_question_id_response"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      skill_topics: {
+        Row: {
+          description: string | null
+          id: string
+          name: string
+          skill_id: string
+        }
+        Insert: {
+          description?: string | null
+          id?: string
+          name: string
+          skill_id: string
+        }
+        Update: {
+          description?: string | null
+          id?: string
+          name?: string
+          skill_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_skill_id"
+            columns: ["skill_id"]
+            isOneToOne: false
+            referencedRelation: "skills"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      skills: {
+        Row: {
+          escoid: string
+          id: string
+          name: string
+        }
+        Insert: {
+          escoid: string
+          id?: string
+          name: string
+        }
+        Update: {
+          escoid?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      question_type: "yes_no" | "multiple_choice" | "text"
     }
     CompositeTypes: {
       [_ in never]: never

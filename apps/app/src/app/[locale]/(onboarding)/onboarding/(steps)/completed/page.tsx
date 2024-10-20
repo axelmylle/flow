@@ -1,5 +1,6 @@
 "use client";
 
+import { setOnboardingCompleted } from "@/actions/user/onboarding/set-onboarding-complete";
 import { Background } from "@/app/[locale]/(onboarding)/background";
 import { Wordmark } from "@v1/ui/wordmark";
 import { useRouter } from "next/navigation";
@@ -17,6 +18,23 @@ export default function OnboardingCompleted() {
 
   //     return () => clearTimeout(timer); // Cleanup timer on unmount
   //   }, [router]);
+
+  useEffect(() => {
+    const completeOnboarding = async () => {
+      try {
+        await setOnboardingCompleted();
+        const timer = setTimeout(() => {
+          router.push("/"); // Redirect to homepage
+        }, 5000);
+
+        return () => clearTimeout(timer); // Cleanup timer on unmount
+      } catch (error) {
+        console.error("Failed to complete onboarding:", error);
+      }
+    };
+
+    completeOnboarding();
+  }, [router]);
 
   return (
     <>

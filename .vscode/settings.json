@@ -23,8 +23,5 @@
   "terminal.integrated.localEchoStyle": "dim",
   "search.exclude": {
     "**/node_modules": true
-  },
-  "[sql]": {
-    "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
   }
 }

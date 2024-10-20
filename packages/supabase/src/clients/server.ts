@@ -33,7 +33,7 @@ console.log = (...args) => {
 
 type CreateClientOptions = {
   admin?: boolean;
-  schema?: "public" | "storage";
+  schema?: "public" | "storage" | "skill_assessment";
 };
 
 export const createClient = (options?: CreateClientOptions) => {

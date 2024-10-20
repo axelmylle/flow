@@ -1,3 +1,6 @@
+import { JobMatchCard } from "@/components/jobs/job-match-card";
+import { PageContent } from "@/components/layout/page-content";
+import { InviteClientCard } from "@/components/profile/invite-client-card";
 import { Charts } from "@/components/shared/charts/charts";
 import { EmptyState } from "@/components/shared/charts/empty-state";
 // import { OverviewModal } from "@/components/modals/overview-modal";
@@ -5,6 +8,7 @@ import { EmptyState } from "@/components/shared/charts/empty-state";
 import { Cookies } from "@/utils/constants";
 import { getTeamBankAccounts } from "@v1/supabase/cached-queries";
 import { cn } from "@v1/ui/cn";
+import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
 import { startOfMonth, startOfYear, subMonths } from "date-fns";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
@@ -44,38 +48,31 @@ export default async function Overview({ searchParams }) {
 
   const isEmpty = !accounts?.data?.length;
 
-  console.log(accounts);
-  console.log(value);
-
   return (
-    <>
-      <div>
-        <div className="h-[530px] mb-4">
-          {/* <ChartSelectors defaultValue={defaultValue} /> */}
+    <PageContent title="Links">
+      <div className="flex w-full items-center pt-3">
+        <MaxWidthWrapper className="flex flex-col gap-y-3">
+          {isEmpty && <EmptyState />}
 
-          <div className="mt-8 relative">
-            {isEmpty && <EmptyState />}
-
-            <div className={cn(isEmpty && "blur-[8px] opacity-20")}>
-              <Charts
-                value={value}
-                defaultValue={defaultValue}
-                disabled={isEmpty}
-                type={chartType}
-                currency={searchParams.currency}
-              />
-            </div>
+          <div className={cn(isEmpty && "blur-[8px] opacity-20")}>
+            <Charts
+              value={value}
+              defaultValue={defaultValue}
+              disabled={isEmpty}
+              type={chartType}
+              currency={searchParams.currency}
+            />
           </div>
-        </div>
-
-        {/* <Widgets
-          initialPeriod={initialPeriod}
-          disabled={isEmpty}
-          searchParams={searchParams}
-        /> */}
+          <div className="grid grid-cols-2 gap-4">
+            <JobMatchCard
+              userName="John"
+              matchedJobsCount={10}
+              skills={["Front end Developer"]}
+            />
+            <InviteClientCard />
+          </div>
+        </MaxWidthWrapper>
       </div>
-
-      {/* <OverviewModal defaultOpen={isEmpty && !hideConnectFlow} /> */}
-    </>
+    </PageContent>
   );
 }

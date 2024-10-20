@@ -10,9 +10,11 @@ import {
 import type { Metadata } from "next";
 
 import { ErrorFallback } from "@/components/error-fallback";
+import { PageContent } from "@/components/layout/page-content";
 import { Table } from "@/components/transactions/tables";
 import { NoAccounts } from "@/components/transactions/tables/empty-states";
 import { Loading } from "@/components/transactions/tables/loading";
+import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
@@ -62,7 +64,7 @@ export default async function Transactions({
 
   const sort = searchParams?.sort?.split(":");
   const hideConnectFlow = cookies().has(Cookies.HideConnectFlow);
-  console.log();
+
   const isOpen = Boolean(searchParams.step);
   const isEmpty = !accountsData?.data?.length && !isOpen;
   const loadingKey = JSON.stringify({
@@ -71,51 +73,52 @@ export default async function Transactions({
     sort,
     query,
   });
-  console.log("hello", accountsData?.data?.length, !isOpen);
 
   return (
-    <>
-      <div className="flex justify-between py-6">
-        <TransactionsSearchFilter
-          placeholder="Search or type filter"
-          categories={[
-            ...categoriesData?.data?.map((category) => ({
-              slug: category.slug,
-              name: category.name,
-            })),
-            {
-              // TODO, move this to the database
-              id: "uncategorized",
-              name: "Uncategorized",
-              slug: "uncategorized",
-            },
-          ]}
-          accounts={accountsData?.data?.map((account) => ({
-            id: account.id,
-            name: account.name,
-            currency: account.currency,
-          }))}
-          members={teamMembersData?.data?.map((member) => ({
-            id: member?.user?.id,
-            name: member.user?.full_name,
-          }))}
-        />
-        {/* <TransactionsActions isEmpty={isEmpty} /> */}
-      </div>
+    <PageContent title="Transactions">
+      <div className="flex w-full items-center pt-3">
+        <MaxWidthWrapper className="flex flex-col gap-y-3">
+          <div className="flex justify-between pb-6">
+            <TransactionsSearchFilter
+              placeholder="Search or type filter"
+              categories={[
+                ...categoriesData?.data?.map((category) => ({
+                  slug: category.slug,
+                  name: category.name,
+                })),
+                {
+                  // TODO, move this to the database
+                  id: "uncategorized",
+                  name: "Uncategorized",
+                  slug: "uncategorized",
+                },
+              ]}
+              accounts={accountsData?.data?.map((account) => ({
+                id: account.id,
+                name: account.name,
+                currency: account.currency,
+              }))}
+              members={teamMembersData?.data?.map((member) => ({
+                id: member?.user?.id,
+                name: member.user?.full_name,
+              }))}
+            />
+            {/* <TransactionsActions isEmpty={isEmpty} /> */}
+          </div>
 
-      {isEmpty ? (
-        <div className="relative h-[calc(100vh-200px)] overflow-hidden">
-          <NoAccounts />
-          <Loading isEmpty />
-        </div>
-      ) : (
-        <ErrorBoundary errorComponent={ErrorFallback}>
-          <Suspense fallback={<Loading />} key={loadingKey}>
-            <Table filter={filter} page={page} sort={sort} query={query} />
-          </Suspense>
-        </ErrorBoundary>
-      )}
-      {/*
+          {isEmpty ? (
+            <div className="relative h-[calc(100vh-200px)] overflow-hidden">
+              <NoAccounts />
+              <Loading isEmpty />
+            </div>
+          ) : (
+            <ErrorBoundary errorComponent={ErrorFallback}>
+              <Suspense fallback={<Loading />} key={loadingKey}>
+                <Table filter={filter} page={page} sort={sort} query={query} />
+              </Suspense>
+            </ErrorBoundary>
+          )}
+          {/*
       <TransactionsModal defaultOpen={isEmpty && !hideConnectFlow} />
       <CreateTransactionSheet
         categories={categoriesData?.data}
@@ -123,6 +126,8 @@ export default async function Transactions({
         accountId={accountsData?.data?.at(0)?.id}
         currency={accountsData?.data?.at(0)?.currency}
       /> */}
-    </>
+        </MaxWidthWrapper>
+      </div>
+    </PageContent>
   );
 }

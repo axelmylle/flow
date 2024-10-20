@@ -18,6 +18,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
+  //if user is not onboarded, redirect to onboarding
+  if (
+    user &&
+    !user.user_metadata?.isOnboarded &&
+    !request.nextUrl.pathname.includes("/onboarding")
+  ) {
+    return NextResponse.redirect(new URL("/onboarding", request.url));
+  }
+
   return response;
 }
 

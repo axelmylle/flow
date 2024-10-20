@@ -1,5 +1,6 @@
 "use client";
 
+import { getUser } from "@v1/supabase/cached-queries";
 import { Button } from "@v1/ui/button";
 import { useLocalStorage, useMediaQuery } from "@v1/ui/hooks";
 import { Icons } from "@v1/ui/icons";
@@ -44,6 +45,10 @@ function OnboardingButtonInner({
   //   invites: true,
   // });
 
+  // const user = await getUser();
+
+  // const isOnboarded = user?.data?.is_onboarded;
+
   const loading = false;
 
   const tasks = useMemo(() => {
@@ -75,7 +80,7 @@ function OnboardingButtonInner({
       align="end"
       popoverContentClassName="rounded-xl"
       content={
-        <div>
+        <div className="w-72">
           <div className="rounded-t-xl bg-black p-4 text-white">
             <div className="flex items-start justify-between gap-2">
               <div>
