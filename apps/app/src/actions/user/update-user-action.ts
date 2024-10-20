@@ -18,7 +18,7 @@ export const updateUserAction = authActionClient
       parsedInput: { revalidatePath, ...data },
       ctx: { user, supabase },
     }) => {
-      await updateUser(supabase, data);
+      await updateUser(user.id, data);
 
       if (data.full_name) {
         await supabase.auth.updateUser({

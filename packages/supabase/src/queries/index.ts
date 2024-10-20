@@ -377,6 +377,50 @@ export async function getTrackerProjectsQuery(
   };
 }
 
+export type GetClientsQueryParams = {
+  to?: number;
+  from?: number;
+  search?: {
+    query?: string;
+    fuzzy?: boolean;
+  };
+};
+
+export async function getClientsQuery(
+  supabase: Client,
+  params: GetClientsQueryParams,
+) {
+  const {
+    from = 0,
+    to = 5,
+
+    search,
+  } = params;
+
+  const query = supabase.from("clients").select("*", {
+    count: "exact",
+  });
+
+  if (search?.query) {
+    if (search.fuzzy) {
+      query.ilike("name", `%${search.query}%`);
+    } else {
+      query.eq("name", search.query);
+    }
+  }
+
+  query.order("created_at", { ascending: false });
+
+  const { data, count } = await query.range(from, to);
+
+  return {
+    meta: {
+      count,
+    },
+    data,
+  };
+}
+
 export async function getTransactionsQuery(
   supabase: Client,
   params: GetTransactionsParams,

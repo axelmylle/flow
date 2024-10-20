@@ -10,6 +10,7 @@ export async function updateUser(userId: string, data: TablesUpdate<"users">) {
   const supabase = createClient();
 
   try {
+    console.log("data", data, userId);
     const result = await supabase.from("users").update(data).eq("id", userId);
 
     return result;
@@ -286,6 +287,68 @@ export async function updateFreelancer(
       .update(data)
       .eq("id", freelancerId);
 
+    return result;
+  } catch (error) {
+    logger.error(error);
+
+    throw error;
+  }
+}
+
+type CreateCompanyClientParams = {
+  name: string;
+  website?: string;
+  description?: string;
+  logo_url?: string;
+};
+
+export async function createCompanyClient(
+  supabase: Client,
+  params: CreateCompanyClientParams,
+) {
+  const { data, error } = await supabase.rpc("create_client", {
+    name: params.name,
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+export async function updateClient(
+  clientId: string,
+  data: TablesUpdate<"clients">,
+) {
+  const supabase = createClient();
+
+  try {
+    const result = await supabase
+      .from("clients")
+      .update(data)
+      .eq("id", clientId);
+
+    return result;
+  } catch (error) {
+    logger.error(error);
+
+    throw error;
+  }
+}
+
+export async function updateProfileAtCompany(
+  id: string,
+  data: TablesUpdate<"users_on_client">,
+) {
+  const supabase = createClient();
+
+  try {
+    const { data: result, error } = await supabase
+      .from("users_on_client")
+      .update(data)
+      .eq("id", id);
+    console.log("error", error);
     return result;
   } catch (error) {
     logger.error(error);

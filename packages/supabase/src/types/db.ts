@@ -141,6 +141,27 @@ export type Database = {
           },
         ]
       }
+      clients: {
+        Row: {
+          base_currency: string | null
+          created_at: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          base_currency?: string | null
+          created_at?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          base_currency?: string | null
+          created_at?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       freelancers: {
         Row: {
           bio: string | null
@@ -580,33 +601,42 @@ export type Database = {
       users: {
         Row: {
           avatar_url: string | null
+          client_id: string | null
           created_at: string | null
           email: string
+          first_name: string | null
           full_name: string | null
           id: string
           is_onboarded: boolean
+          last_name: string | null
           locale: string | null
           team_id: string | null
           updated_at: string | null
         }
         Insert: {
           avatar_url?: string | null
+          client_id?: string | null
           created_at?: string | null
           email: string
+          first_name?: string | null
           full_name?: string | null
           id: string
           is_onboarded?: boolean
+          last_name?: string | null
           locale?: string | null
           team_id?: string | null
           updated_at?: string | null
         }
         Update: {
           avatar_url?: string | null
+          client_id?: string | null
           created_at?: string | null
           email?: string
+          first_name?: string | null
           full_name?: string | null
           id?: string
           is_onboarded?: boolean
+          last_name?: string | null
           locale?: string | null
           team_id?: string | null
           updated_at?: string | null
@@ -624,6 +654,61 @@ export type Database = {
             columns: ["team_id"]
             isOneToOne: false
             referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "users_company_id_fkey1"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users_on_client: {
+        Row: {
+          client_id: string
+          created_at: string | null
+          id: string
+          location: string | null
+          phone_number: string | null
+          role: string
+          title: string | null
+          user_id: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string | null
+          id?: string
+          location?: string | null
+          phone_number?: string | null
+          role: string
+          title?: string | null
+          user_id: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string | null
+          id?: string
+          location?: string | null
+          phone_number?: string | null
+          role?: string
+          title?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "users_on_company_company_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "users_on_company_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]
@@ -672,6 +757,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      create_client: {
+        Args: {
+          name: string
+        }
+        Returns: string
+      }
       get_profit_v3: {
         Args: {
           team_id: string

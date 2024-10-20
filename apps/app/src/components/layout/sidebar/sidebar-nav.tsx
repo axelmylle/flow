@@ -12,7 +12,7 @@ import {
   useState,
 } from "react";
 import UserSurveyButton from "../user-survey";
-import { ITEMS, type NavItem as NavItemType } from "./items";
+import { CLIENT_ITEMS, ITEMS, type NavItem as NavItemType } from "./items";
 // import { Usage } from "./usage";
 import UserDropdown from "./user-dropdown";
 
@@ -37,8 +37,6 @@ export function SidebarNav({
         ? "workspaceSettings"
         : "default";
   }, [slug, pathname]);
-
-  console.log(currentArea);
 
   return (
     <ClientOnly className="scrollbar-hide relative flex h-full w-full flex-col overflow-y-auto overflow-x-hidden">
@@ -85,7 +83,7 @@ export function SidebarNav({
               )}
 
               <div className="flex flex-col gap-4 pt-4">
-                {ITEMS[currentArea].map(({ name, items }, idx) => (
+                {CLIENT_ITEMS[currentArea].map(({ name, items }, idx) => (
                   <div key={idx} className="flex flex-col gap-0.5">
                     {name && (
                       <div className="mb-2 pl-1 text-sm text-neutral-500">
