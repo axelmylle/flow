@@ -208,3 +208,7 @@ SET
   user_id = '77a4350f-d747-5a7f-9e73-17fbb4cc41df'
 WHERE
   id = 'b0074e1b-9c92-5734-bb59-e8ab743e45bb';
+
+
+SELECT vault.create_secret('http://localhost:3000/api', 'WEBHOOK_ENDPOINT', 'Webhook endpoint URL');
+SELECT vault.create_secret('6c369443-1a88-444e-b459-7e662c1fff9e', 'WEBHOOK_SECRET', 'Webhook secret key');

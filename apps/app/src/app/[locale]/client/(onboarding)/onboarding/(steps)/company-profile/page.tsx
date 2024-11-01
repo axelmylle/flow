@@ -1,5 +1,5 @@
 import { LaterButton } from "../../later-button";
-import { StepPage } from "../step-page";
+import { StepPage } from "../../step-page";
 import { Form } from "./form";
 import { VatNumberForm } from "./vat-number-form";
 

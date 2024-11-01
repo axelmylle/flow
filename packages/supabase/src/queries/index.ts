@@ -30,6 +30,51 @@ export async function getCurrentUserTeamQuery(supabase: Client) {
   return getUserQuery(supabase, session.user?.id);
 }
 
+export async function getCurrentUserCompanyQuery(supabase: Client) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session?.user) {
+    return;
+  }
+  const user = await getUserQuery(supabase, session.user?.id);
+
+  return user?.data?.company;
+}
+
+export async function getCurrentUserAtCompanyQuery(supabase: Client) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session?.user) {
+    return;
+  }
+  const user = await getUserQuery(supabase, session.user?.id);
+  console.log(user);
+  if (!user?.data?.company_id) {
+    throw new Error("user has no company");
+  }
+
+  const { data: userAtCompany, error } = await supabase
+    .from("users_on_company")
+    .select("*")
+    .eq("company_id", user?.data?.company_id)
+    .eq("user_id", session.user.id)
+    .single();
+
+  console.log(userAtCompany, error);
+  if (!userAtCompany) {
+    throw new Error("user is not registered at this company");
+  }
+
+  return {
+    ...user,
+    ...userAtCompany,
+  };
+}
+
 export type GetMetricsParams = {
   teamId: string;
   from: string;
@@ -131,6 +176,21 @@ export async function getUserInviteQuery(
     .single();
 }
 
+type GetCompanyInviteQueryParams = {
+  code: string;
+};
+
+export async function getCompanyInviteQuery(
+  supabase: Client,
+  params: GetCompanyInviteQueryParams,
+) {
+  return supabase
+    .from("company_user_invites")
+    .select("*, company:company_id(*)")
+    .eq("code", params.code)
+    .single();
+}
+
 type GetTrackerProjectQueryParams = {
   teamId: string;
   projectId: string;
@@ -154,7 +214,8 @@ export async function getUserQuery(supabase: Client, userId: string) {
     .select(
       `
       *,
-      team:team_id(*)
+      team:team_id(*),
+      company:company_id(*)
     `,
     )
     .eq("id", userId)
@@ -297,6 +358,42 @@ export type GetTransactionsParams = {
   };
 };
 
+export type GetJobsParams = {
+  to: number;
+  from: number;
+  sort?: string[];
+  searchQuery?: string;
+  // filter?: {
+  //   statuses?: string[];
+  //   attachments?: "include" | "exclude";
+  //   categories?: string[];
+  //   accounts?: string[];
+  //   assignees?: string[];
+  //   type?: "income" | "expense";
+  //   start?: string;
+  //   end?: string;
+  //   recurring?: string[];
+  // };
+};
+
+export async function getJobsByQuery(supabase: Client, params: GetJobsParams) {
+  const query = supabase
+    .from("jobs")
+    .select("*")
+    .eq("status", "active")
+    .order("created_at");
+
+  const { data } = await query;
+
+  return {
+    meta: {
+      from: params.from,
+      to: params.to,
+    },
+    data,
+  };
+}
+
 export type GetTrackerProjectsQueryParams = {
   teamId: string;
   to?: number;
@@ -377,7 +474,7 @@ export async function getTrackerProjectsQuery(
   };
 }
 
-export type GetClientsQueryParams = {
+export type GetCompaniesQueryParams = {
   to?: number;
   from?: number;
   search?: {
@@ -386,9 +483,9 @@ export type GetClientsQueryParams = {
   };
 };
 
-export async function getClientsQuery(
+export async function getCompaniesQuery(
   supabase: Client,
-  params: GetClientsQueryParams,
+  params: GetCompaniesQueryParams,
 ) {
   const {
     from = 0,
@@ -397,7 +494,7 @@ export async function getClientsQuery(
     search,
   } = params;
 
-  const query = supabase.from("clients").select("*", {
+  const query = supabase.from("companies").select("*", {
     count: "exact",
   });
 
@@ -453,7 +550,7 @@ export async function getTransactionsQuery(
     "name",
     "description",
     "assigned:assigned_id(*)",
-    "category:transaction_categories(id, name, color, slug)",
+    // "category:transaction_categories(id, name, color, slug)",
     "bank_account:bank_accounts(id, name, currency, bank_connection:bank_connections(id, logo_url))",
     // "attachments:transaction_attachments(id, name, size, path, type)",
     "vat:calculated_vat",
@@ -464,6 +561,7 @@ export async function getTransactionsQuery(
     .select(columns.join(","), { count: "exact" })
     .eq("team_id", teamId);
 
+  console.log("query", query);
   if (sort) {
     const [column, value] = sort;
     const ascending = value === "asc";

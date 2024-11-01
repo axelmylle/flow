@@ -19,29 +19,29 @@ export function LoadingTransactionsEvent({
   setEventId,
   onClose,
 }: Props) {
-  const { statuses } = useEventRunStatuses(eventId);
-  const status = statuses?.at(0);
+  // const { statuses } = useEventRunStatuses(eventId);
+  // const status = statuses?.at(0);
   const [step, setStep] = useState(1);
   const { resolvedTheme } = useTheme();
 
-  useEffect(() => {
-    if (status?.data?.step) {
-      if (status.data.step === "getting_transactions") {
-        setStep(2);
-      }
+  // useEffect(() => {
+  //   if (status?.data?.step) {
+  //     if (status.data.step === "getting_transactions") {
+  //       setStep(2);
+  //     }
 
-      if (status.data.step === "completed") {
-        setStep(3);
-        setTimeout(() => {
-          onClose();
-        }, 500);
+  //     if (status.data.step === "completed") {
+  //       setStep(3);
+  //       setTimeout(() => {
+  //         onClose();
+  //       }, 500);
 
-        setTimeout(() => {
-          setEventId(undefined);
-        }, 1000);
-      }
-    }
-  }, [status]);
+  //       setTimeout(() => {
+  //         setEventId(undefined);
+  //       }, 1000);
+  //     }
+  //   }
+  // }, [status]);
 
   return (
     <div className="h-[250px]">

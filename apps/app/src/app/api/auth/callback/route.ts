@@ -1,28 +1,138 @@
+import { env } from "@/env.mjs";
+import { Cookies } from "@/utils/constants";
+import { render } from "@react-email/render";
+import WelcomeEmail from "@v1/email/emails/welcome-email";
+import { LogEvents } from "@v1/events/events";
+import { setupAnalytics } from "@v1/events/server";
+import { getSession } from "@v1/supabase/cached-queries";
 import { createClient } from "@v1/supabase/server";
+import type { Database } from "@v1/supabase/types";
+import { addYears } from "date-fns";
+import { nanoid } from "nanoid";
+import { cookies, headers } from "next/headers";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { Resend } from "resend";
+export const revalidate = 0;
+const resend = new Resend(env.RESEND_API_KEY);
 
-export async function GET(request: Request) {
-  const { searchParams, origin } = new URL(request.url);
+export const preferredRegion = ["fra1", "sfo1", "iad1"];
 
-  const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? "/";
+export async function GET(req: NextRequest) {
+  const cookieStore = cookies();
+  const requestUrl = new URL(req.url);
+  const code = requestUrl.searchParams.get("code");
+  const client = requestUrl.searchParams.get("client");
+  const returnTo = requestUrl.searchParams.get("return_to");
+  const userType = requestUrl.searchParams.get("user_type");
+
+  const provider = requestUrl.searchParams.get("provider");
+  const mfaSetupVisited = cookieStore.has(Cookies.MfaSetupVisited);
+  const invitedForCompanyCode = cookieStore.get(
+    Cookies.InvitedForCompanyCode,
+  )?.value;
+
+  if (client === "desktop") {
+    return NextResponse.redirect(`${requestUrl.origin}/verify?code=${code}`);
+  }
+
+  if (provider) {
+    cookieStore.set(Cookies.PreferredSignInProvider, provider, {
+      expires: addYears(new Date(), 1),
+    });
+  }
+
+  console.log("-----------------code----------------", { code });
+  console.log("-----------------code----------------", { userType });
 
   if (code) {
-    const supabase = createClient();
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    if (!error) {
-      const forwardedHost = request.headers.get("x-forwarded-host");
-      const isLocalEnv = process.env.NODE_ENV === "development";
+    const supabase = createClient(cookieStore);
+    await supabase.auth.exchangeCodeForSession(code);
 
-      if (isLocalEnv) {
-        return NextResponse.redirect(`${origin}${next}`);
+    const {
+      data: { session },
+    } = await getSession();
+    console.log("-----------------code----------------", {
+      id: session?.user?.id,
+    });
+
+    if (!session?.user.user_metadata.isOnboarded) {
+      await supabase
+        .from("users")
+        .update({ user_type: userType })
+        .eq("id", session?.user?.id);
+
+      await supabase.auth.updateUser({
+        data: {
+          user_type: userType,
+        },
+      });
+
+      if (userType === "Company") {
+        await resend.emails.send({
+          to: "info@studiokompleks.be",
+          subject: "Company joined",
+          from: "Create v1 <onboarding@resend.dev>",
+          html: await render(
+            WelcomeEmail({
+              name: "company",
+            }),
+          ),
+          headers: {
+            "X-Entity-Ref-ID": nanoid(),
+          },
+        });
+        return NextResponse.redirect(`${requestUrl.origin}/client/onboarding`);
       }
-      if (forwardedHost) {
-        return NextResponse.redirect(`https://${forwardedHost}${next}`);
+
+      if (userType === "Freelancer") {
+        resend.emails.send({
+          to: "info@studiokompleks.be",
+          subject: "Freelancer joined",
+          from: "Create v1 <onboarding@resend.dev>",
+          html: await render(
+            WelcomeEmail({
+              name: "freelancer",
+            }),
+          ),
+          headers: {
+            "X-Entity-Ref-ID": nanoid(),
+          },
+        });
+        return NextResponse.redirect(`${requestUrl.origin}/onboarding`);
       }
-      return NextResponse.redirect(`${origin}${next}`);
+    }
+
+    if (session) {
+      const userId = session.user.id;
+
+      const analytics = await setupAnalytics({
+        userId,
+        fullName: session?.user?.user_metadata?.full_name,
+      });
+
+      await analytics.track({
+        event: LogEvents.SignIn.name,
+        channel: LogEvents.SignIn.channel,
+      });
+
+      if (returnTo) {
+        return NextResponse.redirect(`${requestUrl.origin}/${returnTo}`);
+      }
     }
   }
 
-  return NextResponse.redirect(`${origin}?error=auth-code-error`);
+  if (!mfaSetupVisited) {
+    cookieStore.set(Cookies.MfaSetupVisited, "true", {
+      expires: addYears(new Date(), 1),
+    });
+
+    return NextResponse.redirect(`${requestUrl.origin}/mfa/setup`);
+  }
+
+  if (returnTo) {
+    return NextResponse.redirect(`${requestUrl.origin}/${returnTo}`);
+  }
+
+  return NextResponse.redirect(requestUrl.origin);
 }

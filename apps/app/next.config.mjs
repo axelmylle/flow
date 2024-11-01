@@ -14,7 +14,7 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ["logo.clearbit.com"],
+    domains: ["logo.clearbit.com", "images.pexels.com"],
   },
 };
 

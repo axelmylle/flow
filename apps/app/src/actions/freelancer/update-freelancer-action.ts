@@ -1,6 +1,10 @@
 "use server";
 
-import { updateFreelancer, updateUser } from "@v1/supabase/mutations";
+import {
+  createFreelancer,
+  updateFreelancer,
+  updateUser,
+} from "@v1/supabase/mutations";
 import { revalidateTag } from "next/cache";
 import { authActionClient } from "../safe-action";
 import { updateFreelancerSchema } from "./schema";
@@ -11,19 +15,26 @@ export const updateFreelancerAction = authActionClient
     name: "update-freelancer",
   })
   .action(async ({ parsedInput: data, ctx: { user, supabase } }) => {
-    const { data: freelancer, error } = await supabase
+    const { data: doesFreelancerExist, error } = await supabase
       .from("freelancers")
       .select("*")
       .eq("user_id", user.id)
       .single();
-
-    if (!freelancer) {
-      throw new Error("Freelancer not found", error.message);
+    if (!doesFreelancerExist) {
+      const { data: freelancer } = await createFreelancer(supabase, {
+        headline: data.headline,
+      });
+    } else {
+      const { data: freelancer } = await updateFreelancer(
+        doesFreelancerExist.id,
+        data,
+      );
     }
 
-    await updateFreelancer(freelancer?.id, data);
+    // await updateFreelancer(freelancer?.id, data);
 
-    revalidateTag(`freelancer_${freelancer.id}`);
+    // revalidateTag(`freelancer_${freelancer.id}`);
+    // revalidateTag(`user_${user.id}`);
 
-    return freelancer;
+    // return freelancer;
   });

@@ -218,7 +218,11 @@ export const CLIENT_ITEMS: Record<
           icon: Icons.CursorRays,
           href: `${APP_DOMAIN}${slug}/jobs`,
         },
-
+        {
+          name: "Transactions",
+          icon: Icons.DollarSign,
+          href: `${APP_DOMAIN}${slug}/transactions`,
+        },
         {
           name: "Timesheets",
           icon: Icons.Time,

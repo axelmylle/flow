@@ -82,11 +82,27 @@ const config = {
             opacity: "0",
           },
         },
+        "infinite-scroll-y": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(var(--scroll, -150%))" },
+        },
+        "infinite-scroll": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(var(--scroll, -150%))" },
+        },
+        "gradient-move": {
+          "0%": { backgroundPosition: "0% 50%" },
+          "100%": { backgroundPosition: "200% 50%" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         spinner: "spinner 1.2s linear infinite",
+        "gradient-move": "gradient-move 5s linear infinite",
+        // Infinite scroll animation
+        "infinite-scroll": "infinite-scroll 22s linear infinite",
+        "infinite-scroll-y": "infinite-scroll-y 22s linear infinite",
       },
     },
   },

@@ -1,5 +1,5 @@
 import { Icons } from "@v1/ui/icons";
-import { StepPage } from "../step-page";
+import { StepPage } from "../../step-page";
 import { Form } from "./form";
 
 export default function Workspace() {

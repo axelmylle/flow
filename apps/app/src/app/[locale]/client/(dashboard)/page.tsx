@@ -2,7 +2,7 @@ import { JobMatchCard } from "@/components/jobs/job-match-card";
 import { PageContent } from "@/components/layout/page-content";
 import { InviteClientCard } from "@/components/profile/invite-client-card";
 import { Charts } from "@/components/shared/charts/charts";
-import { EmptyState } from "@/components/shared/charts/empty-state";
+import { ChartsEmptyState } from "@/components/shared/charts/empty-state";
 // import { OverviewModal } from "@/components/modals/overview-modal";
 // import { Widgets } from "@/components/widgets";
 import { Cookies } from "@/utils/constants";
@@ -52,7 +52,7 @@ export default async function Overview({ searchParams }) {
     <PageContent title="Dashboard">
       <div className="flex w-full items-center pt-3">
         <MaxWidthWrapper className="flex flex-col gap-y-3">
-          {isEmpty && <EmptyState />}
+          {isEmpty && <ChartsEmptyState />}
 
           <div className={cn(isEmpty && "blur-[8px] opacity-20")}>Company</div>
         </MaxWidthWrapper>

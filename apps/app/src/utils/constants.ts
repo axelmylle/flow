@@ -12,4 +12,5 @@ export const Cookies = {
   HideConnectFlow: "hide-connect-flow",
   RequestAccess: "request-access",
   LastProject: "last-project",
+  InvitedForCompanyCode: "invited-for-company-code",
 };

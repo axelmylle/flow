@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 export default async function Onboarding() {
   const user = await getUser();
-  console.log("user", user);
+
   if (user?.data?.is_onboarded) {
     return redirect("/");
   }

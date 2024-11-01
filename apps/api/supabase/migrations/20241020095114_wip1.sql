@@ -1,10 +1,6 @@
-alter table "public"."transaction_categories" drop constraint "transaction_categories_slug_team_id_unique";
-
-alter table "public"."transactions" drop constraint "transactions_category_slug_team_id_fkey";
 
 drop function if exists "public"."get_revenue_v2"(team_id uuid, date_from date, date_to date, base_currency text);
 
-drop index if exists "public"."transaction_categories_slug_team_id_unique";
 
 alter table "public"."users" add column "is_onboarded" boolean not null default false;
 

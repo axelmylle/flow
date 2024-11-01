@@ -1,15 +1,20 @@
-import type { ClientOnboardingStep } from "@/actions/client/types";
-import { client } from "@v1/kv/client";
-import { getUser } from "@v1/supabase/cached-queries";
-import { redirect } from "next/navigation";
 import type { PropsWithChildren } from "react";
 import { Background } from "./background";
+import { OnboardingSummaryCard } from "./onboarding-summary-card";
 
 export default async function Layout({ children }: PropsWithChildren) {
   return (
     <>
       <Background />
-      {children}
+      <div className="grid grid-cols-2">
+        <div>{children}</div>
+
+        <div className="bg-white">
+          <div className="p-4 z-10">
+            <OnboardingSummaryCard />
+          </div>
+        </div>
+      </div>
     </>
   );
 }

@@ -2,7 +2,7 @@ import { JobMatchCard } from "@/components/jobs/job-match-card";
 import { PageContent } from "@/components/layout/page-content";
 import { InviteClientCard } from "@/components/profile/invite-client-card";
 import { Charts } from "@/components/shared/charts/charts";
-import { EmptyState } from "@/components/shared/charts/empty-state";
+import { ChartsEmptyState } from "@/components/shared/charts/empty-state";
 // import { OverviewModal } from "@/components/modals/overview-modal";
 // import { Widgets } from "@/components/widgets";
 import { Cookies } from "@/utils/constants";
@@ -49,27 +49,19 @@ export default async function Overview({ searchParams }) {
   const isEmpty = !accounts?.data?.length;
 
   return (
-    <PageContent title="Links">
+    <PageContent title="Home">
       <div className="flex w-full items-center pt-3">
         <MaxWidthWrapper className="flex flex-col gap-y-3">
-          {isEmpty && <EmptyState />}
+          {<ChartsEmptyState />}
 
           <div className={cn(isEmpty && "blur-[8px] opacity-20")}>
-            <Charts
+            {/* <Charts
               value={value}
               defaultValue={defaultValue}
               disabled={isEmpty}
               type={chartType}
               currency={searchParams.currency}
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <JobMatchCard
-              userName="John"
-              matchedJobsCount={10}
-              skills={["Front end Developer"]}
-            />
-            <InviteClientCard />
+            /> */}
           </div>
         </MaxWidthWrapper>
       </div>

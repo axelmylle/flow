@@ -13,3 +13,7 @@ export const updateUserSchema = z.object({
 });
 
 export type UpdateUserFormValues = z.infer<typeof updateUserSchema>;
+export const verifyOtpSchema = z.object({
+  token: z.string(),
+  email: z.string(),
+});

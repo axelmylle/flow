@@ -1,4 +1,7 @@
+import { Form } from "@/app/[locale]/client/(onboarding)/onboarding/(steps)/my-company/form";
 import { getUser } from "@v1/supabase/cached-queries";
+import { getCurrentUserCompanyQuery } from "@v1/supabase/queries";
+import { createClient } from "@v1/supabase/server";
 import { Wordmark } from "@v1/ui/wordmark";
 import { redirect } from "next/navigation";
 import { NextButton } from "../next-button";
@@ -9,6 +12,9 @@ export default async function Welcome() {
   // if (user?.data?.is_onboarded) {
   //   return redirect("/");
   // }
+
+  const supabase = await createClient();
+  const company = await getCurrentUserCompanyQuery(supabase);
 
   return (
     <>
@@ -37,7 +43,7 @@ export default async function Welcome() {
           workforce today!
         </p>
         <div className="animate-slide-up-fade mt-10 w-full [--offset:10px] [animation-delay:750ms] [animation-duration:1s] [animation-fill-mode:both]">
-          <NextButton step="my-company" />
+          <NextButton step={company ? "update-company" : "my-company"} />
         </div>
       </div>
     </>

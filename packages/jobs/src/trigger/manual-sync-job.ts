@@ -42,14 +42,6 @@ export const manualSyncTask = task({
 
     console.log("accountsData", accountsData);
     const promises = accountsData?.map(async (account) => {
-      console.log("account", account);
-      console.log("account.bank_connection", {
-        provider: "gocardless",
-        accountId: account.account_id,
-        accountType: getClassification(account.type),
-        accessToken: account.bank_connection?.access_token,
-        latest: true,
-      });
       // const health = await engine.health.retrieve();
 
       const transactions = await engine.transactions.list({
@@ -57,250 +49,311 @@ export const manualSyncTask = task({
         accountId: account.account_id,
         accountType: getClassification(account.type),
         accessToken: account.bank_connection?.access_token,
-        latest: true,
+        latest: "true",
       });
       console.log("transactions", transactions);
-      const formattedTransactions = transactions.data?.map((transaction) => {
-        return transformTransaction({
-          transaction,
-          teamId: account.team_id,
-          bankAccountId: account.id,
-        });
-      });
+      // const formattedTransactions = transactions.data?.map((transaction) => {
+      //   return transformTransaction({
+      //     transaction,
+      //     teamId: account.team_id,
+      //     bankAccountId: account.id,
+      //   });
+      // });
 
-      // const formattedTransactions = [
-      //   {
-      //     name: "Mobbin Com",
-      //     description: null,
-      //     date: "2024-10-02",
-      //     amount: -40.91,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_cfc9ebbbeeca3a6bcab9057a1f426db3",
-      //     category_slug: null,
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Openai",
-      //     description: null,
-      //     date: "2024-09-29",
-      //     amount: -5.49,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_a1381af789356397f9ee6ba2ea3fba83",
-      //     category_slug: null,
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Openai",
-      //     description: null,
-      //     date: "2024-09-29",
-      //     amount: 0,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_67598683c0da4bde596dd1ec970a8a14",
-      //     category_slug: null,
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Axel Wilfried M Mylle",
-      //     description: "From Yassin Fauvart",
-      //     date: "2024-09-28",
-      //     amount: 55,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_4b6fa9ad09970646d81a95f127d514ff",
-      //     category_slug: "income",
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Axel Wilfried M Mylle",
-      //     description: "From Denisa Florina Coltea Dine Outs",
-      //     date: "2024-09-25",
-      //     amount: 50,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_73a8b43023c799a5f8ba09f7310348b1",
-      //     category_slug: "income",
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Yassin Fauvart",
-      //     description: "To Yassin Fauvart",
-      //     date: "2024-09-24",
-      //     amount: -730,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_8f7a410a673ece515aec381acc2a141c",
-      //     category_slug: null,
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Denisa Florina Coltea",
-      //     description: "To Denisa Florina Coltea",
-      //     date: "2024-09-20",
-      //     amount: -11,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_c666435e7bc88bd06225f78f3fb12b0f",
-      //     category_slug: null,
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Axel Wilfried M Mylle",
-      //     description: "From Denisa Florina Coltea Dine Outs",
-      //     date: "2024-09-20",
-      //     amount: 75,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_02befb4fc0e3a8c13711dd35a8cc0c7b",
-      //     category_slug: "income",
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Cursor Ai Powered Ide",
-      //     description: null,
-      //     date: "2024-09-15",
-      //     amount: -18.3,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_f3c236314fae1477a67db16498e4f109",
-      //     category_slug: null,
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Axel Wilfried M Mylle",
-      //     description: "From Denisa Florina Coltea Food Love",
-      //     date: "2024-09-12",
-      //     amount: 30,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_02dd98637499a8da92c91f126a49790a",
-      //     category_slug: "income",
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Openai Chatgpt Subscr",
-      //     description: null,
-      //     date: "2024-09-12",
-      //     amount: -22.05,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_26447f39af94755114a8c8eac5e0a979",
-      //     category_slug: null,
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Supermaven Inc",
-      //     description: null,
-      //     date: "2024-09-10",
-      //     amount: -9.11,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_9768a72fda2a291b4983b228a798397a",
-      //     category_slug: null,
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Axel Wilfried M Mylle",
-      //     description: "From Denisa Florina Coltea Thai",
-      //     date: "2024-09-09",
-      //     amount: 36,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_7142621151bfa85069f36b16018f286d",
-      //     category_slug: "income",
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      //   {
-      //     name: "Axel Wilfried M Mylle",
-      //     description: "From Denisa Florina Coltea",
-      //     date: "2024-09-08",
-      //     amount: 1159.91,
-      //     currency: "EUR",
-      //     method: "other",
-      //     internal_id:
-      //       "f50c1b3d-4279-4797-be84-918c3ae3e6d5_4115466502cb4f37aa23c13fb91a4143",
-      //     category_slug: "income",
-      //     bank_account_id: "7af9242d-0868-4f46-8f07-bc82924e48b0",
-      //     balance: null,
-      //     team_id: "f50c1b3d-4279-4797-be84-918c3ae3e6d5",
-      //     status: "posted",
-      //   },
-      // ];
-      console.log("formattedTransactions", formattedTransactions);
-      const balance = await engine.accounts.balance({
-        provider: account.bank_connection.provider,
-        id: account.account_id,
-        accessToken: account.bank_connection?.access_token,
-      });
+      const formattedTransactions = [
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-28",
+          amount: -237.4,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_51b073b728ac49d33563773a13a5f2e3",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-21",
+          amount: -55.95,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_bcd9efdd47f51b824fd6e15d09204df2",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-16",
+          amount: -4.26,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_99a584642abefd0a148f5a53e25e96b4",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-16",
+          amount: -8.2,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_401529ec19784c60c2d5187c9bb656bd",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-16",
+          amount: -23.76,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_f2fc5f984259fbbcf1892e68ca2f64a1",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-16",
+          amount: -4.5,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_1f0bf43ddc169cba622c058f9f6569cb",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Btw Aangifte",
+          description: null,
+          date: "2024-10-15",
+          amount: -9386.63,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_01bb7625dfe41edc2fa053925781c698",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-15",
+          amount: 12100,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_7509fc9d505aeb3297e01a32af614b60",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-15",
+          amount: -31.47,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_3aa114bc52799011f48a6f54aef5bee3",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-14",
+          amount: -4.37,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_e6b763f9b0c4f946dff08e1db9a479a2",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-11",
+          amount: -6.31,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_cb866e2d5ef70ec957d7c69aec5c5456",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-11",
+          amount: -8.4,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_1f1fea25804870b82e90055af67eb944",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-11",
+          amount: -46.7,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_ff62ed99e0a77c817954401ac43c7685",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-10",
+          amount: -7.77,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_f72b053acc0131aefed7fe59394adb91",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Kompleks Bv",
+          description: null,
+          date: "2024-10-10",
+          amount: -45.45,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_81db3a0122cdd599d49a2b0b5056f10a",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Maxime Mylle",
+          description: null,
+          date: "2024-10-07",
+          amount: -1479,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_43351aabd7754ee4b28d426e69fff0c6",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Team Inning Bedrijfsvoorheffing",
+          description: null,
+          date: "2024-10-06",
+          amount: -570,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_55cd2b2c61b83b2119582e093f14dbd1",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+        {
+          name: "Liantis Sociale Bijdrage",
+          description: null,
+          date: "2024-10-04",
+          amount: -7883.22,
+          currency: "EUR",
+          method: "other",
+          internal_id:
+            "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb_1c81850bfb0f5d6717435f6c7dd59314",
+          category_slug: null,
+          bank_account_id: "be2d090f-bf35-4f17-8db3-8900b8889822",
+          balance: null,
+          team_id: "6b5633c2-83ac-4fd2-9bbe-524b1e645ebb",
+          status: "posted",
+        },
+      ];
 
-      // const balance = { data: { currency: "EUR", amount: 572.79 } };
-      console.log("balance", balance);
-      // Update account balance
-      if (balance.data?.amount) {
-        await supabase
-          .from("bank_accounts")
-          .update({
-            balance: balance.data.amount,
-          })
-          .eq("id", account.id);
-      }
+      // const balance = await engine.accounts.balance({
+      //   provider: account.bank_connection.provider,
+      //   id: account.account_id,
+      //   accessToken: account.bank_connection?.access_token,
+      // });
+
+      // // const balance = { data: { currency: "EUR", amount: 572.79 } };
+      // console.log("balance", balance);
+      // // Update account balance
+      // if (balance.data?.amount) {
+      //   await supabase
+      //     .from("bank_accounts")
+      //     .update({
+      //       balance: balance.data.amount,
+      //     })
+      //     .eq("id", account.id);
+      // }
       // NOTE: We will get all the transactions at once for each account so
       // we need to guard against massive payloads
       await processBatch(formattedTransactions, BATCH_LIMIT, async (batch) => {
+        console.log("batch", batch);
         const smth = await supabase.from("transactions").upsert(batch, {
           // onConflict: "internal_id",
           ignoreDuplicates: true,
@@ -340,5 +393,7 @@ export const manualSyncTask = task({
         error_details: null,
       })
       .eq("id", connectionId);
+
+    return true;
   },
 });

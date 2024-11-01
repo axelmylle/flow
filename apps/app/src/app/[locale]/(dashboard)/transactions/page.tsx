@@ -50,7 +50,7 @@ export default async function Transactions({
       getTeamMembers(),
       getUser(),
     ]);
-
+  // console.log(accountsData, categoriesData, teamMembersData, userData);
   const filter = {
     attachments,
     start,
@@ -82,10 +82,10 @@ export default async function Transactions({
             <TransactionsSearchFilter
               placeholder="Search or type filter"
               categories={[
-                ...categoriesData?.data?.map((category) => ({
-                  slug: category.slug,
-                  name: category.name,
-                })),
+                // ...categoriesData?.data?.map((category) => ({
+                //   slug: category.slug,
+                //   name: category.name,
+                // })),
                 {
                   // TODO, move this to the database
                   id: "uncategorized",

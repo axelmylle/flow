@@ -1,106 +1,129 @@
-import { DUB_THUMBNAIL, DUB_WORDMARK } from "@dub/utils";
 import {
   Body,
   Container,
-  Head,
+  Font,
   Heading,
   Html,
   Img,
   Link,
   Preview,
-  Section,
   Tailwind,
   Text,
 } from "@react-email/components";
-import Footer from "./components/footer";
 
-export default function WelcomeEmail({
-  name = "Brendon Urie",
-  email = "panic@thedis.co",
-}: {
-  name: string | null;
-  email: string;
-}) {
+import { Logo } from "../components/logo";
+import { Footer } from "./components/footer";
+import { GetStarted } from "./components/get-started";
+
+interface WelcomeProps {
+  fullName: string;
+}
+
+const baseUrl =
+  process.env.VERCEL_ENV === "production"
+    ? "https://midday.ai/email"
+    : "http://localhost:3000/email";
+
+export const WelcomeEmail = ({ fullName = "Axel Mylle" }: WelcomeProps) => {
+  const firstName = fullName.split(" ").at(0);
+  const text = `Hi ${firstName}, Welcome to Gigflow! I'm Axel, one of the founders. It's really important to me that you have a great experience ramping up.`;
+
   return (
     <Html>
-      <Head />
-      <Preview>Welcome to Dub.co</Preview>
       <Tailwind>
-        <Body className="mx-auto my-auto bg-white font-sans">
-          <Container className="mx-auto my-10 max-w-[500px] rounded border border-solid border-gray-200 px-10 py-5">
-            <Section className="mt-8">
-              <Img
-                src={DUB_WORDMARK}
-                height="40"
-                alt="Dub"
-                className="mx-auto my-0"
-              />
-            </Section>
-            <Heading className="mx-0 my-7 p-0 text-center text-xl font-semibold text-black">
-              Welcome to Dub.co
+        <head>
+          <Font
+            fontFamily="Geist"
+            fallbackFontFamily="Helvetica"
+            webFont={{
+              url: "https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.1/files/geist-sans-latin-400-normal.woff2",
+              format: "woff2",
+            }}
+            fontWeight={400}
+            fontStyle="normal"
+          />
+
+          <Font
+            fontFamily="Geist"
+            fallbackFontFamily="Helvetica"
+            webFont={{
+              url: "https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.1/files/geist-sans-latin-500-normal.woff2",
+              format: "woff2",
+            }}
+            fontWeight={500}
+            fontStyle="normal"
+          />
+        </head>
+        <Preview>{text}</Preview>
+
+        <Body className="bg-[#fff] my-auto mx-auto font-sans">
+          <Container
+            className="border-transparent md:border-[#E8E7E1] my-[40px] mx-auto p-[20px] max-w-[600px]"
+            style={{ borderStyle: "solid", borderWidth: 1 }}
+          >
+            <Logo baseUrl={baseUrl} />
+            <Heading className="text-[#121212] text-[21px] font-normal text-center p-0 my-[30px] mx-0">
+              Welcome to Gigflow
             </Heading>
-            <Section className="my-8">
-              <Img src={DUB_THUMBNAIL} alt="Dub" className="max-w-[500px]" />
-            </Section>
-            <Text className="text-sm leading-6 text-black">
-              Thanks for signing up{name && `, ${name}`}!
-            </Text>
-            <Text className="text-sm leading-6 text-black">
-              My name is Steven, and I'm the founder of Dub.co - the modern link
-              management platform for you to create marketing campaigns, link
-              sharing features, and referral programs. We're excited to have you
-              on board!
-            </Text>
-            <Text className="text-sm leading-6 text-black">
-              Here are a few things you can do:
-            </Text>
-            <Text className="ml-1 text-sm leading-4 text-black">
-              ◆ Create a{" "}
+
+            <br />
+
+            <span className="font-medium">Hi {firstName},</span>
+            <Text className="text-[#121212]">
+              Welcome to Gigflow! I'm Axel, the founder of Gigflow.
+              <br />
+              <br />
+              Over the past few months, I've been building Gigflow to support
+              you and your team in managing gig work with ease. We've
+              established the foundational features to get started, and with
+              your input, we can make smarter, more impactful improvements to
+              meet your business needs.
+              <br />
+              <br />
+              During our beta phase, you might experience a few bugs, but we
+              truly value all of your feedback.
+              <br />
+              <br />
+              If you have any questions or suggestions, please feel free to
+              reply directly to this email or{" "}
               <Link
-                href="https://app.dub.co?newWorkspace=true"
-                className="font-medium text-blue-600 no-underline"
+                href="https://cal.com/pontus-gigflow/15min"
+                className="text-[#121212] underline"
               >
-                new workspace
-              </Link>{" "}
-              and{" "}
-              <Link
-                href="https://dub.co/help/article/how-to-add-custom-domain"
-                className="font-medium text-blue-600 no-underline"
-              >
-                add your custom domain
+                schedule a call with me
               </Link>
-            </Text>
-            <Text className="ml-1 text-sm leading-4 text-black">
-              ◆ Create your first{" "}
-              <Link
-                href="https://dub.co/help/article/how-to-create-link"
-                className="font-medium text-blue-600 no-underline"
-              >
-                short link
-              </Link>
-            </Text>
-            <Text className="ml-1 text-sm leading-4 text-black">
-              ◆ Check out our{" "}
-              <Link
-                href="https://dub.co/api"
-                className="font-medium text-blue-600 no-underline"
-              >
-                API documentation
-              </Link>{" "}
-              for programmatic link generation
-            </Text>
-            <Text className="text-sm leading-6 text-black">
-              Let me know if you have any questions or feedback. I'm always
-              happy to help!
-            </Text>
-            <Text className="text-sm font-light leading-6 text-gray-400">
-              Steven from Dub
+              .
             </Text>
 
-            <Footer email={email} marketing />
+            <br />
+
+            <Img
+              src={`${baseUrl}/founders.jpeg`}
+              alt="Founders"
+              className="my-0 mx-auto block w-full"
+            />
+
+            <Text className="text-[#707070]">Best regards, Axel</Text>
+
+            <Img
+              src={`${baseUrl}/signature.png`}
+              alt="Signature"
+              className="block w-full w-[143px] h-[20px]"
+            />
+
+            <br />
+            <br />
+
+            <GetStarted />
+
+            <br />
+
+            <Footer baseUrl={baseUrl} />
           </Container>
         </Body>
       </Tailwind>
     </Html>
   );
-}
+};
+
+export default WelcomeEmail;

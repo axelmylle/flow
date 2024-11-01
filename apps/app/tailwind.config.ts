@@ -28,6 +28,8 @@ export default {
         "scale-out-content": "scale-out-content 0.2s ease",
         // Accordion
         "infinite-scroll": "infinite-scroll 22s linear infinite",
+        "infinite-scroll-y": "infinite-scroll-y 22s linear infinite",
+
         "pulse-scale": "pulse-scale 6s ease-out infinite",
       },
       keyframes: {
@@ -95,6 +97,10 @@ export default {
         "infinite-scroll": {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-150%)" },
+        },
+        "infinite-scroll-y": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(var(--scroll, -150%))" },
         },
         "pulse-scale": {
           "0%": { transform: "scale(0.8)", opacity: "0" },

@@ -134,13 +134,13 @@ export function BankConnection({ connection }: BankConnectionProps) {
   const [eventId, setEventId] = useState<string | undefined>();
   const [isSyncing, setSyncing] = useState(false);
   const { toast, dismiss } = useToast();
-  const { data } = useEventDetails(eventId);
+  // const { data } = useEventDetails(eventId);
   const router = useRouter();
 
-  const status = data?.runs.at(-1)?.status;
+  // const status = data?.runs.at(-1)?.status;
   const { show } = connectionStatus(connection);
 
-  const error = status === "FAILURE" || status === "TIMED_OUT";
+  const error = null; //status === "FAILURE" || status === "TIMED_OUT";
 
   const [params] = useQueryStates({
     step: parseAsString,

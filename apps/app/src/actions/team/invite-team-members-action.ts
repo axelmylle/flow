@@ -5,6 +5,7 @@ import { env } from "@/env.mjs";
 import { render } from "@react-email/render";
 import InviteEmail from "@v1/email/emails/invite";
 import { getI18n } from "@v1/email/locales";
+import { LogEvents } from "@v1/events/events";
 import { revalidatePath as revalidatePathFunc } from "next/cache";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -18,10 +19,10 @@ export const inviteTeamMembersAction = authActionClient
   .schema(inviteTeamMembersSchema)
   .metadata({
     name: "invite-team-members",
-    // track: {
-    //   event: LogEvents.InviteTeamMembers.name,
-    //   channel: LogEvents.InviteTeamMembers.channel,
-    // },
+    track: {
+      event: LogEvents.InviteTeamMembers.name,
+      channel: LogEvents.InviteTeamMembers.channel,
+    },
   })
   .action(
     async ({

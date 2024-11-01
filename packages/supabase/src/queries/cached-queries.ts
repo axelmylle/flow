@@ -4,6 +4,7 @@ import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import {
   type GetCategoriesParams,
+  type GetJobsParams,
   type GetMetricsParams,
   type GetTeamBankAccountsParams,
   type GetTrackerProjectsQueryParams,
@@ -23,6 +24,7 @@ import {
   getUserQuery,
 } from ".";
 import { createClient } from "../clients/server";
+import { getJobsByQuery } from "./index";
 
 export const getTrackerRecordsByRange = async (
   params: Omit<GetTrackerRecordsByRangeParams, "teamId">,
@@ -42,6 +44,24 @@ export const getTrackerRecordsByRange = async (
     ["tracker_entries", teamId],
     {
       tags: [`tracker_entries_${teamId}`],
+      revalidate: 180,
+    },
+  )(params);
+};
+
+export const getJobs = async (params: GetJobsParams) => {
+  const supabase = createClient();
+  const user = await getUser();
+
+  return unstable_cache(
+    async () => {
+      return getJobsByQuery(supabase, {
+        ...params,
+      });
+    },
+    ["jobs", user?.data?.id],
+    {
+      tags: [`jobs_${user?.data?.id}`],
       revalidate: 180,
     },
   )(params);
@@ -75,7 +95,7 @@ export const getTransactions = async (
   const supabase = createClient();
   const user = await getUser();
   const teamId = user?.data?.team_id;
-
+  console.log(teamId);
   if (!teamId) {
     return null;
   }

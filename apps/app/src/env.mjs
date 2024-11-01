@@ -14,12 +14,15 @@ export const env = createEnv({
     RESEND_API_KEY: z.string(),
     SUPABASE_SERVICE_KEY: z.string(),
     UPSTASH_REDIS_REST_TOKEN: z.string(),
+    LOOPS_API_KEY: z.string(),
     UPSTASH_REDIS_REST_URL: z.string(),
+    WEBHOOK_SECRET_KEY: z.string(),
   },
   client: {
     NEXT_PUBLIC_OPENPANEL_CLIENT_ID: z.string(),
     NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),
     NEXT_PUBLIC_SUPABASE_URL: z.string(),
+    NEXT_PUBLIC_TRIGGER_API_KEY: z.string(),
   },
   runtimeEnv: {
     NEXT_PUBLIC_OPENPANEL_CLIENT_ID:
@@ -29,8 +32,11 @@ export const env = createEnv({
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     OPENPANEL_SECRET_KEY: process.env.OPENPANEL_SECRET_KEY,
     PORT: process.env.PORT,
+    LOOPS_API_KEY: process.env.LOOPS_API_KEY,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
+    NEXT_PUBLIC_TRIGGER_API_KEY: process.env.NEXT_PUBLIC_TRIGGER_API_KEY,
     SUPABASE_SERVICE_KEY: process.env.SUPABASE_SERVICE_KEY,
+    WEBHOOK_SECRET_KEY: process.env.WEBHOOK_SECRET_KEY,
     UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
     UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
     VERCEL_URL: process.env.VERCEL_URL,

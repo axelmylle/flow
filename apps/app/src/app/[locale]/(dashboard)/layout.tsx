@@ -8,6 +8,7 @@ import { SidebarLayout, SidebarTrigger } from "@v1/ui/sidebar";
 
 import { MainNav } from "@/components/layout/main-nav";
 import { GlobalSheets } from "@/components/tracker/sheets";
+import { setupAnalytics } from "@v1/analytics/server";
 import { getCountryCode } from "@v1/location";
 import { currencies } from "@v1/location/src/currencies";
 import { createClient } from "@v1/supabase/server";
@@ -45,6 +46,9 @@ export default async function Layout({
 
   const countryCode = getCountryCode();
 
+  if (user) {
+    await setupAnalytics({ userId: user.id });
+  }
   return (
     <div>
       <div className="min-h-screen w-full bg-white">

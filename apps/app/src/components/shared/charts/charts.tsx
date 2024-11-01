@@ -1,4 +1,4 @@
-import { BurnRateChart } from "./burn-rate-chart";
+// import { BurnRateChart } from "./burn-rate-chart";
 // import { ExpenseChart } from "./expense-chart";
 import { ProfitRevenueChart } from "./profit-revenue-chart";
 
@@ -7,8 +7,8 @@ export function Charts(props) {
     case "revenue":
     case "profit":
       return <ProfitRevenueChart {...props} />;
-    case "burn_rate":
-      return <BurnRateChart {...props} />;
+    // case "burn_rate":
+    //   return <BurnRateChart {...props} />;
     // case "expense":
     //   return <ExpenseChart {...props} />;
     default:

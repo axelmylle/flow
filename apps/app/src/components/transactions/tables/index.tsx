@@ -26,11 +26,13 @@ export async function Table({ filter, page, sort, query }: Props) {
   const transactions = await getTransactions({
     to: hasFilters ? maxItems : pageSize,
     from: 0,
+
     filter,
     sort,
     searchQuery: query ?? undefined,
   });
 
+  console.log("transactions", transactions);
   const { data, meta } = transactions ?? {};
 
   async function loadMore({ from, to }: { from: number; to: number }) {

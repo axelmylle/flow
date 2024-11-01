@@ -13,20 +13,13 @@ type ProviderProps = {
 export function Providers({ locale, children }: ProviderProps) {
   return (
     <I18nProviderClient locale={locale}>
-      <TriggerProvider
-        publicApiKey={"proj_raxmqnsxepndhqkztsnt"}
+      {/* <TriggerProvider
+        // @ts-ignore
+        publicApiKey={process.env.NEXT_PUBLIC_TRIGGER_API_KEY!}
         apiUrl={process.env.NEXT_PUBLIC_TRIGGER_API_URL}
-      >
-        {/* <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        > */}
-
-        {children}
-        {/* </ThemeProvider> */}
-      </TriggerProvider>
+      > */}
+      {children}
+      {/* </TriggerProvider> */}
     </I18nProviderClient>
   );
 }

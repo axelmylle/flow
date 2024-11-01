@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default async function InviteCode({
   params,
 }: { params: { code: string } }) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { code } = params;
 
   if (code) {
@@ -26,8 +26,8 @@ export default async function InviteCode({
       revalidateTag(`user_${user.id}`);
       revalidateTag(`teams_${user.id}`);
 
-      if (!user.full_name) {
-        redirect("/setup");
+      if (!user.is_onboarded) {
+        redirect("/client/onboarding");
       }
 
       redirect("/");
