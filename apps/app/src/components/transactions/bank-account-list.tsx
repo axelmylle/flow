@@ -1,5 +1,5 @@
-import { getTeamBankAccounts } from "@v1/supabase/cached-queries";
-import { Skeleton } from "@v1/ui/skeleton";
+import { getTeamBankAccounts } from "@gigflow/supabase/cached-queries";
+import { Skeleton } from "@gigflow/ui/skeleton";
 import { BankConnections } from "./bank-connections";
 import { ManualAccounts } from "./manual-accounts";
 

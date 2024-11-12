@@ -3,13 +3,13 @@
 import { OTPSignIn } from "@/components/auth/otp-sign-in";
 import { emailSchema } from "@/lib/zod/schemas/auth";
 
-import { createClient } from "@v1/supabase/client";
-import { AnimatedSizeContainer } from "@v1/ui/animated-size-container";
-import { Button } from "@v1/ui/button";
-import { cn } from "@v1/ui/cn";
-import { useLocalStorage, useMediaQuery } from "@v1/ui/hooks";
-import { Icons } from "@v1/ui/icons";
-import { Input } from "@v1/ui/input";
+import { createClient } from "@gigflow/supabase/client";
+import { AnimatedSizeContainer } from "@gigflow/ui/animated-size-container";
+import { Button } from "@gigflow/ui/button";
+import { cn } from "@gigflow/ui/cn";
+import { useLocalStorage, useMediaQuery } from "@gigflow/ui/hooks";
+import { Icons } from "@gigflow/ui/icons";
+import { Input } from "@gigflow/ui/input";
 import { Lock, Mail } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {

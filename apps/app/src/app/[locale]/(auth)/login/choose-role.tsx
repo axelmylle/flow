@@ -1,7 +1,7 @@
 "use client";
 
-import { Card, CardContent } from "@v1/ui/card";
-import { cn } from "@v1/ui/cn";
+import { Card, CardContent } from "@gigflow/ui/card";
+import { cn } from "@gigflow/ui/cn";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 

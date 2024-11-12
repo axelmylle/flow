@@ -1,4 +1,4 @@
-import type { Transaction } from "@v1/import/src/types";
+import type { Transaction } from "@gigflow/import/src/types";
 import { revalidateTag } from "next/cache";
 import { z } from "zod";
 import { processBatch } from "./process";

@@ -5,12 +5,6 @@ import { deleteTeamMemberAction } from "@/actions/team/delete-team-member-action
 import { leaveTeamAction } from "@/actions/team/leave-team-action";
 import { useI18n } from "@/locales/client";
 import {
-  type ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -20,27 +14,33 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@v1/ui/alert-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "@v1/ui/avatar";
-import { Button } from "@v1/ui/button";
-import { cn } from "@v1/ui/cn";
-import { Dialog } from "@v1/ui/dialog";
+} from "@gigflow/ui/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@gigflow/ui/avatar";
+import { Button } from "@gigflow/ui/button";
+import { cn } from "@gigflow/ui/cn";
+import { Dialog } from "@gigflow/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@v1/ui/dropdown-menu";
-import { Input } from "@v1/ui/input";
+} from "@gigflow/ui/dropdown-menu";
+import { Input } from "@gigflow/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@v1/ui/select";
-import { Table, TableBody, TableCell, TableRow } from "@v1/ui/table";
-import { useToast } from "@v1/ui/use-toast";
+} from "@gigflow/ui/select";
+import { Table, TableBody, TableCell, TableRow } from "@gigflow/ui/table";
+import { useToast } from "@gigflow/ui/use-toast";
+import {
+  type ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { Loader2 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";

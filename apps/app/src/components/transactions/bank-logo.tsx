@@ -1,4 +1,4 @@
-import { Avatar, AvatarImage } from "@v1/ui/avatar";
+import { Avatar, AvatarImage } from "@gigflow/ui/avatar";
 
 type Props = {
   src: string | null;

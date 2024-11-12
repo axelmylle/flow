@@ -1,10 +1,10 @@
 "use client";
 
-// import { useCurrentLocale } from "@/locales/client";
-import { uniqueCurrencies } from "@v1/location/src/currencies";
-import { Button } from "@v1/ui/button";
-import { Collapsible, CollapsibleContent } from "@v1/ui/collapsible";
-import { CurrencyInput } from "@v1/ui/currency-input";
+import type { Customer } from "@/components/invoices/customer-details";
+import { uniqueCurrencies } from "@gigflow/location/src/currencies";
+import { Button } from "@gigflow/ui/button";
+import { Collapsible, CollapsibleContent } from "@gigflow/ui/collapsible";
+import { CurrencyInput } from "@gigflow/ui/currency-input";
 import {
   Form,
   FormControl,
@@ -13,28 +13,34 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@v1/ui/form";
-import { Input } from "@v1/ui/input";
+} from "@gigflow/ui/form";
+import { Input } from "@gigflow/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@v1/ui/select";
-import { Switch } from "@v1/ui/switch";
-import { Textarea } from "@v1/ui/textarea";
+} from "@gigflow/ui/select";
+import { Switch } from "@gigflow/ui/switch";
+import { Textarea } from "@gigflow/ui/textarea";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { SearchCustomer } from "../../search-customer";
 
 type Props = {
   onSubmit: (data: any) => void;
   isSaving: boolean;
   form: any;
+  customers: Customer[];
 };
 
-export function TrackerProjectForm({ onSubmit, isSaving, form }: Props) {
-  const locale = "nl-BE";
+export function TrackerProjectForm({
+  onSubmit,
+  isSaving,
+  form,
+  customers,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -61,6 +67,27 @@ export function TrackerProjectForm({ onSubmit, isSaving, form }: Props) {
               </FormControl>
               <FormDescription>
                 This is the project display name.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="customer_id"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Customer</FormLabel>
+              <FormControl>
+                <SearchCustomer
+                  data={customers}
+                  onSelect={(id) => field.onChange(id)}
+                  selectedId={field.value}
+                />
+              </FormControl>
+              <FormDescription>
+                Link a customer to enable direct invoicing.
               </FormDescription>
               <FormMessage />
             </FormItem>

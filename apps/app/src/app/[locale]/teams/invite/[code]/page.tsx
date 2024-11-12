@@ -1,8 +1,8 @@
 import { UserMenu } from "@/components/users/user-menu";
-import { joinTeamByInviteCode } from "@v1/supabase/mutations";
-import { createClient } from "@v1/supabase/server";
-import { Button } from "@v1/ui/button";
-import { Icons } from "@v1/ui/icons";
+import { joinTeamByInviteCode } from "@gigflow/supabase/mutations";
+import { createClient } from "@gigflow/supabase/server";
+import { Button } from "@gigflow/ui/button";
+import { Icons } from "@gigflow/ui/icons";
 import type { Metadata } from "next";
 import { revalidateTag } from "next/cache";
 import Link from "next/link";

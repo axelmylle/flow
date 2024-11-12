@@ -1,3 +1,4 @@
+import { cn } from "@gigflow/ui/cn";
 import {
   Body,
   Button,
@@ -11,7 +12,6 @@ import {
   Tailwind,
   Text,
 } from "@react-email/components";
-import { cn } from "@v1/ui/cn";
 import { format } from "date-fns";
 
 import { Logo } from "../components/logo";

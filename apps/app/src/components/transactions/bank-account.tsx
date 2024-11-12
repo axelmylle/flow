@@ -14,17 +14,17 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@v1/ui/alert-dialog";
-import { Avatar, AvatarFallback } from "@v1/ui/avatar";
-import { cn } from "@v1/ui/cn";
+} from "@gigflow/ui/alert-dialog";
+import { Avatar, AvatarFallback } from "@gigflow/ui/avatar";
+import { cn } from "@gigflow/ui/cn";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@v1/ui/dropdown-menu";
-import { Switch } from "@v1/ui/switch";
+} from "@gigflow/ui/dropdown-menu";
+import { Switch } from "@gigflow/ui/switch";
 import { MoreHorizontal } from "lucide-react";
 import { Loader2 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";

@@ -1,5 +1,5 @@
-import { cn } from "@v1/ui/cn";
-import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
+import { cn } from "@gigflow/ui/cn";
+import { MaxWidthWrapper } from "@gigflow/ui/max-width-wrapper";
 import type { PropsWithChildren, ReactNode } from "react";
 // import { HelpButtonRSC } from "../sidebar/help-button-rsc";
 import UserDropdown from "../sidebar/user-dropdown";

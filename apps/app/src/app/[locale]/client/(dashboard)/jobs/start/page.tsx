@@ -1,15 +1,15 @@
-import { getUser } from "@v1/supabase/cached-queries";
-import { Editor } from "@v1/ui/editor";
-import { Wordmark } from "@v1/ui/wordmark";
+import { getUser } from "@gigflow/supabase/cached-queries";
+import { Editor } from "@gigflow/ui/editor";
+import { Wordmark } from "@gigflow/ui/wordmark";
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@v1/ui/accordion";
-import { Badge } from "@v1/ui/badge";
-import { ComboboxDropdown } from "@v1/ui/combobox-dropdown";
+} from "@gigflow/ui/accordion";
+import { Badge } from "@gigflow/ui/badge";
+import { ComboboxDropdown } from "@gigflow/ui/combobox-dropdown";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { NextButton } from "../next-button";

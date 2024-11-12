@@ -3,8 +3,8 @@ import {
   getJobs,
   getTrackerRecordsByRange,
   getUser,
-} from "@v1/supabase/cached-queries";
-import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
+} from "@gigflow/supabase/cached-queries";
+import { MaxWidthWrapper } from "@gigflow/ui/max-width-wrapper";
 import { endOfMonth, formatISO, startOfMonth } from "date-fns";
 import { JobsEmptyState } from "./empty-state";
 import PageClient from "./page-client";

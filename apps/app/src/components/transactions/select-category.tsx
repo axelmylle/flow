@@ -1,13 +1,13 @@
 // import { createCategoriesAction } from "@/actions/create-categories-action";
 import { getColorFromName } from "@/utils/categories";
-import { createClient } from "@v1/supabase/client";
+import { createClient } from "@gigflow/supabase/client";
 import {
   getCategoriesQuery,
   getCurrentUserTeamQuery,
-} from "@v1/supabase/queries";
-import { ComboboxDropdown } from "@v1/ui/combobox-dropdown";
+} from "@gigflow/supabase/queries";
+import { ComboboxDropdown } from "@gigflow/ui/combobox-dropdown";
 
-import { Icons } from "@v1/ui/icons";
+import { Icons } from "@gigflow/ui/icons";
 import { useAction } from "next-safe-action/hooks";
 import { useEffect, useState } from "react";
 import { CategoryColor } from "./category";

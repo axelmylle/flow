@@ -1,4 +1,4 @@
-import { Icons } from "@v1/ui/icons";
+import { Icons } from "@gigflow/ui/icons";
 import { StepPage } from "../step-page";
 import { WorkTypeSelector } from "./work-type-selector";
 

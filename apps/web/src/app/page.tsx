@@ -8,12 +8,12 @@ import { Map } from "@/components/home/map";
 import HeroDifferentPlans from "@/components/home/plans";
 import TrustedClients from "@/components/home/trusted-clients";
 import { Heading, Subheading } from "@/components/text";
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 
 import { Screenshot } from "@/components/screenshot";
 import { SubscribeForm } from "@/components/subscribe-form";
 import { Testimonials } from "@/components/testimonials";
-import { cn } from "@v1/ui/cn";
+import { cn } from "@gigflow/ui/cn";
 import type { Metadata } from "next";
 import Image from "next/image";
 

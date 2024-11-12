@@ -1,5 +1,5 @@
 {
-  "name": "@v1/email",
+  "name": "@gigflow/email",
   "version": "0.1.0",
   "private": true,
   "scripts": {

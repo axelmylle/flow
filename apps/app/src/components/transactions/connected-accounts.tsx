@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@v1/ui/card";
+} from "@gigflow/ui/card";
 import { Suspense } from "react";
 
 export function ConnectedAccounts() {

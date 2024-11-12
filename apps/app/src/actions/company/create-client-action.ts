@@ -7,7 +7,7 @@ import {
   createCompanyClient,
   updateCompany,
   updateUser,
-} from "@v1/supabase/mutations";
+} from "@gigflow/supabase/mutations";
 import { addYears } from "date-fns";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";

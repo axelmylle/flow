@@ -1,11 +1,11 @@
-import { Button } from "@v1/ui/button";
-import { Icons } from "@v1/ui/icons";
+import { Button } from "@gigflow/ui/button";
+import { Icons } from "@gigflow/ui/icons";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@v1/ui/tooltip";
+} from "@gigflow/ui/tooltip";
 
 type Props = {
   disabled: boolean;

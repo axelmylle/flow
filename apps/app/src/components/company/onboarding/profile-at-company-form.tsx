@@ -2,9 +2,9 @@
 
 import type { updateProfileAtCompanyFormValues } from "@/actions/company/schema";
 import { updateCompanyAction } from "@/actions/company/update-company-action";
-import { Button } from "@v1/ui/button";
-import { cn } from "@v1/ui/cn";
-import { Combobox } from "@v1/ui/combobox";
+import { Button } from "@gigflow/ui/button";
+import { cn } from "@gigflow/ui/cn";
+import { Combobox } from "@gigflow/ui/combobox";
 import {
   Form,
   FormControl,
@@ -12,19 +12,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@v1/ui/form";
-import { useMediaQuery } from "@v1/ui/hooks";
+} from "@gigflow/ui/form";
+import { useMediaQuery } from "@gigflow/ui/hooks";
 import { useAction } from "next-safe-action/hooks";
 
-import { createClient } from "@v1/supabase/client";
-import { getClientsQuery } from "@v1/supabase/queries";
+import { createClient } from "@gigflow/supabase/client";
+import { getClientsQuery } from "@gigflow/supabase/queries";
 
-import { toast, useToast } from "@v1/ui/use-toast";
+import { toast, useToast } from "@gigflow/ui/use-toast";
 
 import { useEffect, useState } from "react";
 
-import { Input } from "@v1/ui/input";
-import { Textarea } from "@v1/ui/textarea";
+import { Input } from "@gigflow/ui/input";
+import { Textarea } from "@gigflow/ui/textarea";
 import { useForm } from "react-hook-form";
 
 type FormData = updateProfileAtCompanyFormValues;

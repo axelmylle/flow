@@ -1,8 +1,8 @@
 "use client";
 
-import { Badge } from "@v1/ui/badge";
-import { TooltipProvider } from "@v1/ui/tooltip";
-import { PRO_PLAN, SELF_SERVE_PAID_PLANS } from "@v1/ui/utils";
+import { Badge } from "@gigflow/ui/badge";
+import { TooltipProvider } from "@gigflow/ui/tooltip";
+import { PRO_PLAN, SELF_SERVE_PAID_PLANS } from "@gigflow/ui/utils";
 import React, { useState } from "react";
 import { PlanFeatures } from "./plan-features";
 

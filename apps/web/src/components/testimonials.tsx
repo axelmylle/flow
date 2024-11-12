@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@v1/ui/cn";
+import { cn } from "@gigflow/ui/cn";
 import {
   type HTMLMotionProps,
   type MotionValue,
@@ -13,7 +13,7 @@ import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import useMeasure, { type RectReadOnly } from "react-use-measure";
 import { Container } from "./container";
 
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import Link from "next/link";
 import { Heading, Subheading } from "./text";
 

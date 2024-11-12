@@ -1,14 +1,14 @@
 import { reconnectGoCardLessLinkAction } from "@/actions/institutions/reconnect-gocardless-link";
-import { useScript } from "@uidotdev/usehooks";
-import { Button } from "@v1/ui/button";
-import { Icons } from "@v1/ui/icons";
+import { Button } from "@gigflow/ui/button";
+import { Icons } from "@gigflow/ui/icons";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@v1/ui/tooltip";
-import { useToast } from "@v1/ui/use-toast";
+} from "@gigflow/ui/tooltip";
+import { useToast } from "@gigflow/ui/use-toast";
+import { useScript } from "@uidotdev/usehooks";
 import { Loader2 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useTheme } from "next-themes";

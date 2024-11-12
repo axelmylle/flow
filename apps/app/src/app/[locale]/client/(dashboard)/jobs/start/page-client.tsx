@@ -6,12 +6,12 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@v1/ui/accordion";
-import { Badge } from "@v1/ui/badge";
-import { Button } from "@v1/ui/button";
-import { ComboboxDropdown } from "@v1/ui/combobox-dropdown";
-import { Editor } from "@v1/ui/editor";
-import { Icons } from "@v1/ui/icons";
+} from "@gigflow/ui/accordion";
+import { Badge } from "@gigflow/ui/badge";
+import { Button } from "@gigflow/ui/button";
+import { ComboboxDropdown } from "@gigflow/ui/combobox-dropdown";
+import { Editor } from "@gigflow/ui/editor";
+import { Icons } from "@gigflow/ui/icons";
 import Image from "next/image";
 import React from "react";
 

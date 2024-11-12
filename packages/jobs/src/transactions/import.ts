@@ -1,5 +1,5 @@
+import { transform } from "@gigflow/import/src/transform";
 import { eventTrigger } from "@trigger.dev/sdk";
-import { transform } from "@v1/import/src/transform";
 import Papa from "papaparse";
 import { z } from "zod";
 import { client, supabase } from "../client";

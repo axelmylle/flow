@@ -1,7 +1,7 @@
 "use client";
 
 import { useOnboardingProgress } from "@/app/[locale]/(onboarding)/onboarding/use-onboarding-progress";
-import { Card, CardContent } from "@v1/ui/card";
+import { Card, CardContent } from "@gigflow/ui/card";
 import { useEffect, useState } from "react";
 
 export function OnboardingSummaryCard() {

@@ -7,24 +7,30 @@ import { getAccounts } from "@/actions/institutions/get-accounts";
 import { useConnectParams } from "@/hooks/use-connect-params";
 import { useI18n } from "@/locales/client";
 import { getInitials } from "@/utils/format";
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { Accounts } from "@midday-ai/engine/resources/accounts.mjs";
-import { Avatar, AvatarFallback } from "@v1/ui/avatar";
-import { Button } from "@v1/ui/button";
+import { Avatar, AvatarFallback } from "@gigflow/ui/avatar";
+import { Button } from "@gigflow/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@v1/ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@v1/ui/form";
-import { Icons } from "@v1/ui/icons";
-import { Skeleton } from "@v1/ui/skeleton";
-import { Switch } from "@v1/ui/switch";
-import { Tabs, TabsContent } from "@v1/ui/tabs";
-import { Textarea } from "@v1/ui/textarea";
-import { useToast } from "@v1/ui/use-toast";
+} from "@gigflow/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@gigflow/ui/form";
+import { Icons } from "@gigflow/ui/icons";
+import { Skeleton } from "@gigflow/ui/skeleton";
+import { Switch } from "@gigflow/ui/switch";
+import { Tabs, TabsContent } from "@gigflow/ui/tabs";
+import { Textarea } from "@gigflow/ui/textarea";
+import { useToast } from "@gigflow/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { Accounts } from "@midday-ai/engine/resources/accounts.mjs";
 import { Loader2 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useEffect, useState } from "react";

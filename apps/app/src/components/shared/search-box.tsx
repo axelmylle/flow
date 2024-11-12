@@ -1,7 +1,7 @@
-import { cn } from "@v1/ui/cn";
-import { useRouterStuff } from "@v1/ui/hooks";
+import { cn } from "@gigflow/ui/cn";
+import { useRouterStuff } from "@gigflow/ui/hooks";
 
-import { Icons } from "@v1/ui/icons";
+import { Icons } from "@gigflow/ui/icons";
 
 import {
   forwardRef,

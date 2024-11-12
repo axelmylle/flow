@@ -1,4 +1,4 @@
-import { getTrackerProjects } from "@v1/supabase/cached-queries";
+import { getTrackerProjects } from "@gigflow/supabase/cached-queries";
 import { DataTable } from "./data-table";
 import { EmptyState, NoResults } from "./empty-states";
 

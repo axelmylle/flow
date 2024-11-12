@@ -2,9 +2,8 @@
 
 import { updateCompanySchema } from "@/actions/company/schema";
 import { updateCompanyAction } from "@/actions/company/update-company-action";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@v1/ui/button";
-import { cn } from "@v1/ui/cn";
+import { Button } from "@gigflow/ui/button";
+import { cn } from "@gigflow/ui/cn";
 import {
   Form,
   FormControl,
@@ -12,10 +11,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@v1/ui/form";
-import { Input } from "@v1/ui/input";
-import { Textarea } from "@v1/ui/textarea";
-import { useToast } from "@v1/ui/use-toast";
+} from "@gigflow/ui/form";
+import { Input } from "@gigflow/ui/input";
+import { Textarea } from "@gigflow/ui/textarea";
+import { useToast } from "@gigflow/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";

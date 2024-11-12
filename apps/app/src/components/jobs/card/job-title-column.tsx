@@ -1,9 +1,9 @@
 "use client";
 
-import { cn } from "@v1/ui/cn";
-import { useInViewport } from "@v1/ui/hooks";
-import { Icons } from "@v1/ui/icons";
-import { Tooltip } from "@v1/ui/tooltip";
+import { cn } from "@gigflow/ui/cn";
+import { useInViewport } from "@gigflow/ui/hooks";
+import { Icons } from "@gigflow/ui/icons";
+import { Tooltip } from "@gigflow/ui/tooltip";
 import { useRef } from "react";
 
 interface Job {

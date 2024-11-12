@@ -1,8 +1,8 @@
 "use client";
 
-import { BlurImage } from "@v1/ui/blur-image";
-import { ClientOnly } from "@v1/ui/client-only";
-import { Wordmark } from "@v1/ui/wordmark";
+import { BlurImage } from "@gigflow/ui/blur-image";
+import { ClientOnly } from "@gigflow/ui/client-only";
+import { Wordmark } from "@gigflow/ui/wordmark";
 import Link from "next/link";
 import { Suspense } from "react";
 

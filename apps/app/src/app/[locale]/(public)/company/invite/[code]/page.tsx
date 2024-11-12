@@ -1,6 +1,6 @@
 import AuthLayout from "@/components/layout/auth-layout";
-import { getCompanyInviteQuery } from "@v1/supabase/queries";
-import { createClient } from "@v1/supabase/server";
+import { getCompanyInviteQuery } from "@gigflow/supabase/queries";
+import { createClient } from "@gigflow/supabase/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import LoginForm from "../../../../(auth)/login/form";

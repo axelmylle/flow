@@ -1,19 +1,18 @@
 import { env } from "@/env.mjs";
 import { Cookies } from "@/utils/constants";
+import WelcomeEmail from "@gigflow/email/emails/welcome-email";
+import { LogEvents } from "@gigflow/events/events";
+import { setupAnalytics } from "@gigflow/events/server";
+import { getSession } from "@gigflow/supabase/cached-queries";
+import { createClient } from "@gigflow/supabase/server";
 import { render } from "@react-email/render";
-import WelcomeEmail from "@v1/email/emails/welcome-email";
-import { LogEvents } from "@v1/events/events";
-import { setupAnalytics } from "@v1/events/server";
-import { getSession } from "@v1/supabase/cached-queries";
-import { createClient } from "@v1/supabase/server";
-import type { Database } from "@v1/supabase/types";
 import { addYears } from "date-fns";
 import { nanoid } from "nanoid";
-import { cookies, headers } from "next/headers";
-import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { Resend } from "resend";
-export const revalidate = 0;
+
 const resend = new Resend(env.RESEND_API_KEY);
 
 export const preferredRegion = ["fra1", "sfo1", "iad1"];

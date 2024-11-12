@@ -6,7 +6,7 @@ import {
   getTeamBankAccounts,
   getTeamMembers,
   getUser,
-} from "@v1/supabase/cached-queries";
+} from "@gigflow/supabase/cached-queries";
 import type { Metadata } from "next";
 
 import { ErrorFallback } from "@/components/error-fallback";
@@ -14,7 +14,7 @@ import { PageContent } from "@/components/layout/page-content";
 import { Table } from "@/components/transactions/tables";
 import { NoAccounts } from "@/components/transactions/tables/empty-states";
 import { Loading } from "@/components/transactions/tables/loading";
-import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
+import { MaxWidthWrapper } from "@gigflow/ui/max-width-wrapper";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { cookies } from "next/headers";
 import { Suspense } from "react";

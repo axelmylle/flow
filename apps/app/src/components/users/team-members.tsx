@@ -1,4 +1,4 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@v1/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@gigflow/ui/tabs";
 import { Suspense } from "react";
 
 import { PendingInvitesTable } from "./pending-invites/table";

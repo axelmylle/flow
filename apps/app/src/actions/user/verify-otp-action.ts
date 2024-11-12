@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@v1/supabase/server";
+import { createClient } from "@gigflow/supabase/server";
 import { redirect } from "next/navigation";
 import { actionClient } from "../safe-action";
 import { verifyOtpSchema } from "./schema";

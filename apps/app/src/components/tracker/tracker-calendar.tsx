@@ -3,15 +3,15 @@
 import { useTrackerParams } from "@/hooks/use-tracker-params";
 import { formatAmount, secondsToHoursAndMinutes } from "@/utils/format";
 import { TZDate } from "@date-fns/tz";
-import { useClickAway } from "@uidotdev/usehooks";
-import { cn } from "@v1/ui/cn";
-import { Icons } from "@v1/ui/icons";
+import { cn } from "@gigflow/ui/cn";
+import { Icons } from "@gigflow/ui/icons";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@v1/ui/tooltip";
+} from "@gigflow/ui/tooltip";
+import { useClickAway } from "@uidotdev/usehooks";
 import {
   addMonths,
   eachDayOfInterval,

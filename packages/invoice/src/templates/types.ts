@@ -14,6 +14,11 @@ export type Template = {
   total_label: string;
   tax_label: string;
   vat_label: string;
+  locale: string;
+  timezone: string;
+  include_decimals: boolean;
+  include_qr: boolean;
+  include_vat: boolean;
 };
 
 export type LineItem = {
@@ -27,6 +32,7 @@ export type LineItem = {
 
 export type TemplateProps = {
   invoice_number: string;
+  discount?: number;
   issue_date: string;
   due_date: string;
   template: Template;
@@ -45,3 +51,34 @@ export type TemplateProps = {
   token: string;
   size: "letter" | "a4";
 };
+
+export interface EditorDoc {
+  type: "doc";
+  content: EditorNode[];
+}
+
+export interface EditorNode {
+  type: string;
+  content?: InlineContent[];
+}
+
+interface InlineContent {
+  type: string;
+  text?: string;
+  marks?: Mark[];
+}
+
+export interface Mark {
+  type: string;
+  attrs?: {
+    href?: string;
+  };
+}
+
+export interface TextStyle {
+  fontSize: number;
+  fontWeight?: number;
+  fontStyle?: "normal" | "italic" | "oblique";
+  color?: string;
+  textDecoration?: string;
+}

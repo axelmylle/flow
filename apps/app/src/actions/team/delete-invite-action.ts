@@ -1,6 +1,6 @@
 "use server";
 
-// import { LogEvents } from "@v1/events/events";
+// import { LogEvents } from "@gigflow/events/events";
 import { revalidatePath as revalidatePathFunc } from "next/cache";
 import { authActionClient } from "../safe-action";
 import { deleteInviteSchema } from "./schema";

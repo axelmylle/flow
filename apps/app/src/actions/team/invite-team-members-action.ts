@@ -1,11 +1,11 @@
 "use server";
 
 import { env } from "@/env.mjs";
-// import { LogEvents } from "@v1/events/events";
+import InviteEmail from "@gigflow/email/emails/invite";
+import { getI18n } from "@gigflow/email/locales";
+import { LogEvents } from "@gigflow/events/events";
+// import { LogEvents } from "@gigflow/events/events";
 import { render } from "@react-email/render";
-import InviteEmail from "@v1/email/emails/invite";
-import { getI18n } from "@v1/email/locales";
-import { LogEvents } from "@v1/events/events";
 import { revalidatePath as revalidatePathFunc } from "next/cache";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";

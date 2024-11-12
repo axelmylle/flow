@@ -1,10 +1,10 @@
 import * as crypto from "node:crypto";
 import { env } from "@/env.mjs";
 import { logger } from "@/utils/logger";
+import WelcomeEmail from "@gigflow/email/emails/welcome-email";
+import { LogEvents } from "@gigflow/events/events";
+import { setupAnalytics } from "@gigflow/events/server";
 import { render } from "@react-email/render";
-import WelcomeEmail from "@v1/email/emails/welcome-email";
-import { LogEvents } from "@v1/events/events";
-import { setupAnalytics } from "@v1/events/server";
 import { LoopsClient } from "loops";
 import { nanoid } from "nanoid";
 import { headers } from "next/headers";

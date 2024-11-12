@@ -1,5 +1,5 @@
-import { cn } from "@v1/ui/cn";
-import type { Icons } from "@v1/ui/icons";
+import { cn } from "@gigflow/ui/cn";
+import type { Icons } from "@gigflow/ui/icons";
 import { Crown } from "lucide-react";
 import type { PropsWithChildren, ReactNode } from "react";
 

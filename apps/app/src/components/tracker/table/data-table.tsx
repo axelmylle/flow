@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@v1/ui/button";
-import { Icons } from "@v1/ui/icons";
-import { Table, TableBody } from "@v1/ui/table";
+import { Button } from "@gigflow/ui/button";
+import { Icons } from "@gigflow/ui/icons";
+import { Table, TableBody } from "@gigflow/ui/table";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { DataTableHeader } from "./data-table-header";

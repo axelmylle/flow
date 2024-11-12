@@ -1,6 +1,6 @@
 "use server";
 
-import { updateBankAccount } from "@v1/supabase/mutations";
+import { updateBankAccount } from "@gigflow/supabase/mutations";
 import { revalidateTag } from "next/cache";
 import { authActionClient } from "../safe-action";
 import { updateBankAccountSchema } from "./schema";

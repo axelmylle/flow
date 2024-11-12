@@ -3,7 +3,7 @@
 "use server";
 
 import { actionClientWithMeta } from "@/actions/safe-action";
-import { createClient } from "@v1/supabase/server";
+import { createClient } from "@gigflow/supabase/server";
 import { z } from "zod";
 import { authActionClient } from "../safe-action";
 

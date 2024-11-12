@@ -4,7 +4,6 @@ import { FormatAmount } from "@/components/format-amount";
 
 import { AssignedUser } from "@/components/users/assigned-user";
 import { formatTransactionDate } from "@/utils/format";
-import type { ColumnDef } from "@tanstack/react-table";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,24 +14,25 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@v1/ui/alert-dialog";
-import { Button } from "@v1/ui/button";
-import { Checkbox } from "@v1/ui/checkbox";
-import { cn } from "@v1/ui/cn";
+} from "@gigflow/ui/alert-dialog";
+import { Button } from "@gigflow/ui/button";
+import { Checkbox } from "@gigflow/ui/checkbox";
+import { cn } from "@gigflow/ui/cn";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@v1/ui/dropdown-menu";
-import { Icons } from "@v1/ui/icons";
+} from "@gigflow/ui/dropdown-menu";
+import { Icons } from "@gigflow/ui/icons";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@v1/ui/tooltip";
+} from "@gigflow/ui/tooltip";
+import type { ColumnDef } from "@tanstack/react-table";
 import { Loader2 } from "lucide-react";
 import { Category } from "../category";
 import { TransactionBankAccount } from "../transaction-bank-account";

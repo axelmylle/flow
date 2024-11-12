@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@v1/ui/button";
-import { Icons } from "@v1/ui/icons";
+import { Button } from "@gigflow/ui/button";
+import { Icons } from "@gigflow/ui/icons";
 import { useRouter } from "next/navigation";
 import { AddAccountButton } from "../add-account-button";
 

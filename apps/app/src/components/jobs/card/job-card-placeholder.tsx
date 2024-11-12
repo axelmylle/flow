@@ -1,5 +1,5 @@
-import { CardList } from "@v1/ui/card-list";
-import { cn } from "@v1/ui/cn";
+import { CardList } from "@gigflow/ui/card-list";
+import { cn } from "@gigflow/ui/cn";
 import { useContext } from "react";
 
 export default function JobCardPlaceholder() {

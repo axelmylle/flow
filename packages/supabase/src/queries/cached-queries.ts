@@ -4,6 +4,8 @@ import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import {
   type GetCategoriesParams,
+  type GetInvoiceSummaryParams,
+  type GetInvoicesQueryParams,
   type GetJobsParams,
   type GetMetricsParams,
   type GetTeamBankAccountsParams,
@@ -11,7 +13,14 @@ import {
   type GetTrackerRecordsByRangeParams,
   type GetTransactionsParams,
   getCategoriesQuery,
+  getCustomersQuery,
+  getFreelancerExperiencesQuery,
+  getInvoiceNumberQuery,
+  getInvoiceSummaryQuery,
+  getInvoiceTemplatesQuery,
+  getInvoicesQuery,
   getMetricsQuery,
+  getPaymentStatusQuery,
   getSkillByIdQuery,
   getSkillQuestionsByIdQuery,
   getTeamBankAccountsQuery,
@@ -23,7 +32,7 @@ import {
   getTransactionsQuery,
   getUserQuery,
 } from ".";
-import { createClient } from "../clients/server";
+import { createClient } from "../client/server";
 import { getJobsByQuery } from "./index";
 
 export const getTrackerRecordsByRange = async (
@@ -49,6 +58,102 @@ export const getTrackerRecordsByRange = async (
   )(params);
 };
 
+export const getFreelancerExperiences = async () => {
+  const supabase = createClient();
+  const user = await getUser();
+
+  if (!user?.data?.id || !user?.data?.team_id) {
+    return null;
+  }
+
+  // First check if user is part of the team and get their freelancer_id
+  const { data: userOnTeam } = await supabase
+    .from("users_on_team")
+    .select("freelancer_id")
+    .eq("user_id", user.data.id)
+    .eq("team_id", user.data.team_id)
+    .single();
+
+  // If no freelancer_id found in users_on_team, return null
+  if (!userOnTeam?.freelancer_id) {
+    return null;
+  }
+
+  return unstable_cache(
+    async () => {
+      return getFreelancerExperiencesQuery(supabase, userOnTeam.freelancer_id);
+    },
+    ["freelancer_experiences", user.data.id],
+    {
+      tags: [`freelancer_experiences_${user.data.id}`],
+      revalidate: 180, // Cache for 3 minutes
+    },
+  )();
+};
+
+export const getInvoiceNumber = async () => {
+  const supabase = createClient();
+  const user = await getUser();
+  const teamId = user?.data?.team_id;
+
+  if (!teamId) {
+    return null;
+  }
+
+  return unstable_cache(
+    async () => {
+      return getInvoiceNumberQuery(supabase, teamId);
+    },
+    ["invoice_number", teamId],
+    {
+      tags: [`invoice_number_${teamId}`],
+      revalidate: 3600,
+    },
+  )();
+};
+
+export const getInvoiceTemplates = async () => {
+  const supabase = createClient();
+  const user = await getUser();
+  const teamId = user?.data?.team_id;
+
+  if (!teamId) {
+    return null;
+  }
+
+  return unstable_cache(
+    async () => {
+      return getInvoiceTemplatesQuery(supabase, teamId);
+    },
+    ["invoice_templates", teamId],
+    {
+      tags: [`invoice_templates_${teamId}`],
+      revalidate: 3600,
+    },
+  )();
+};
+
+export const getPaymentStatus = async () => {
+  const supabase = createClient();
+  const user = await getUser();
+  const teamId = user?.data?.team_id;
+
+  if (!teamId) {
+    return null;
+  }
+
+  return unstable_cache(
+    async () => {
+      return getPaymentStatusQuery(supabase, teamId);
+    },
+    ["payment_status", teamId],
+    {
+      tags: [`payment_status_${teamId}`],
+      revalidate: 3600,
+    },
+  )();
+};
+
 export const getJobs = async (params: GetJobsParams) => {
   const supabase = createClient();
   const user = await getUser();
@@ -65,6 +170,69 @@ export const getJobs = async (params: GetJobsParams) => {
       revalidate: 180,
     },
   )(params);
+};
+
+export const getInvoiceSummary = async (
+  params?: Omit<GetInvoiceSummaryParams, "teamId">,
+) => {
+  const supabase = createClient();
+  const user = await getUser();
+  const teamId = user?.data?.team_id;
+
+  return unstable_cache(
+    async () => {
+      return getInvoiceSummaryQuery(supabase, { ...params, teamId });
+    },
+    ["invoice_summary", teamId],
+    {
+      tags: [`invoice_summary_${teamId}`],
+      revalidate: 3600,
+    },
+  )(params);
+};
+
+export const getInvoices = async (
+  params?: Omit<GetInvoicesQueryParams, "teamId">,
+) => {
+  const supabase = createClient();
+  const user = await getUser();
+  const teamId = user?.data?.team_id;
+
+  if (!teamId) {
+    return null;
+  }
+
+  return unstable_cache(
+    async () => {
+      return getInvoicesQuery(supabase, { ...params, teamId });
+    },
+    ["invoices", teamId],
+    {
+      tags: [`invoices_${teamId}`],
+      revalidate: 3600,
+    },
+  )(params);
+};
+
+export const getCustomers = async () => {
+  const supabase = createClient();
+  const user = await getUser();
+  const teamId = user?.data?.team_id;
+
+  if (!teamId) {
+    return null;
+  }
+
+  return unstable_cache(
+    async () => {
+      return getCustomersQuery(supabase, teamId);
+    },
+    ["customers", teamId],
+    {
+      tags: [`customers_${teamId}`],
+      revalidate: 3600,
+    },
+  )();
 };
 
 export const getMetrics = async (params: Omit<GetMetricsParams, "teamId">) => {

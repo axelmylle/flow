@@ -3,13 +3,17 @@
 }
 
 .tiptap {
-  @apply text-sm leading-loose;
+  @apply font-mono text-xs leading-loose;
 }
 
 .tiptap h2 {
   @apply text-2xl;
   @apply font-sans;
   margin-bottom: 1.5rem;
+}
+
+.tiptap a {
+  @apply underline;
 }
 
 .tiptap .bubble-menu {

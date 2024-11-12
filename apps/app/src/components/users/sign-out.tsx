@@ -1,7 +1,7 @@
 "use client";
 
 import { signOutAction } from "@/actions/user/sign-out-action";
-import { DropdownMenuItem } from "@v1/ui/dropdown-menu";
+import { DropdownMenuItem } from "@gigflow/ui/dropdown-menu";
 import { useState } from "react";
 
 export function SignOut() {

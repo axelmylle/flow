@@ -4,6 +4,6 @@
     "react": "npm:react@18.3.1",
     "resend": "npm:resend@4.0.0",
     "standardwebhooks": "npm:standardwebhooks@1.0.0",
-    "@v1/emails/*": "../../../../../packages/email/emails/*"
+    "@gigflow/emails/*": "../../../../../packages/email/emails/*"
   }
 }

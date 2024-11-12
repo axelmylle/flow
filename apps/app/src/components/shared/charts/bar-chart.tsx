@@ -2,7 +2,7 @@
 
 import { useCurrentLocale, useI18n } from "@/locales/client";
 import { formatAmount } from "@/utils/format";
-import { cn } from "@v1/ui/cn";
+import { cn } from "@gigflow/ui/cn";
 import { format } from "date-fns";
 import {
   Bar,

@@ -1,7 +1,7 @@
-import "@v1/ui/globals.css";
+import "@gigflow/ui/globals.css";
 import { Footer } from "@/components/footer";
-import { cn } from "@v1/ui/cn";
-import { Toaster } from "@v1/ui/toaster";
+import { cn } from "@gigflow/ui/cn";
+import { Toaster } from "@gigflow/ui/toaster";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";

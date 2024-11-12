@@ -1,8 +1,8 @@
 "use server";
 
-// import { LogEvents } from "@v1/events/events";
-import { getTeamMembers } from "@v1/supabase/cached-queries";
-import { leaveTeam } from "@v1/supabase/mutations";
+// import { LogEvents } from "@gigflow/events/events";
+import { getTeamMembers } from "@gigflow/supabase/cached-queries";
+import { leaveTeam } from "@gigflow/supabase/mutations";
 import {
   revalidatePath as revalidatePathFunc,
   revalidateTag,

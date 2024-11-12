@@ -5,26 +5,26 @@ import {
   type InviteTeamMembersFormValues,
   inviteTeamMembersSchema,
 } from "@/actions/team/schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import {
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@v1/ui/dialog";
-import { Form, FormControl, FormField, FormItem } from "@v1/ui/form";
-import { Icons } from "@v1/ui/icons";
-import { Input } from "@v1/ui/input";
+} from "@gigflow/ui/dialog";
+import { Form, FormControl, FormField, FormItem } from "@gigflow/ui/form";
+import { Icons } from "@gigflow/ui/icons";
+import { Input } from "@gigflow/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@v1/ui/select";
-import { useToast } from "@v1/ui/use-toast";
+} from "@gigflow/ui/select";
+import { useToast } from "@gigflow/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useEffect } from "react";

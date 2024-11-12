@@ -1,10 +1,10 @@
-import { Icons } from "@v1/ui/icons";
-import { SimpleTooltipContent, Tooltip } from "@v1/ui/tooltip";
+import { Icons } from "@gigflow/ui/icons";
+import { SimpleTooltipContent, Tooltip } from "@gigflow/ui/tooltip";
 import {
   SELF_SERVE_PAID_PLANS,
   STAGGER_CHILD_VARIANTS,
   cn,
-} from "@v1/ui/utils";
+} from "@gigflow/ui/utils";
 import { motion } from "framer-motion";
 
 export function PlanFeatures({

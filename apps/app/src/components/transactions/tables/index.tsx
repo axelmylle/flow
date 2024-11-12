@@ -1,5 +1,5 @@
 import { Cookies } from "@/utils/constants";
-import { getTransactions } from "@v1/supabase/cached-queries";
+import { getTransactions } from "@gigflow/supabase/cached-queries";
 import { cookies } from "next/headers";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";

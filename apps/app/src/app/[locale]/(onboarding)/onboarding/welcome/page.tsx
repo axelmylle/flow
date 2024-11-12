@@ -1,5 +1,5 @@
-import { getUser } from "@v1/supabase/cached-queries";
-import { Wordmark } from "@v1/ui/wordmark";
+import { getUser } from "@gigflow/supabase/cached-queries";
+import { Wordmark } from "@gigflow/ui/wordmark";
 import { redirect } from "next/navigation";
 import { NextButton } from "../next-button";
 

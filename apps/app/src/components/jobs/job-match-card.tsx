@@ -1,14 +1,14 @@
-import { Badge } from "@v1/ui/badge";
-import { Button } from "@v1/ui/button";
+import { Badge } from "@gigflow/ui/badge";
+import { Button } from "@gigflow/ui/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@v1/ui/card";
-import { cn } from "@v1/ui/cn";
-import { Icons } from "@v1/ui/icons";
+} from "@gigflow/ui/card";
+import { cn } from "@gigflow/ui/cn";
+import { Icons } from "@gigflow/ui/icons";
 import Link from "next/link";
 
 interface JobMatchCardProps {

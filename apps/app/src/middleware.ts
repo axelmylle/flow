@@ -1,5 +1,5 @@
-import { updateSession } from "@v1/supabase/middleware";
-import { createClient } from "@v1/supabase/server";
+import { updateSession } from "@gigflow/supabase/middleware";
+import { createClient } from "@gigflow/supabase/server";
 import { createI18nMiddleware } from "next-international/middleware";
 import { type NextRequest, NextResponse } from "next/server";
 
@@ -35,6 +35,7 @@ export async function middleware(request: NextRequest) {
   // Not authenticated
   if (
     !session &&
+    !newUrl.pathname.includes("/i/") &&
     newUrl.pathname !== "/login" &&
     !newUrl.pathname.includes("/report")
   ) {

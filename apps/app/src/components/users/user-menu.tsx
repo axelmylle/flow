@@ -1,5 +1,5 @@
-import { getUser } from "@v1/supabase/cached-queries";
-import { Avatar, AvatarFallback } from "@v1/ui/avatar";
+import { getUser } from "@gigflow/supabase/cached-queries";
+import { Avatar, AvatarFallback } from "@gigflow/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@v1/ui/dropdown-menu";
+} from "@gigflow/ui/dropdown-menu";
 import Image from "next/image";
 import Link from "next/link";
 import { SignOut } from "./sign-out";

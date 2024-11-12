@@ -1,9 +1,9 @@
 "use server";
 
-// import { LogEvents } from "@v1/events/events";
-// import { setupAnalytics } from "@v1/events/server";
-import { getSession } from "@v1/supabase/cached-queries";
-import { createClient } from "@v1/supabase/server";
+// import { LogEvents } from "@gigflow/events/events";
+// import { setupAnalytics } from "@gigflow/events/server";
+import { getSession } from "@gigflow/supabase/cached-queries";
+import { createClient } from "@gigflow/supabase/server";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 

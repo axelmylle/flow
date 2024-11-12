@@ -2,13 +2,14 @@
 
 import { createProjectAction } from "@/actions/project/create-project-action";
 import { createProjectSchema } from "@/actions/project/schema";
+import type { Customer } from "@/components/invoices/customer-details";
 import { useTrackerParams } from "@/hooks/use-tracker-params";
+import { Drawer, DrawerContent, DrawerHeader } from "@gigflow/ui/drawer";
+import { useMediaQuery } from "@gigflow/ui/hooks";
+import { ScrollArea } from "@gigflow/ui/scroll-area";
+import { Sheet, SheetContent, SheetHeader } from "@gigflow/ui/sheet";
+import { useToast } from "@gigflow/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Drawer, DrawerContent, DrawerHeader } from "@v1/ui/drawer";
-import { useMediaQuery } from "@v1/ui/hooks";
-import { ScrollArea } from "@v1/ui/scroll-area";
-import { Sheet, SheetContent, SheetHeader } from "@v1/ui/sheet";
-import { useToast } from "@v1/ui/use-toast";
 import { useAction } from "next-safe-action/hooks";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -17,9 +18,10 @@ import { TrackerProjectForm } from "../forms/tracker-project-form";
 
 type Props = {
   currencyCode: string;
+  customers: Customer[];
 };
 
-export function TrackerCreateSheet({ currencyCode }: Props) {
+export function TrackerCreateSheet({ currencyCode, customers }: Props) {
   const { toast } = useToast();
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const { setParams, create } = useTrackerParams();
@@ -29,8 +31,14 @@ export function TrackerCreateSheet({ currencyCode }: Props) {
   const form = useForm<z.infer<typeof createProjectSchema>>({
     resolver: zodResolver(createProjectSchema),
     defaultValues: {
-      currency: currencyCode,
+      name: undefined,
+      description: undefined,
+      rate: undefined,
       status: "in_progress",
+      billable: false,
+      estimate: 0,
+      currency: currencyCode,
+      customer_id: undefined,
     },
   });
 
@@ -61,6 +69,7 @@ export function TrackerCreateSheet({ currencyCode }: Props) {
               isSaving={action.status === "executing"}
               onSubmit={action.execute}
               form={form}
+              customers={customers}
             />
           </ScrollArea>
         </SheetContent>
@@ -70,7 +79,7 @@ export function TrackerCreateSheet({ currencyCode }: Props) {
 
   return (
     <Drawer
-      open={isOpen ?? false}
+      open={isOpen}
       onOpenChange={(open: boolean) => {
         if (!open) {
           setParams({ create: null });
@@ -86,6 +95,7 @@ export function TrackerCreateSheet({ currencyCode }: Props) {
           isSaving={action.status === "executing"}
           onSubmit={action.execute}
           form={form}
+          customers={customers}
         />
       </DrawerContent>
     </Drawer>

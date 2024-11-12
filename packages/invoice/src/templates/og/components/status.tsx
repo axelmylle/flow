@@ -5,16 +5,18 @@ export function Status({
 }) {
   const getStatusStyles = () => {
     if (status === "draft" || status === "canceled") {
-      return "text-[#878787] bg-[#F2F1EF] text-[20px]";
+      return "text-[#878787] bg-[#1D1D1D] text-[20px]";
     }
+
     if (status === "overdue") {
       return "bg-[#262111] text-[#FFD02B]";
     }
+
     if (status === "paid") {
       return "text-[#00C969] bg-[#17241B]";
     }
 
-    return "text-[#1D1D1D] bg-[#29292]";
+    return "text-[#F5F5F3] bg-[#292928]";
   };
 
   return (

@@ -1,15 +1,16 @@
 "use client";
 
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@v1/ui/card";
-import { Icons } from "@v1/ui/icons";
-import { Input } from "@v1/ui/input";
+} from "@gigflow/ui/card";
+import { Icons } from "@gigflow/ui/icons";
+import { Input } from "@gigflow/ui/input";
+import Image from "next/image";
 import { useState } from "react";
 
 export function InviteClientCard() {
@@ -22,13 +23,22 @@ export function InviteClientCard() {
   };
 
   return (
-    <Card className="w-full max-w-md">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold">
+    <Card className="relative">
+      <div className="absolute inset-0 rounded-lg overflow-hidden">
+        <Image
+          src="/assets/tips/insights.jpg"
+          alt="Freelancer"
+          fill
+          className="object-cover transition-transform duration-400 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 " />
+      </div>
+      <CardHeader className="relative">
+        <CardTitle className="text-xl font-semibold">
           Earn when you invite your clients
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className=" relative">
         <ul className="space-y-2">
           <li className="flex items-start">
             <span className="mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-purple-100 text-sm font-semibold text-purple-600">
@@ -53,6 +63,8 @@ export function InviteClientCard() {
             <span>You get rewarded. Every single time!</span>
           </li>
         </ul>
+      </CardContent>
+      <CardFooter className="justify-end relative">
         <div className="flex items-center space-x-2">
           <Input
             type="email"
@@ -65,11 +77,6 @@ export function InviteClientCard() {
             Invite new client
           </Button>
         </div>
-      </CardContent>
-      <CardFooter className="justify-end">
-        <Button variant="link" className="text-purple-600">
-          Learn more <Icons.ChevronRight className="ml-1 h-4 w-4" />
-        </Button>
       </CardFooter>
     </Card>
   );

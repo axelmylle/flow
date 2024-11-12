@@ -2,19 +2,19 @@
 
 import { getInstitutions } from "@/actions/institutions/get-institutions";
 import { useConnectParams } from "@/hooks/use-connect-params";
-import type { Institutions } from "@v1-ai/engine/resources/institutions/institutions";
+import type { Institutions } from "@gigflow-ai/engine/resources/institutions/institutions";
 
-import { useDebounce, useScript } from "@uidotdev/usehooks";
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@v1/ui/dialog";
-import { Input } from "@v1/ui/input";
-import { Skeleton } from "@v1/ui/skeleton";
+} from "@gigflow/ui/dialog";
+import { Input } from "@gigflow/ui/input";
+import { Skeleton } from "@gigflow/ui/skeleton";
+import { useDebounce, useScript } from "@uidotdev/usehooks";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 

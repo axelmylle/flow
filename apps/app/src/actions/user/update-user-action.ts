@@ -1,6 +1,6 @@
 "use server";
 
-import { updateUser } from "@v1/supabase/mutations";
+import { updateUser } from "@gigflow/supabase/mutations";
 import {
   revalidatePath as nextRevalidatePath,
   revalidateTag,

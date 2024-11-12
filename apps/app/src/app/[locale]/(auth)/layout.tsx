@@ -1,5 +1,5 @@
-import { NewBackground } from "@v1/ui/new-background";
-import { Wordmark } from "@v1/ui/wordmark";
+import { NewBackground } from "@gigflow/ui/new-background";
+import { Wordmark } from "@gigflow/ui/wordmark";
 import Link from "next/link";
 import type { ReactNode } from "react";
 

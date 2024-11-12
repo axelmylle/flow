@@ -1,13 +1,13 @@
+import TransactionsEmail from "@gigflow/email/emails/transactions";
+import { getI18n } from "@gigflow/email/locales";
 import { render } from "@react-email/components";
 import { eventTrigger } from "@trigger.dev/sdk";
-import TransactionsEmail from "@v1/email/emails/transactions";
-import { getI18n } from "@v1/email/locales";
 
 import {
   NotificationTypes,
   TriggerEvents,
   triggerBulk,
-} from "@v1/notification";
+} from "@gigflow/notification";
 import { z } from "zod";
 import { client, supabase } from "../client";
 import { Events, Jobs } from "../constants";

@@ -1,4 +1,4 @@
-import { Wordmark } from "@v1/ui/wordmark";
+import { Wordmark } from "@gigflow/ui/wordmark";
 import type { PropsWithChildren } from "react";
 
 export default function Layout({ children }: PropsWithChildren) {

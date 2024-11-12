@@ -1,4 +1,4 @@
-import { getUser } from "@v1/supabase/cached-queries";
+import { getUser } from "@gigflow/supabase/cached-queries";
 import { redirect } from "next/navigation";
 
 export default async function Onboarding() {

@@ -1,4 +1,4 @@
-import { cn } from "@v1/ui/cn";
+import { cn } from "@gigflow/ui/cn";
 import { BankLogo } from "./bank-logo";
 
 type Props = {

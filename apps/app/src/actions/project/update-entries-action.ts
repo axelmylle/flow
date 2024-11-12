@@ -3,7 +3,7 @@
 import { updateEntriesSchema } from "@/actions/project/schema";
 import { authActionClient } from "@/actions/safe-action";
 import { Cookies } from "@/utils/constants";
-import { LogEvents } from "@v1/events/events";
+import { LogEvents } from "@gigflow/events/events";
 import { addYears } from "date-fns";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";

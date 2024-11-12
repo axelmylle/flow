@@ -1,6 +1,6 @@
 import { useTransactionsStore } from "@/store/transactions";
-import { Button } from "@v1/ui/button";
-import { useToast } from "@v1/ui/use-toast";
+import { Button } from "@gigflow/ui/button";
+import { useToast } from "@gigflow/ui/use-toast";
 import { AnimatePresence, motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";

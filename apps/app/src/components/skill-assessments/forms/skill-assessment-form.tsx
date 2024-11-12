@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -11,8 +11,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@v1/ui/card";
-import { Progress } from "@v1/ui/progress";
+} from "@gigflow/ui/card";
+import { Progress } from "@gigflow/ui/progress";
 import { QuestionCard } from "../skill-question";
 
 type Question = {

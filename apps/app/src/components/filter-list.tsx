@@ -1,7 +1,7 @@
 import { formatAccountName } from "@/utils/format";
-import { Button } from "@v1/ui/button";
-import { Icons } from "@v1/ui/icons";
-import { Skeleton } from "@v1/ui/skeleton";
+import { Button } from "@gigflow/ui/button";
+import { Icons } from "@gigflow/ui/icons";
+import { Skeleton } from "@gigflow/ui/skeleton";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
 import { formatDateRange } from "little-date";

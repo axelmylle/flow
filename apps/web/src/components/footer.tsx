@@ -2,7 +2,7 @@ import { PlusGrid, PlusGridItem, PlusGridRow } from "@/components/plus-grid";
 import { Container } from "./container";
 import { Gradient } from "./gradient";
 
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import Link from "next/link";
 import { Logo } from "./logo";
 import { Subheading } from "./text";

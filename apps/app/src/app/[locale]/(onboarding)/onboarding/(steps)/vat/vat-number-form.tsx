@@ -1,10 +1,16 @@
 "use client";
 
 import { updateFreelancerAction } from "@/actions/freelancer/update-freelancer-action";
+import { Button } from "@gigflow/ui/button";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@gigflow/ui/form";
+import { Input } from "@gigflow/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@v1/ui/button";
-import { Form, FormField, FormItem, FormLabel, FormMessage } from "@v1/ui/form";
-import { Input } from "@v1/ui/input";
 import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";
 import * as z from "zod";

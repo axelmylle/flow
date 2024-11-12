@@ -1,14 +1,14 @@
 "use client";
 
 import { verifyOtpAction } from "@/actions/user/verify-otp-action";
+import { createClient } from "@gigflow/supabase/client";
+import type { Database } from "@gigflow/supabase/types";
+import { Button } from "@gigflow/ui/button";
+import { cn } from "@gigflow/ui/cn";
+import { Form, FormControl, FormField, FormItem } from "@gigflow/ui/form";
+import { Input } from "@gigflow/ui/input";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@gigflow/ui/input-otp";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createClient } from "@v1/supabase/client";
-import type { Database } from "@v1/supabase/types";
-import { Button } from "@v1/ui/button";
-import { cn } from "@v1/ui/cn";
-import { Form, FormControl, FormField, FormItem } from "@v1/ui/form";
-import { Input } from "@v1/ui/input";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@v1/ui/input-otp";
 import { Loader2 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";

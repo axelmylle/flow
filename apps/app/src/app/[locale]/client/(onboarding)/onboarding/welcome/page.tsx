@@ -1,8 +1,8 @@
 import { Form } from "@/app/[locale]/client/(onboarding)/onboarding/(steps)/my-company/form";
-import { getUser } from "@v1/supabase/cached-queries";
-import { getCurrentUserCompanyQuery } from "@v1/supabase/queries";
-import { createClient } from "@v1/supabase/server";
-import { Wordmark } from "@v1/ui/wordmark";
+import { getUser } from "@gigflow/supabase/cached-queries";
+import { getCurrentUserCompanyQuery } from "@gigflow/supabase/queries";
+import { createClient } from "@gigflow/supabase/server";
+import { Wordmark } from "@gigflow/ui/wordmark";
 import { redirect } from "next/navigation";
 import { NextButton } from "../next-button";
 

@@ -2,8 +2,8 @@
 
 import { authActionClient } from "@/actions/safe-action";
 import { Cookies } from "@/utils/constants";
-import { LogEvents } from "@v1/events/events";
-import { createJob, createProject } from "@v1/supabase/mutations";
+import { LogEvents } from "@gigflow/events/events";
+import { createJob, createProject } from "@gigflow/supabase/mutations";
 import { addYears } from "date-fns";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";

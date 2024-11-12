@@ -1,12 +1,12 @@
-import { getMetrics } from "@v1/supabase/cached-queries";
-import { cn } from "@v1/ui/cn";
-import { Icons } from "@v1/ui/icons";
+import { getMetrics } from "@gigflow/supabase/cached-queries";
+import { cn } from "@gigflow/ui/cn";
+import { Icons } from "@gigflow/ui/icons";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@v1/ui/tooltip";
+} from "@gigflow/ui/tooltip";
 import Link from "next/link";
 import { AnimatedNumber } from "../../animated-number";
 import { FormatAmount } from "../../format-amount";

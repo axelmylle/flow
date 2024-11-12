@@ -38,12 +38,39 @@ import {
   X,
 } from "lucide-react";
 import type { SVGProps } from "react";
-import { MdTrendingDown, MdTrendingUp } from "react-icons/md";
+import {
+  MdClose,
+  MdDragIndicator,
+  MdNotifications,
+  MdOutlineAssuredWorkload,
+  MdOutlineAttachMoney,
+  MdOutlineCalculate,
+  MdOutlineCropFree,
+  MdOutlineDownload,
+  MdOutlineEditNote,
+  MdOutlineFace,
+  MdOutlineFactCheck,
+  MdOutlineNotificationsNone,
+  MdOutlineVisibility,
+  MdTrendingDown,
+  MdTrendingUp,
+} from "react-icons/md";
 import { cn } from "../utils";
 
 export const Icons = {
   SignOut: LogOut,
   Copy,
+  Download: MdOutlineDownload,
+  Notifications: MdOutlineNotificationsNone,
+  Edit: MdOutlineEditNote,
+  CropFree: MdOutlineCropFree,
+  Close: MdClose,
+  DateFormat: MdOutlineFactCheck,
+  DragIndicator: MdDragIndicator,
+  Tax: MdOutlineAssuredWorkload,
+  Visibility: MdOutlineVisibility,
+  Vat: MdOutlineCalculate,
+  CurrencyOutline: MdOutlineAttachMoney,
   LayoutSidebar: function LayoutSidebar(props: SVGProps<SVGSVGElement>) {
     return (
       <svg
@@ -79,6 +106,7 @@ export const Icons = {
       </svg>
     );
   },
+  Face: MdOutlineFace,
   ConnectedDots: function ConnectedDots(props: SVGProps<SVGSVGElement>) {
     return (
       <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>

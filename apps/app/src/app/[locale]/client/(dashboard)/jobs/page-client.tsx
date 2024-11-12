@@ -1,13 +1,13 @@
 "use client";
 
 import { SearchBoxPersisted } from "@/components/shared/search-box";
-import { Filter } from "@v1/ui/filter";
-import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
+import { Filter } from "@gigflow/ui/filter";
+import { MaxWidthWrapper } from "@gigflow/ui/max-width-wrapper";
 
 import { JobDetail } from "@/components/jobs/job-detail";
 import { useLinkFilters } from "@/components/jobs/use-job-filters";
-import { Button } from "@v1/ui/button";
-import { Icons } from "@v1/ui/icons";
+import { Button } from "@gigflow/ui/button";
+import { Icons } from "@gigflow/ui/icons";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { JobList } from "./list";

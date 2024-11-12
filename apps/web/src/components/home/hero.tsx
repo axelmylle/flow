@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@v1/ui/button";
-import { cn } from "@v1/ui/cn";
+import { Button } from "@gigflow/ui/button";
+import { cn } from "@gigflow/ui/cn";
 
 import { motion } from "framer-motion";
 import Link from "next/link";

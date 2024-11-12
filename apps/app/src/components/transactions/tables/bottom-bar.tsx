@@ -2,13 +2,13 @@
 
 import { useI18n } from "@/locales/client";
 import { formatAmount } from "@/utils/format";
-import { Icons } from "@v1/ui/icons";
+import { Icons } from "@gigflow/ui/icons";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@v1/ui/tooltip";
+} from "@gigflow/ui/tooltip";
 import { AnimatePresence, motion } from "framer-motion";
 
 type Props = {

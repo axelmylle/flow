@@ -1,7 +1,7 @@
 "use client";
-import { cn } from "@v1/ui/cn";
-import { Skeleton } from "@v1/ui/skeleton";
-import { Table, TableBody, TableCell, TableRow } from "@v1/ui/table";
+import { cn } from "@gigflow/ui/cn";
+import { Skeleton } from "@gigflow/ui/skeleton";
+import { Table, TableBody, TableCell, TableRow } from "@gigflow/ui/table";
 import { DataTableHeader } from "./data-table-header";
 
 const data = [...Array(40)].map((_, i) => ({ id: i.toString() }));

@@ -1,5 +1,5 @@
+import type { Database } from "@gigflow/supabase/types";
 import type { Transactions } from "@midday-ai/engine/resources/transactions";
-import type { Database } from "@v1/supabase/types";
 
 type TransformTransactionData = {
   transaction: Transactions.Data;

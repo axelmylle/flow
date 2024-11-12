@@ -1,5 +1,5 @@
+import { cn } from "@gigflow/ui/cn";
 import { useEventRunStatuses } from "@trigger.dev/react";
-import { cn } from "@v1/ui/cn";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";

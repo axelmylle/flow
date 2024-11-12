@@ -1,6 +1,6 @@
 import { AddAccountButton } from "@/components/transactions/add-account-button";
-import { AnimatedEmptyState } from "@v1/ui/animated-empty-state";
-import { Icons } from "@v1/ui/icons";
+import { AnimatedEmptyState } from "@gigflow/ui/animated-empty-state";
+import { Icons } from "@gigflow/ui/icons";
 
 export function JobsEmptyState() {
   return (

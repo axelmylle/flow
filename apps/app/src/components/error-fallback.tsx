@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import { useRouter } from "next/navigation";
 
 export function ErrorFallback() {

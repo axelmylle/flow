@@ -1,4 +1,4 @@
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 

@@ -4,7 +4,7 @@ import { z } from "zod";
 import { ONBOARDING_STEPS } from "../onboarding/types";
 
 import { authActionClient } from "@/actions/safe-action";
-import { client } from "@v1/kv/client";
+import { client } from "@gigflow/kv/client";
 
 // Generate a new client secret for an integration
 export const setOnboardingProgress = authActionClient

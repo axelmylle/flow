@@ -1,8 +1,5 @@
 {
-  "extends": "@v1/typescript/base.json",
-  "include": [
-    "./src",
-    "trigger.config.ts"
-  ],
+  "extends": "@gigflow/typescript/base.json",
+  "include": ["./src", "trigger.config.ts"],
   "exclude": ["node_modules"]
 }

@@ -3,8 +3,8 @@
 import { authActionClient } from "@/actions/safe-action";
 import { manualSyncTransactionsSchema } from "./schema";
 
-import { Events, client } from "@v1/jobs";
-import { manualSyncTask } from "@v1/jobs/src/trigger/manual-sync-job";
+import { Events, client } from "@gigflow/jobs";
+import { manualSyncTask } from "@gigflow/jobs/src/trigger/manual-sync-job";
 
 export const manualSyncTransactionsAction = authActionClient
   .schema(manualSyncTransactionsSchema)

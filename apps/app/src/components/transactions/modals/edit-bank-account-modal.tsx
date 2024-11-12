@@ -1,14 +1,13 @@
 import { updateBankAccountAction } from "@/actions/bank-account/update-bank-account-action";
 import { useI18n } from "@/locales/client";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@v1/ui/dialog";
+} from "@gigflow/ui/dialog";
 import {
   Form,
   FormControl,
@@ -17,15 +16,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@v1/ui/form";
-import { Input } from "@v1/ui/input";
+} from "@gigflow/ui/form";
+import { Input } from "@gigflow/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@v1/ui/select";
+} from "@gigflow/ui/select";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";

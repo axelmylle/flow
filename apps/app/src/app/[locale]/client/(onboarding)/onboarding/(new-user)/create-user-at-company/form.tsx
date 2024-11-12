@@ -1,7 +1,7 @@
 "use client";
 
 import { CompanyUserProfileUpdateForm } from "@/components/company/onboarding/invited-user/forms/company-user-profile-update-form";
-import type { Database } from "@v1/supabase/types";
+import type { Database } from "@gigflow/supabase/types";
 import { useClientOnboardingProgress } from "../../use-onboarding-progress";
 
 export function Form({

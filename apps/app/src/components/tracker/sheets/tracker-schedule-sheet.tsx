@@ -1,9 +1,9 @@
 "use client";
 
 import { useTrackerParams } from "@/hooks/use-tracker-params";
-import { Drawer, DrawerContent } from "@v1/ui/drawer";
-import { useMediaQuery } from "@v1/ui/hooks";
-import { Sheet, SheetContent } from "@v1/ui/sheet";
+import { Drawer, DrawerContent } from "@gigflow/ui/drawer";
+import { useMediaQuery } from "@gigflow/ui/hooks";
+import { Sheet, SheetContent } from "@gigflow/ui/sheet";
 import React from "react";
 import { TrackerSchedule } from "../tracker-schedule";
 

@@ -3,7 +3,7 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@v1/supabase"],
+  transpilePackages: ["@gigflow/supabase", "@gigflow/invoice", "@gigflow/ui"],
   experimental: {
     instrumentationHook: process.env.NODE_ENV === "production",
   },
@@ -14,7 +14,14 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ["logo.clearbit.com", "images.pexels.com"],
+    remotePatterns: [
+      { hostname: "logo.clearbit.com" },
+      { hostname: "images.pexels.com" },
+      { hostname: "builds.contra.com" },
+      { hostname: "127.0.0.1" },
+      { hostname: "img.logo.dev" },
+      { hostname: "lh3.googleusercontent.com" },
+    ],
   },
 };
 

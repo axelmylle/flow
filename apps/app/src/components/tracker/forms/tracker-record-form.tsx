@@ -1,9 +1,9 @@
 import { NEW_EVENT_ID } from "@/utils/tracker";
+import { Form, FormControl, FormField, FormItem } from "@gigflow/ui/form";
+import { Input } from "@gigflow/ui/input";
+import { SubmitButton } from "@gigflow/ui/submit-button";
+import { TimeRangeInput } from "@gigflow/ui/time-range-input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem } from "@v1/ui/form";
-import { Input } from "@v1/ui/input";
-import { SubmitButton } from "@v1/ui/submit-button";
-import { TimeRangeInput } from "@v1/ui/time-range-input";
 import { differenceInSeconds, parse } from "date-fns";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";

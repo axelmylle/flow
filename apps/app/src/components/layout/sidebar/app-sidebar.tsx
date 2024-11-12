@@ -23,8 +23,8 @@ import {
   Turtle,
 } from "lucide-react";
 
-import { NavMain } from "@v1/ui/nav-main";
-import { NavSecondary } from "@v1/ui/nav-secondary";
+import { NavMain } from "@gigflow/ui/nav-main";
+import { NavSecondary } from "@gigflow/ui/nav-secondary";
 import {
   Sidebar,
   SidebarContent,
@@ -32,9 +32,9 @@ import {
   SidebarHeader,
   SidebarItem,
   SidebarLabel,
-} from "@v1/ui/sidebar";
+} from "@gigflow/ui/sidebar";
 
-import { createClient } from "@v1/supabase/client";
+import { createClient } from "@gigflow/supabase/client";
 import { NavUser } from "./nav-user";
 import { SkillsProgressCard } from "./skills-card";
 const data = {

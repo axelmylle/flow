@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@v1/ui/card";
-import { Label } from "@v1/ui/label";
-import { RadioGroup, RadioGroupItem } from "@v1/ui/radio-group";
+import { Card, CardContent, CardHeader, CardTitle } from "@gigflow/ui/card";
+import { Label } from "@gigflow/ui/label";
+import { RadioGroup, RadioGroupItem } from "@gigflow/ui/radio-group";
 
 type QuestionProps = {
   question: {

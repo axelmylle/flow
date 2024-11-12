@@ -1,5 +1,5 @@
 {
-  "name": "@v1/import",
+  "name": "@gigflow/import",
   "version": "1.0.0",
   "private": true,
   "main": "src/index.ts",

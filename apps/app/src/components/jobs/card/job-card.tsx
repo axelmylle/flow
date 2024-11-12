@@ -1,7 +1,7 @@
-import { Badge } from "@v1/ui/badge";
-import { Button } from "@v1/ui/button";
-import { Card, CardContent, CardFooter } from "@v1/ui/card";
-import { Icons } from "@v1/ui/icons";
+import { Badge } from "@gigflow/ui/badge";
+import { Button } from "@gigflow/ui/button";
+import { Card, CardContent, CardFooter } from "@gigflow/ui/card";
+import { Icons } from "@gigflow/ui/icons";
 import Link from "next/link";
 
 interface Job {

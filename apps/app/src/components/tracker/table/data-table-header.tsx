@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@v1/ui/button";
-import { TableHead, TableHeader, TableRow } from "@v1/ui/table";
+import { Button } from "@gigflow/ui/button";
+import { TableHead, TableHeader, TableRow } from "@gigflow/ui/table";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";

@@ -1,8 +1,8 @@
 "use client";
 
 import type { OnboardingStep } from "@/actions/user/onboarding/types";
-import { cn } from "@v1/ui/cn";
-import { Icons } from "@v1/ui/icons";
+import { cn } from "@gigflow/ui/cn";
+import { Icons } from "@gigflow/ui/icons";
 import type { PropsWithChildren } from "react";
 import { useClientOnboardingProgress } from "./use-onboarding-progress";
 

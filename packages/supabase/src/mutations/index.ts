@@ -1,6 +1,6 @@
-import { getAccessValidForDays } from "@v1/engine/src/providers/gocardless/utils";
-import { logger } from "@v1/logger";
-import { createClient } from "@v1/supabase/server";
+import { getAccessValidForDays } from "@gigflow/engine/src/providers/gocardless/utils";
+import { logger } from "@gigflow/logger";
+import { createClient } from "@gigflow/supabase/server";
 import { addDays } from "date-fns";
 import {
   getCompanyInviteQuery,
@@ -472,4 +472,22 @@ export async function updateTransaction(
     .eq("id", id)
     .select("id, category, category_slug, team_id, name, status")
     .single();
+}
+
+export async function createFreelancerExperience(
+  supabase: Client,
+  params: TablesInsert<"freelancer_experiences">,
+) {
+  try {
+    const result = await supabase
+      .from("freelancer_experiences")
+      .insert(params)
+      .select()
+      .single();
+
+    return result;
+  } catch (error) {
+    logger.error(error);
+    throw error;
+  }
 }

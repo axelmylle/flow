@@ -1,7 +1,7 @@
 "use client";
 
 import { useI18n } from "@/locales/client";
-import { cn } from "@v1/ui/cn";
+import { cn } from "@gigflow/ui/cn";
 
 export function TrackerStatus({ status }) {
   const t = useI18n();

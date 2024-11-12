@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@v1/ui/cn";
+import { cn } from "@gigflow/ui/cn";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";

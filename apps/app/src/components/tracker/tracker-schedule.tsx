@@ -14,17 +14,17 @@ import {
   transformTrackerData,
   updateEventTime,
 } from "@/utils/tracker";
-import { createClient } from "@v1/supabase/client";
-import { getTrackerRecordsByDateQuery } from "@v1/supabase/queries";
-import { cn } from "@v1/ui/cn";
+import { createClient } from "@gigflow/supabase/client";
+import { getTrackerRecordsByDateQuery } from "@gigflow/supabase/queries";
+import { cn } from "@gigflow/ui/cn";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuShortcut,
   ContextMenuTrigger,
-} from "@v1/ui/context-menu";
-import { ScrollArea } from "@v1/ui/scroll-area";
+} from "@gigflow/ui/context-menu";
+import { ScrollArea } from "@gigflow/ui/scroll-area";
 import {
   addMinutes,
   addSeconds,

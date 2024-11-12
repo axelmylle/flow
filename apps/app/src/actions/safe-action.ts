@@ -1,9 +1,9 @@
+import { setupAnalytics } from "@gigflow/analytics/server";
+import { ratelimit } from "@gigflow/kv/ratelimit";
+import { logger } from "@gigflow/logger";
+import { getUser } from "@gigflow/supabase/cached-queries";
+import { createClient } from "@gigflow/supabase/server";
 import * as Sentry from "@sentry/nextjs";
-import { setupAnalytics } from "@v1/analytics/server";
-import { ratelimit } from "@v1/kv/ratelimit";
-import { logger } from "@v1/logger";
-import { getUser } from "@v1/supabase/cached-queries";
-import { createClient } from "@v1/supabase/server";
 import {
   DEFAULT_SERVER_ERROR_MESSAGE,
   createSafeActionClient,
@@ -45,9 +45,9 @@ export const authActionClient = actionClientWithMeta
     const result = await next({ ctx: {} });
 
     if (process.env.NODE_ENV === "development") {
-      logger.info(`Input -> ${JSON.stringify(clientInput)}`);
-      logger.info(`Result -> ${JSON.stringify(result.data)}`);
-      logger.info(`Metadata -> ${JSON.stringify(metadata)}`);
+      // logger.info(`Input -> ${JSON.stringify(clientInput)}`);
+      // logger.info(`Result -> ${JSON.stringify(result.data)}`);
+      // logger.info(`Metadata -> ${JSON.stringify(metadata)}`);
 
       return result;
     }

@@ -2,8 +2,8 @@
 
 // import { generateTransactionsFilters } from "@/actions/ai/filters/generate-transactions-filters";
 import { formatAccountName } from "@/utils/format";
-import { Calendar } from "@v1/ui/calendar";
-import { cn } from "@v1/ui/cn";
+import { Calendar } from "@gigflow/ui/calendar";
+import { cn } from "@gigflow/ui/cn";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -14,9 +14,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@v1/ui/dropdown-menu";
-import { Icons } from "@v1/ui/icons";
-import { Input } from "@v1/ui/input";
+} from "@gigflow/ui/dropdown-menu";
+import { Icons } from "@gigflow/ui/icons";
+import { Input } from "@gigflow/ui/input";
 import { readStreamableValue } from "ai/rsc";
 import { formatISO } from "date-fns";
 import {

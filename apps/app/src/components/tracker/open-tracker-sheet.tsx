@@ -1,8 +1,8 @@
 "use client";
 
 import { useTrackerParams } from "@/hooks/use-tracker-params";
-import { Button } from "@v1/ui/button";
-import { Icons } from "@v1/ui/icons";
+import { Button } from "@gigflow/ui/button";
+import { Icons } from "@gigflow/ui/icons";
 
 export function OpenTrackerSheet() {
   const { setParams } = useTrackerParams();

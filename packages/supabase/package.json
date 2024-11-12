@@ -1,32 +1,37 @@
 {
-  "name": "@v1/supabase",
+  "name": "@gigflow/supabase",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "lint": "biome check .",
     "format": "biome format --write .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "db:generate": "supabase gen types --lang=typescript --project-id $PROJECT_ID --schema public > src/types/db.ts"
   },
   "dependencies": {
-    "@supabase/ssr": "^0.5.1",
-    "@v1/logger": "workspace:*",
-    "react": "^18.3.1",
-    "server-only": "^0.0.1",
     "@date-fns/utc": "^2.1.0",
-    "supabase": "^1.191.3"
+    "@supabase/postgrest-js": "^1.16.2",
+    "@supabase/ssr": "^0.5.1",
+    "date-fns": "^4.1.0",
+    "react": "18.3.1",
+    "server-only": "^0.0.1",
+    "supabase": "^1.200.3"
   },
   "devDependencies": {
-    "@supabase/supabase-js": "^2.45.3",
-    "typescript": "^5.5.4"
+    "@supabase/supabase-js": "^2.45.4",
+    "typescript": "^5.6.3"
   },
   "exports": {
-    "./server": "./src/clients/server.ts",
-    "./client": "./src/clients/client.ts",
+    "./server": "./src/client/server.ts",
+    "./client": "./src/client/client.ts",
+    "./client-query": "./src/queries/client.ts",
+    "./job": "./src/client/job.ts",
     "./mutations": "./src/mutations/index.ts",
-    "./middleware": "./src/clients/middleware.ts",
+    "./middleware": "./src/client/middleware.ts",
     "./queries": "./src/queries/index.ts",
     "./cached-queries": "./src/queries/cached-queries.ts",
+    "./storage": "./src/utils/storage.ts",
     "./types": "./src/types/index.ts"
   }
 }

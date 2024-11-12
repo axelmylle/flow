@@ -1,5 +1,5 @@
 import { createGoCardLessLinkAction } from "@/actions/institutions/create-gocardless-link";
-// import { useToast } from "@v1/ui/use-toast";
+// import { useToast } from "@gigflow/ui/use-toast";
 import { useAction } from "next-safe-action/hooks";
 import { BankConnectButton } from "./bank-connect-button";
 

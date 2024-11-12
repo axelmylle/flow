@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@v1/ui/cn";
-import { useRouterStuff } from "@v1/ui/hooks";
+import { cn } from "@gigflow/ui/cn";
+import { useRouterStuff } from "@gigflow/ui/hooks";
 import { useSearchParams } from "next/navigation";
 import ChooseRole from "./choose-role";
 import { RegisterProvider, useRegisterContext } from "./context";

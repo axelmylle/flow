@@ -1,8 +1,8 @@
 import { useTrackerParams } from "@/hooks/use-tracker-params";
 import { TZDate } from "@date-fns/tz";
-import { Button } from "@v1/ui/button";
-import { cn } from "@v1/ui/cn";
-import { Icons } from "@v1/ui/icons";
+import { Button } from "@gigflow/ui/button";
+import { cn } from "@gigflow/ui/cn";
+import { Icons } from "@gigflow/ui/icons";
 import { addMonths, format, formatISO, startOfMonth } from "date-fns";
 
 type Props = {

@@ -1,6 +1,6 @@
 "use server";
 
-import { deleteBankAccount } from "@v1/supabase/mutations";
+import { deleteBankAccount } from "@gigflow/supabase/mutations";
 import { revalidateTag } from "next/cache";
 import { authActionClient } from "../safe-action";
 import { deleteBankAccountSchema } from "./schema";

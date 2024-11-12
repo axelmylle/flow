@@ -1,6 +1,6 @@
-import { Badge } from "@v1/ui/badge";
-import { Button } from "@v1/ui/button";
-import { Icons } from "@v1/ui/icons";
+import { Badge } from "@gigflow/ui/badge";
+import { Button } from "@gigflow/ui/button";
+import { Icons } from "@gigflow/ui/icons";
 import Image from "next/image";
 import Link from "next/link";
 

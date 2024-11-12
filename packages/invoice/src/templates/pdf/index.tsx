@@ -1,4 +1,4 @@
-import { Document, Font, Image, Page, Text, View } from "@react-pdf/renderer";
+import { Document, Image, Page, Text, View } from "@react-pdf/renderer";
 import QRCodeUtil from "qrcode";
 import type { TemplateProps } from "../types";
 import { EditorContent } from "./components/editor-content";
@@ -9,22 +9,6 @@ import { PaymentDetails } from "./components/payment-details";
 import { QRCode } from "./components/qr-code";
 import { Summary } from "./components/summary";
 
-const CDN_URL = "https://cdn.midday.ai";
-
-Font.register({
-  family: "GeistMono",
-  fonts: [
-    {
-      src: `${CDN_URL}/fonts/GeistMono/ttf/GeistMono-Regular.ttf`,
-      fontWeight: 400,
-    },
-    {
-      src: `${CDN_URL}/fonts/GeistMono/ttf/GeistMono-Medium.ttf`,
-      fontWeight: 500,
-    },
-  ],
-});
-
 export async function PdfTemplate({
   invoice_number,
   issue_date,
@@ -33,6 +17,7 @@ export async function PdfTemplate({
   line_items,
   customer_details,
   from_details,
+  discount,
   payment_details,
   note_details,
   currency,
@@ -42,14 +27,15 @@ export async function PdfTemplate({
   size = "a4",
   token,
 }: TemplateProps) {
-  const qrCode = await QRCodeUtil.toDataURL(
-    `https://app.midday.ai/i/${token}`,
-    {
+  let qrCode = null;
+
+  if (template.include_qr) {
+    qrCode = await QRCodeUtil.toDataURL(`https://app.midday.ai/i/${token}`, {
       width: 40 * 3,
       height: 40 * 3,
       margin: 0,
-    },
-  );
+    });
+  }
 
   return (
     <Document>
@@ -58,7 +44,6 @@ export async function PdfTemplate({
         style={{
           padding: 20,
           backgroundColor: "#fff",
-          fontFamily: "GeistMono",
           color: "#000",
         }}
       >
@@ -67,8 +52,8 @@ export async function PdfTemplate({
             <Image
               src={template.logo_url}
               style={{
-                width: 78,
-                height: 78,
+                width: 65,
+                height: 65,
               }}
             />
           )}
@@ -81,6 +66,8 @@ export async function PdfTemplate({
           invoiceNo={invoice_number}
           issueDate={issue_date}
           dueDate={due_date}
+          timezone={template.timezone}
+          dateFormat={template.date_format}
         />
 
         <View style={{ flexDirection: "row" }}>
@@ -110,6 +97,10 @@ export async function PdfTemplate({
           quantityLabel={template.quantity_label}
           priceLabel={template.price_label}
           totalLabel={template.total_label}
+          locale={template.locale}
+          includeVAT={template.include_vat}
+          vatLabel={template.vat_label}
+          includeDecimals={template.include_decimals}
         />
 
         <Summary
@@ -120,6 +111,14 @@ export async function PdfTemplate({
           totalLabel={template.total_label}
           taxLabel={template.tax_label}
           vatLabel={template.vat_label}
+          taxRate={template.tax_rate}
+          locale={template.locale}
+          discount={discount}
+          discountLabel={template.discount_label}
+          includeDiscount={template.include_discount}
+          includeVAT={template.include_vat}
+          includeTax={template.include_tax}
+          includeDecimals={template.include_decimals}
         />
 
         <View
@@ -136,7 +135,7 @@ export async function PdfTemplate({
                 paymentLabel={template.payment_label}
               />
 
-              <QRCode data={qrCode} />
+              {qrCode && <QRCode data={qrCode} />}
             </View>
 
             <View style={{ flex: 1, marginLeft: 10 }}>

@@ -1,6 +1,6 @@
-import { getTeamUser } from "@v1/supabase/cached-queries";
-import { getTeamMembersQuery } from "@v1/supabase/queries";
-import { createClient } from "@v1/supabase/server";
+import { getTeamUser } from "@gigflow/supabase/cached-queries";
+import { getTeamMembersQuery } from "@gigflow/supabase/queries";
+import { createClient } from "@gigflow/supabase/server";
 import { DataTable } from "./table";
 
 export async function MembersTable() {

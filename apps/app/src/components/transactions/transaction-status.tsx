@@ -1,10 +1,10 @@
-import { Icons } from "@v1/ui/icons";
+import { Icons } from "@gigflow/ui/icons";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@v1/ui/tooltip";
+} from "@gigflow/ui/tooltip";
 
 type Props = {
   fullfilled: boolean;

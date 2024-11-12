@@ -1,5 +1,5 @@
-import { Card, CardContent } from "@v1/ui/card";
-import { Progress } from "@v1/ui/progress";
+import { Card, CardContent } from "@gigflow/ui/card";
+import { Progress } from "@gigflow/ui/progress";
 import { Database, Palette } from "lucide-react";
 
 export function SkillsProgressCard() {

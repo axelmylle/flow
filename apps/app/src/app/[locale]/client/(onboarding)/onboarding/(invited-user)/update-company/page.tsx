@@ -1,6 +1,6 @@
-import { getCurrentUserCompanyQuery } from "@v1/supabase/queries";
-import { createClient } from "@v1/supabase/server";
-import { Icons } from "@v1/ui/icons";
+import { getCurrentUserCompanyQuery } from "@gigflow/supabase/queries";
+import { createClient } from "@gigflow/supabase/server";
+import { Icons } from "@gigflow/ui/icons";
 import { StepPage } from "../../step-page";
 import { Form } from "./form";
 

@@ -1,5 +1,5 @@
 import { PageContent } from "@/components/layout/page-content";
-import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
+import { MaxWidthWrapper } from "@gigflow/ui/max-width-wrapper";
 import PageClient from "./page-client";
 
 export const metadata = {

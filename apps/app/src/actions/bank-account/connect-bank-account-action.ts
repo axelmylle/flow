@@ -1,10 +1,10 @@
 "use server";
 
 import { getMostFrequentCurrency } from "@/utils/currency";
-// import { LogEvents } from "@v1/events/events";
-import { Events, client } from "@v1/jobs";
-import { getTeamSettings } from "@v1/supabase/cached-queries";
-import { createBankAccounts } from "@v1/supabase/mutations";
+// import { LogEvents } from "@gigflow/events/events";
+import { Events, client } from "@gigflow/jobs";
+import { getTeamSettings } from "@gigflow/supabase/cached-queries";
+import { createBankAccounts } from "@gigflow/supabase/mutations";
 import { revalidateTag } from "next/cache";
 import { authActionClient } from "../safe-action";
 import { connectBankAccountSchema } from "./schema";

@@ -2,7 +2,7 @@
 
 import { setOnboardingCompleted } from "@/actions/user/onboarding/set-onboarding-complete";
 import { Background } from "@/app/[locale]/(onboarding)/background";
-import { Wordmark } from "@v1/ui/wordmark";
+import { Wordmark } from "@gigflow/ui/wordmark";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Confetti from "react-confetti";

@@ -2,7 +2,7 @@
 
 import type { UpdateUserFormValues } from "@/actions/user/schema";
 import { updateUserAction } from "@/actions/user/update-user-action";
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,8 +14,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@v1/ui/dropdown-menu";
-import { Icons } from "@v1/ui/icons";
+} from "@gigflow/ui/dropdown-menu";
+import { Icons } from "@gigflow/ui/icons";
 import { useAction } from "next-safe-action/hooks";
 
 type Props = {

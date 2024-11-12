@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import { useQueryState } from "nuqs";
 
 export function AddAccountButton({ onClick }: { onClick?: () => void }) {

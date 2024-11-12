@@ -3,7 +3,7 @@
 import { z } from "zod";
 
 import { authActionClient } from "@/actions/safe-action";
-import { client } from "@v1/kv/client";
+import { client } from "@gigflow/kv/client";
 import { CLIENT_ONBOARDING_STEPS } from "./types";
 
 // Generate a new client secret for an integration

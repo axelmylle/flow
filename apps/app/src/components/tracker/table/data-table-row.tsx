@@ -12,17 +12,17 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@v1/ui/alert-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "@v1/ui/avatar";
+} from "@gigflow/ui/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@gigflow/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@v1/ui/dropdown-menu";
-import { Icons } from "@v1/ui/icons";
-import { TableCell, TableRow } from "@v1/ui/table";
-import { useToast } from "@v1/ui/use-toast";
+} from "@gigflow/ui/dropdown-menu";
+import { Icons } from "@gigflow/ui/icons";
+import { TableCell, TableRow } from "@gigflow/ui/table";
+import { useToast } from "@gigflow/ui/use-toast";
 import { useAction } from "next-safe-action/hooks";
 // import { deleteProjectAction } from "@/actions/project/delete-project-action";
 // import { updateProjectAction } from "@/actions/project/update-project-action";

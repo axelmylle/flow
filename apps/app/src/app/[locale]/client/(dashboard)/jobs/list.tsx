@@ -1,7 +1,7 @@
 "use client";
 
-import { Badge } from "@v1/ui/badge";
-import { CardList } from "@v1/ui/card-list";
+import { Badge } from "@gigflow/ui/badge";
+import { CardList } from "@gigflow/ui/card-list";
 import Image from "next/image";
 import Link from "next/link";
 

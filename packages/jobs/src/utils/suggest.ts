@@ -1,6 +1,6 @@
 import { openai } from "@ai-sdk/openai";
+import type { Transaction } from "@gigflow/import/src/types";
 import { createClient } from "@supabase/supabase-js";
-import type { Transaction } from "@v1/import/src/types";
 import { generateObject } from "ai";
 import { revalidateTag } from "next/cache";
 import { z } from "zod";

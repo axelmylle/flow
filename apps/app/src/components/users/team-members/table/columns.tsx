@@ -2,7 +2,6 @@ import { changeUserRoleAction } from "@/actions/team/change-user-role-action";
 import { deleteTeamMemberAction } from "@/actions/team/delete-team-member-action";
 import { leaveTeamAction } from "@/actions/team/leave-team-action";
 import { useI18n } from "@/locales/client";
-import type { ColumnDef } from "@tanstack/react-table";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,23 +12,24 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@v1/ui/alert-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "@v1/ui/avatar";
-import { Button } from "@v1/ui/button";
+} from "@gigflow/ui/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@gigflow/ui/avatar";
+import { Button } from "@gigflow/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@v1/ui/dropdown-menu";
+} from "@gigflow/ui/dropdown-menu";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@v1/ui/select";
-import { useToast } from "@v1/ui/use-toast";
+} from "@gigflow/ui/select";
+import { useToast } from "@gigflow/ui/use-toast";
+import type { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { Loader2 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";

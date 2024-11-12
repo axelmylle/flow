@@ -4,18 +4,18 @@ import {
   type companySearchFormValues,
   companySearchSchema,
 } from "@/actions/company/schema";
+import { createClient } from "@gigflow/supabase/client";
+import { getCompaniesQuery } from "@gigflow/supabase/queries";
+import type { Database } from "@gigflow/supabase/types";
+import { Avatar, AvatarFallback, AvatarImage } from "@gigflow/ui/avatar";
+import { Button } from "@gigflow/ui/button";
+import { cn } from "@gigflow/ui/cn";
+import { Combobox } from "@gigflow/ui/combobox";
+import { Form, FormControl, FormField, FormItem } from "@gigflow/ui/form";
+import { useMediaQuery } from "@gigflow/ui/hooks";
+import { Icons } from "@gigflow/ui/icons";
+import { toast, useToast } from "@gigflow/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createClient } from "@v1/supabase/client";
-import { getCompaniesQuery } from "@v1/supabase/queries";
-import type { Database } from "@v1/supabase/types";
-import { Avatar, AvatarFallback, AvatarImage } from "@v1/ui/avatar";
-import { Button } from "@v1/ui/button";
-import { cn } from "@v1/ui/cn";
-import { Combobox } from "@v1/ui/combobox";
-import { Form, FormControl, FormField, FormItem } from "@v1/ui/form";
-import { useMediaQuery } from "@v1/ui/hooks";
-import { Icons } from "@v1/ui/icons";
-import { toast, useToast } from "@v1/ui/use-toast";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 

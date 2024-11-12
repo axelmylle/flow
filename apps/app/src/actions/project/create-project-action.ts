@@ -3,7 +3,7 @@
 import { authActionClient } from "@/actions/safe-action";
 import { Cookies } from "@/utils/constants";
 
-import { createProject } from "@v1/supabase/mutations";
+import { createProject } from "@gigflow/supabase/mutations";
 import { addYears } from "date-fns";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";

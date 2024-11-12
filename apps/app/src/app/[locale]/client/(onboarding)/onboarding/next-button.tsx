@@ -1,7 +1,7 @@
 "use client";
 
 import type { ClientOnboardingStep } from "@/actions/client/types";
-import { Button, type ButtonProps } from "@v1/ui/button";
+import { Button, type ButtonProps } from "@gigflow/ui/button";
 import { useClientOnboardingProgress } from "./use-onboarding-progress";
 
 export function NextButton({

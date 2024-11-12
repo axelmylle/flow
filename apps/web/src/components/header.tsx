@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@v1/ui/dialog";
+} from "@gigflow/ui/dialog";
 import Image from "next/image";
 import Link from "next/link";
 import { SubscribeForm } from "./subscribe-form";

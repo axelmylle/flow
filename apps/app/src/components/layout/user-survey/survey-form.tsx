@@ -1,10 +1,10 @@
-import { Button } from "@v1/ui/button";
-import { cn } from "@v1/ui/cn";
-import { useMediaQuery } from "@v1/ui/hooks";
-import { Icons } from "@v1/ui/icons";
-import { Label } from "@v1/ui/label";
-import { RadioGroup, RadioGroupItem } from "@v1/ui/radio-group";
-import { Wordmark } from "@v1/ui/wordmark";
+import { Button } from "@gigflow/ui/button";
+import { cn } from "@gigflow/ui/cn";
+import { useMediaQuery } from "@gigflow/ui/hooks";
+import { Icons } from "@gigflow/ui/icons";
+import { Label } from "@gigflow/ui/label";
+import { RadioGroup, RadioGroupItem } from "@gigflow/ui/radio-group";
+import { Wordmark } from "@gigflow/ui/wordmark";
 import { ChevronRight } from "lucide-react";
 import { useContext, useState } from "react";
 import { UserSurveyContext } from ".";

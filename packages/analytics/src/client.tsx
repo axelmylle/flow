@@ -1,9 +1,9 @@
+import { logger } from "@gigflow/logger";
 import {
   OpenPanelComponent,
   type PostEventPayload,
   useOpenPanel,
 } from "@openpanel/nextjs";
-import { logger } from "@v1/logger";
 
 const isProd = process.env.NODE_ENV === "production";
 

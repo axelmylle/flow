@@ -2,21 +2,21 @@
 
 import { manualSyncTransactionsAction } from "@/actions/transactions/manual-sync-transactions-action";
 import { connectionStatus } from "@/utils/connection-status";
-import { useEventDetails } from "@trigger.dev/react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@v1/ui/accordion";
-import { Icons } from "@v1/ui/icons";
+} from "@gigflow/ui/accordion";
+import { Icons } from "@gigflow/ui/icons";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@v1/ui/tooltip";
-import { useToast } from "@v1/ui/use-toast";
+} from "@gigflow/ui/tooltip";
+import { useToast } from "@gigflow/ui/use-toast";
+import { useEventDetails } from "@trigger.dev/react";
 import { differenceInDays, formatDistanceToNow } from "date-fns";
 import { useAction } from "next-safe-action/hooks";
 import { useRouter } from "next/navigation";

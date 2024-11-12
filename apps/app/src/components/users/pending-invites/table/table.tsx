@@ -2,26 +2,26 @@
 
 import { deleteInviteAction } from "@/actions/team/delete-invite-action";
 import { useI18n } from "@/locales/client";
+import { Avatar, AvatarFallback } from "@gigflow/ui/avatar";
+import { Button } from "@gigflow/ui/button";
+import { cn } from "@gigflow/ui/cn";
+import { Dialog } from "@gigflow/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@gigflow/ui/dropdown-menu";
+import { Input } from "@gigflow/ui/input";
+import { Skeleton } from "@gigflow/ui/skeleton";
+import { Table, TableBody, TableCell, TableRow } from "@gigflow/ui/table";
+import { useToast } from "@gigflow/ui/use-toast";
 import {
   type ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Avatar, AvatarFallback } from "@v1/ui/avatar";
-import { Button } from "@v1/ui/button";
-import { cn } from "@v1/ui/cn";
-import { Dialog } from "@v1/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@v1/ui/dropdown-menu";
-import { Input } from "@v1/ui/input";
-import { Skeleton } from "@v1/ui/skeleton";
-import { Table, TableBody, TableCell, TableRow } from "@v1/ui/table";
-import { useToast } from "@v1/ui/use-toast";
 import { MoreHorizontal } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import * as React from "react";

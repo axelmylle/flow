@@ -1,7 +1,7 @@
 import type { TagColorProps } from "@/lib/types";
 
-import { useMediaQuery } from "@v1/ui/hooks";
-import { cn, truncate } from "@v1/ui/utils";
+import { useMediaQuery } from "@gigflow/ui/hooks";
+import { cn, truncate } from "@gigflow/ui/utils";
 
 import { Tag } from "lucide-react";
 

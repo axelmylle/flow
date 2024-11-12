@@ -1,6 +1,6 @@
 import { createJobAction } from "@/actions/job/create-job-action";
 import type { CreateJobSchema } from "@/actions/job/schema";
-import { Button } from "@v1/ui/button";
+import { Button } from "@gigflow/ui/button";
 import {
   Form,
   FormControl,
@@ -8,9 +8,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@v1/ui/form";
-import { Input } from "@v1/ui/input";
-import { Textarea } from "@v1/ui/textarea";
+} from "@gigflow/ui/form";
+import { Input } from "@gigflow/ui/input";
+import { Textarea } from "@gigflow/ui/textarea";
 import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";

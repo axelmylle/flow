@@ -1,6 +1,6 @@
-import { getSkillById } from "@v1/supabase/cached-queries";
-import { Button } from "@v1/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@v1/ui/card";
+import { getSkillById } from "@gigflow/supabase/cached-queries";
+import { Button } from "@gigflow/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@gigflow/ui/card";
 import type { Metadata } from "next";
 import Link from "next/link";
 

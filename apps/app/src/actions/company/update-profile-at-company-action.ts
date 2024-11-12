@@ -1,6 +1,6 @@
 "use server";
 
-import { updateClient, updateUser } from "@v1/supabase/mutations";
+import { updateClient, updateUser } from "@gigflow/supabase/mutations";
 import { revalidateTag } from "next/cache";
 import { authActionClient } from "../safe-action";
 

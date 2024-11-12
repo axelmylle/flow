@@ -1,10 +1,10 @@
 "use client";
 
+import { createClient } from "@gigflow/supabase/client";
+import { useResizeObserver } from "@gigflow/ui/hooks";
+import { Icons } from "@gigflow/ui/icons";
+import { Popup, PopupContext } from "@gigflow/ui/popup";
 import type { Session } from "@supabase/supabase-js";
-import { createClient } from "@v1/supabase/client";
-import { useResizeObserver } from "@v1/ui/hooks";
-import { Icons } from "@v1/ui/icons";
-import { Popup, PopupContext } from "@v1/ui/popup";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { createContext, useContext, useEffect, useRef, useState } from "react";

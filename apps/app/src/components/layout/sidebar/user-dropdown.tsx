@@ -1,12 +1,12 @@
 "use client";
 
-import { createClient } from "@v1/supabase/client";
-import { getUserQuery } from "@v1/supabase/queries";
-import { Avatar, AvatarFallback, AvatarImage } from "@v1/ui/avatar";
-import { Badge } from "@v1/ui/badge";
-import { cn } from "@v1/ui/cn";
-import { Icons } from "@v1/ui/icons";
-import { Popover, ResponsivePopover } from "@v1/ui/popover";
+import { createClient } from "@gigflow/supabase/client";
+import { getUserQuery } from "@gigflow/supabase/queries";
+import { Avatar, AvatarFallback, AvatarImage } from "@gigflow/ui/avatar";
+import { Badge } from "@gigflow/ui/badge";
+import { cn } from "@gigflow/ui/cn";
+import { Icons } from "@gigflow/ui/icons";
+import { Popover, ResponsivePopover } from "@gigflow/ui/popover";
 import Cookies from "js-cookie";
 import { Edit3, LogOut } from "lucide-react";
 import Link from "next/link";
@@ -21,7 +21,6 @@ export default function UserDropdown({ user }: { user: any }) {
   const [openPopover, setOpenPopover] = useState(false);
   const [unreadChangelogs, setUnreadChangelogs] = useState(0);
 
-  console.log(openPopover, setOpenPopover);
   useEffect(() => {
     const lastReadChangelog = Cookies.get("lastReadChangelog");
     if (!lastReadChangelog) {

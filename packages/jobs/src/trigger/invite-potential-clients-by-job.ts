@@ -1,5 +1,5 @@
+import SuggestedFreelancersEmail from "@gigflow/email/emails/suggested-freelancers";
 import { task } from "@trigger.dev/sdk/v3";
-import SuggestedFreelancersEmail from "@v1/email/emails/suggested-freelancers";
 
 import { render } from "@react-email/components";
 import { createClient } from "@supabase/supabase-js";

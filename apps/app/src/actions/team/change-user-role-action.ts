@@ -1,7 +1,7 @@
 "use server";
 
-// import { LogEvents } from "@v1/events/events";
-import { updateUserTeamRole } from "@v1/supabase/mutations";
+// import { LogEvents } from "@gigflow/events/events";
+import { updateUserTeamRole } from "@gigflow/supabase/mutations";
 import { revalidatePath as revalidatePathFunc } from "next/cache";
 import { authActionClient } from "../safe-action";
 import { changeUserRoleSchema } from "./schema";

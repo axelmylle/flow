@@ -1,5 +1,5 @@
 {
-  "name": "@v1/engine",
+  "name": "@gigflow/engine",
   "main": "src/index.ts",
   "scripts": {
     "dev": "NODE_ENV=development wrangler dev src/index.ts --port 3002",

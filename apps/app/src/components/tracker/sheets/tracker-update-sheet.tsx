@@ -4,9 +4,8 @@ import { deleteProjectAction } from "@/actions/project/delete-project-action";
 import { updateProjectSchema } from "@/actions/project/schema";
 import { updateProjectAction } from "@/actions/project/update-project-action";
 import { useTrackerParams } from "@/hooks/use-tracker-params";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createClient } from "@v1/supabase/client";
-import { getTrackerProjectQuery } from "@v1/supabase/queries";
+import { createClient } from "@gigflow/supabase/client";
+import { getTrackerProjectQuery } from "@gigflow/supabase/queries";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,19 +16,20 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@v1/ui/alert-dialog";
-import { Drawer, DrawerContent, DrawerHeader } from "@v1/ui/drawer";
+} from "@gigflow/ui/alert-dialog";
+import { Drawer, DrawerContent, DrawerHeader } from "@gigflow/ui/drawer";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@v1/ui/dropdown-menu";
-import { useMediaQuery } from "@v1/ui/hooks";
-import { Icons } from "@v1/ui/icons";
-import { ScrollArea } from "@v1/ui/scroll-area";
-import { Sheet, SheetContent, SheetHeader } from "@v1/ui/sheet";
-import { useToast } from "@v1/ui/use-toast";
+} from "@gigflow/ui/dropdown-menu";
+import { useMediaQuery } from "@gigflow/ui/hooks";
+import { Icons } from "@gigflow/ui/icons";
+import { ScrollArea } from "@gigflow/ui/scroll-area";
+import { Sheet, SheetContent, SheetHeader } from "@gigflow/ui/sheet";
+import { useToast } from "@gigflow/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "next-safe-action/hooks";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";

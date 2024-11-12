@@ -1,7 +1,7 @@
-import { Avatar } from "@v1/ui/avatar";
-import { BlurImage } from "@v1/ui/blur-image";
-import { useRouterStuff } from "@v1/ui/hooks";
-import { Icons } from "@v1/ui/icons";
+import { Avatar } from "@gigflow/ui/avatar";
+import { BlurImage } from "@gigflow/ui/blur-image";
+import { useRouterStuff } from "@gigflow/ui/hooks";
+import { Icons } from "@gigflow/ui/icons";
 import { useMemo } from "react";
 import TagBadge from "./tag-badge";
 

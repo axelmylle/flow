@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@v1/ui/cn";
-import { Icons } from "@v1/ui/icons";
+import { cn } from "@gigflow/ui/cn";
+import { Icons } from "@gigflow/ui/icons";
 
 type Props = {
   value: string;

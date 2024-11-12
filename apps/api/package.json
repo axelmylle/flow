@@ -1,5 +1,5 @@
 {
-  "name": "@v1/api",
+  "name": "@gigflow/api",
   "private": true,
   "scripts": {
     "dev": "supabase start",
@@ -7,7 +7,7 @@
     "migrate": "supabase migration up",
     "seed": "bunx tsx seed.ts > seed.sql",
     "reset": "supabase db reset",
-    "generate": "supabase gen types --lang=typescript --local --schema public --schema skill_assessment > ../../packages/supabase/src/types/db.ts"
+    "generate": "supabase gen types typescript --local --schema public --schema skill_assessment > ../../packages/supabase/src/types/db.ts"
   },
   "dependencies": {
     "supabase": "^1.191.5"

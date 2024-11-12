@@ -1,4 +1,4 @@
-import { Icons } from "@v1/ui/icons";
+import { Icons } from "@gigflow/ui/icons";
 import { Gift, Globe, Key, ShieldCheck, Webhook } from "lucide-react";
 
 export type NavItem = {

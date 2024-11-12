@@ -1,16 +1,16 @@
-import { createClient } from "@v1/supabase/client";
+import { createClient } from "@gigflow/supabase/client";
 import {
   getCurrentUserTeamQuery,
   getTeamMembersQuery,
-} from "@v1/supabase/queries";
+} from "@gigflow/supabase/queries";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@v1/ui/select";
-import { Skeleton } from "@v1/ui/skeleton";
+} from "@gigflow/ui/select";
+import { Skeleton } from "@gigflow/ui/skeleton";
 import { useEffect, useState } from "react";
 import { AssignedUser } from "./assigned-user";
 

@@ -15,13 +15,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@v1/ui/card";
+} from "@gigflow/ui/card";
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@v1/ui/chart";
+} from "@gigflow/ui/chart";
 
 export const description = "A radar chart";
 

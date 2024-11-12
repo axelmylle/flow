@@ -2,18 +2,21 @@
 
 import type { updateClientFormValues } from "@/actions/client/schema";
 import { updateClientAction } from "@/actions/client/update-client-action";
-import { Button } from "@v1/ui/button";
-import { cn } from "@v1/ui/cn";
-import { Combobox } from "@v1/ui/combobox";
-import { Form, FormControl, FormField, FormItem } from "@v1/ui/form";
-import { useMediaQuery } from "@v1/ui/hooks";
+import { Button } from "@gigflow/ui/button";
+import { cn } from "@gigflow/ui/cn";
+import { Combobox } from "@gigflow/ui/combobox";
+import { Form, FormControl, FormField, FormItem } from "@gigflow/ui/form";
+import { useMediaQuery } from "@gigflow/ui/hooks";
 import { useAction } from "next-safe-action/hooks";
 
 import { createProjectAction } from "@/actions/project/create-project-action";
-import { createClient } from "@v1/supabase/client";
-import { getClientsQuery, getTrackerProjectsQuery } from "@v1/supabase/queries";
+import { createClient } from "@gigflow/supabase/client";
+import {
+  getClientsQuery,
+  getTrackerProjectsQuery,
+} from "@gigflow/supabase/queries";
 
-import { useToast } from "@v1/ui/use-toast";
+import { useToast } from "@gigflow/ui/use-toast";
 
 import { useEffect, useState } from "react";
 

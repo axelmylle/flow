@@ -1,17 +1,12 @@
-import { AppSidebar } from "@/components/layout/sidebar/app-sidebar";
 import Toolbar from "@/components/layout/toolbar/toolbar";
-import UserSurveyPopup from "@/components/layout/user-survey";
-import { getUser } from "@v1/supabase/cached-queries";
-
-import { MaxWidthWrapper } from "@v1/ui/max-width-wrapper";
-import { SidebarLayout, SidebarTrigger } from "@v1/ui/sidebar";
 
 import { MainNav } from "@/components/layout/main-nav";
-import { GlobalSheets } from "@/components/tracker/sheets";
-import { setupAnalytics } from "@v1/analytics/server";
-import { getCountryCode } from "@v1/location";
-import { currencies } from "@v1/location/src/currencies";
-import { createClient } from "@v1/supabase/server";
+
+import { GlobalSheets } from "@/components/global-sheets";
+import { setupAnalytics } from "@gigflow/analytics/server";
+import { getCountryCode } from "@gigflow/location";
+import { currencies } from "@gigflow/location/src/currencies";
+import { createClient } from "@gigflow/supabase/server";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
@@ -50,20 +45,21 @@ export default async function Layout({
     await setupAnalytics({ userId: user.id });
   }
   return (
-    <div>
+    <div className="relative">
       <div className="min-h-screen w-full bg-white">
         <MainNav user={user} toolContent={null}>
           {children}
           <ConnectTransactionsModal countryCode={countryCode} />
           <SelectBankAccountsModal />
+
           <Toolbar show={["onboarding"]} />
         </MainNav>
       </div>
-      {/* <ChangelogPopup /> */}
-      <Toolbar show={["onboarding"]} />
       <Suspense>
         <GlobalSheets defaultCurrency={currencies[countryCode]} />
       </Suspense>
+      {/* <ChangelogPopup /> */}
+      <Toolbar show={["onboarding"]} />
     </div>
   );
 }

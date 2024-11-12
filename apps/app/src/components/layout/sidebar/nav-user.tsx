@@ -6,8 +6,8 @@ import {
   LogOut,
 } from "lucide-react";
 
-import { createClient } from "@v1/supabase/client";
-import { Avatar, AvatarFallback, AvatarImage } from "@v1/ui/avatar";
+import { createClient } from "@gigflow/supabase/client";
+import { Avatar, AvatarFallback, AvatarImage } from "@gigflow/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +16,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@v1/ui/dropdown-menu";
+} from "@gigflow/ui/dropdown-menu";
 import { redirect } from "next/navigation";
 
 export async function NavUser({

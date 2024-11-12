@@ -1,10 +1,10 @@
 "use client";
 
-import { getUser } from "@v1/supabase/cached-queries";
-import { Button } from "@v1/ui/button";
-import { useLocalStorage, useMediaQuery } from "@v1/ui/hooks";
-import { Icons } from "@v1/ui/icons";
-import { Popover, ResponsivePopover } from "@v1/ui/popover";
+import { getUser } from "@gigflow/supabase/cached-queries";
+import { Button } from "@gigflow/ui/button";
+import { useLocalStorage, useMediaQuery } from "@gigflow/ui/hooks";
+import { Icons } from "@gigflow/ui/icons";
+import { Popover, ResponsivePopover } from "@gigflow/ui/popover";
 
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";

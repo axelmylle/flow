@@ -1,7 +1,7 @@
 "use server";
 
+import type { helloWorldTask } from "@gigflow/jobs/src/trigger/example";
 import { tasks } from "@trigger.dev/sdk/v3";
-import type { helloWorldTask } from "@v1/jobs/src/trigger/example";
 
 export async function myTask() {
   try {
