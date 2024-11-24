@@ -93,7 +93,7 @@ const Hero = () => {
             <AvatarCircles numPeople={7} avatarUrls={avatars} />
           </div>
         </div>
-        <SubscribeForm />
+        <SubscribeForm group="sdf" placeholder="hi" />
       </div>
 
       <HeroImage />
@@ -101,11 +101,3 @@ const Hero = () => {
     </section>
   );
 };
-
-// const Features = () => {
-//   return (
-//     <section className="mt-[60px] lg:mt-[180px] min-h-[530px] relative lg:h-[calc(100vh-300px)]">
-//       <Feature1 className="bg-transparent" />
-//     </section>
-//   );
-// };
