@@ -1,17 +1,15 @@
 "use client";
 
-import "@gigflow/ui/globals.css";
 import { TopbarNavigation } from "@/components/TopbarNavigation";
 import Footer from "@/components/footer";
-import { Header } from "@/components/header";
 import { Provider as AnalyticsProvider } from "@gigflow/analytics/client";
 import { Button } from "@gigflow/ui/button";
 import { cn } from "@gigflow/ui/cn";
+import "@gigflow/ui/globals.css";
 import { Wordmark } from "@gigflow/ui/wordmark";
 import { motion } from "framer-motion";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
-import type { Metadata } from "next";
 import localFont from "next/font/local";
 
 const FontKompleks = localFont({

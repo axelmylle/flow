@@ -1,26 +1,16 @@
-import { BentoCard } from "@/components/bento-card";
-import { Container } from "@/components/container";
-import { Gradient } from "@/components/gradient";
-import { Keyboard } from "@/components/home/keyboard";
 import { LogoCluster } from "@/components/home/logo-cluster";
 import HeroDifferentPlans from "@/components/home/plans";
 import TrustedClients from "@/components/home/trusted-clients";
-import { Heading, Subheading } from "@/components/text";
 import { Button } from "@gigflow/ui/button";
 
 import { AvatarCircles } from "@/components/avatar-circles";
-import { Feature1 } from "@/components/home/feature1";
 import { Features } from "@/components/home/features";
 import { HeroImage } from "@/components/home/hero-image";
 import { Metrics } from "@/components/home/metrics";
-import { PlanFeatures } from "@/components/home/plan-features";
 import { WordAnimation } from "@/components/home/word-animation";
-import { Screenshot } from "@/components/screenshot";
 import { SubscribeForm } from "@/components/subscribe-form";
 import { Testimonials } from "@/components/testimonials";
-import { cn } from "@gigflow/ui/cn";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 const avatars = [
