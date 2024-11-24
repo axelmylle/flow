@@ -37,7 +37,7 @@ export function Subheading({
       data-dark={dark ? "true" : undefined}
       className={cn(
         className,
-        "font-mono text-xs/5 font-semibold uppercase tracking-widest text-gray-500 data-[dark]:text-gray-400",
+        "text-xs/5 font-semibold tracking-widest text-gray-500 data-[dark]:text-gray-400",
       )}
     />
   );

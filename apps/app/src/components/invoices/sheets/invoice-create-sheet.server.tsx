@@ -7,12 +7,15 @@ import {
 import { InvoiceCreateSheet } from "./invoice-create-sheet";
 
 export async function InvoiceCreateSheetServer({ teamId }: { teamId: string }) {
-  const [{ data: templatesData }, { data: customersData }, invoiceNumber] =
-    await Promise.all([
-      getInvoiceTemplates(),
-      getCustomers(),
-      getInvoiceNumber(),
-    ]);
+  const [
+    { data: templatesData = null },
+    { data: customersData = null },
+    invoiceNumber,
+  ] = await Promise.all([
+    getInvoiceTemplates(),
+    getCustomers(),
+    getInvoiceNumber(),
+  ]);
 
   const defaultSettings = getDefaultSettings();
 

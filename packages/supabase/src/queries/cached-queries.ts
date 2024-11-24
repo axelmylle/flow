@@ -4,6 +4,7 @@ import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import {
   type GetCategoriesParams,
+  type GetFreelancersParams,
   type GetInvoiceSummaryParams,
   type GetInvoicesQueryParams,
   type GetJobsParams,
@@ -15,6 +16,7 @@ import {
   getCategoriesQuery,
   getCustomersQuery,
   getFreelancerExperiencesQuery,
+  getFreelancersQuery,
   getInvoiceNumberQuery,
   getInvoiceSummaryQuery,
   getInvoiceTemplatesQuery,
@@ -218,7 +220,7 @@ export const getCustomers = async () => {
   const supabase = createClient();
   const user = await getUser();
   const teamId = user?.data?.team_id;
-
+  console.log(teamId);
   if (!teamId) {
     return null;
   }
@@ -273,6 +275,27 @@ export const getTransactions = async (
       return getTransactionsQuery(supabase, { ...params, teamId });
     },
     ["transactions", user?.id],
+    {
+      revalidate: 180,
+      tags: [`transactions_${user?.id}`],
+    },
+  )(params);
+};
+
+export const getFreelancers = async (
+  params: Omit<GetFreelancersParams, "companyId">,
+) => {
+  const supabase = createClient();
+  const user = await getUser();
+  const companyId = user?.data?.company_id;
+  if (!companyId) {
+    return null;
+  }
+  return unstable_cache(
+    async () => {
+      return getFreelancersQuery(supabase, { ...params, companyId });
+    },
+    ["freelancers", user?.id],
     {
       revalidate: 180,
       tags: [`transactions_${user?.id}`],

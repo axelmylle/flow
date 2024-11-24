@@ -1,192 +1,104 @@
-import { PlusGrid, PlusGridItem, PlusGridRow } from "@/components/plus-grid";
-import { Container } from "./container";
-import { Gradient } from "./gradient";
+import { cn } from "@gigflow/ui/cn";
+import Link, { type LinkProps } from "next/link";
+import type { PropsWithChildren } from "react";
 
-import { Button } from "@gigflow/ui/button";
-import Link from "next/link";
-import { Logo } from "./logo";
-import { Subheading } from "./text";
-
-function CallToAction() {
+const Footer = ({ wide }: { wide?: boolean }) => {
   return (
-    <div className="relative pb-16 pt-20 text-center sm:py-24">
-      <hgroup>
-        <Subheading>Get started</Subheading>
-        <p className="mt-6 text-3xl font-medium tracking-tight text-gray-950 sm:text-5xl">
-          Ready to dive in?
-          <br />
-          Start your free trial today.
-        </p>
-      </hgroup>
-      <p className="mx-auto mt-6 max-w-xs text-sm/6 text-gray-500">
-        Get the cheat codes for selling and unlock your team&apos;s revenue
-        potential.
-      </p>
-      <div className="mt-6">
-        <Button className="w-full sm:w-auto">Get started</Button>
+    <div
+      className={cn(
+        "dark:border-polar-700 dark:bg-polar-950 overflow-hidden md:max-h-[820px] flex w-full flex-col items-center space-y-24 border-t border-gray-200 bg-gray-50 pt-24 md:pt-32",
+      )}
+    >
+      <div
+        className={cn(
+          "flex w-full flex-col gap-x-16 gap-y-24 px-8 md:flex-row md:justify-between md:gap-y-12",
+          wide ? "max-w-7xl" : "max-w-[970px]",
+        )}
+      >
+        <div className="flex flex-col gap-y-6">
+          <span className="dark:text-polar-500 text-gray-500">
+            &copy; Gigflow {new Date().getFullYear()}
+          </span>
+        </div>
+        <div
+          className={cn(
+            "flex flex-col gap-y-12 md:flex-row",
+            wide ? "gap-x-24 lg:gap-x-32" : "gap-x-20",
+          )}
+        >
+          <div className="flex flex-col gap-y-4">
+            <h3 className="text-base dark:text-white">Platform</h3>
+            <div className="flex flex-col gap-y-2">
+              <FooterLink href="https://api.polar.sh/v1/integrations/github/authorize?return_to=%2Fmaintainer&user_signup_type=maintainer">
+                Create an Account
+              </FooterLink>
+              <FooterLink href="https://polar.sh/products">
+                Products & Subscriptions
+              </FooterLink>
+              <FooterLink href="https://polar.sh/donations">
+                Donations
+              </FooterLink>
+              <FooterLink href="https://polar.sh/issue-funding">
+                Issue Funding
+              </FooterLink>
+            </div>
+          </div>
+          <div className="flex flex-col gap-y-4">
+            <h3 className="text-base dark:text-white">Company</h3>
+            <div className="flex flex-col gap-y-2">
+              <FooterLink href="https://polar.sh/careers">Careers</FooterLink>
+              <FooterLink href="https://blog.polar.sh">Blog</FooterLink>
+              <FooterLink href="https://polar.sh/assets/brand/polar_brand.zip">
+                Brand Assets
+              </FooterLink>
+              <FooterLink href="https://polar.sh/legal/terms">
+                Terms of Service
+              </FooterLink>
+              <FooterLink href="https://polar.sh/legal/privacy">
+                Privacy Policy
+              </FooterLink>
+            </div>
+          </div>
+          <div className="flex flex-col gap-y-4">
+            <h3 className="text-lg dark:text-white">Community</h3>
+            <div className="flex flex-col gap-y-2">
+              <FooterLink href="https://discord.gg/Pnhfz3UThd">
+                Join our Discord
+              </FooterLink>
+              <FooterLink href="https://github.com/polarsource">
+                GitHub
+              </FooterLink>
+              <FooterLink href="https://x.com/polar_sh">X / Twitter</FooterLink>
+            </div>
+          </div>
+          <div className="flex flex-col gap-y-4">
+            <h3 className="text-base dark:text-white">Support</h3>
+            <div className="flex flex-col gap-y-2">
+              <FooterLink href="https://docs.polar.sh">Docs</FooterLink>
+              <FooterLink href="https://docs.polar.sh/support/faq">
+                FAQ
+              </FooterLink>
+              <FooterLink href="mailto:support@polar.sh">Contact</FooterLink>
+            </div>
+          </div>
+        </div>
       </div>
+      <h5 className="dark:text-[#161616] font-kompleks text-[#F4F4F3] text-[500px] leading-none text-center pointer-events-none">
+        gigflow
+      </h5>
     </div>
   );
-}
+};
 
-function SitemapHeading({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-sm/6 font-medium text-gray-950/50">{children}</h3>;
-}
+export default Footer;
 
-function SitemapLinks({ children }: { children: React.ReactNode }) {
-  return <ul className="mt-6 space-y-4 text-sm/6">{children}</ul>;
-}
-
-function SitemapLink(props: React.ComponentPropsWithoutRef<typeof Link>) {
+const FooterLink = (props: PropsWithChildren<LinkProps>) => {
   return (
-    <li>
-      <Link
-        {...props}
-        className="font-medium text-gray-950 data-[hover]:text-gray-950/75"
-      />
-    </li>
+    <Link
+      className="dark:text-polar-500 dark:hover:text-polar-50 flex flex-row items-center gap-x-1 text-gray-500 transition-colors hover:text-gray-500"
+      {...props}
+    >
+      {props.children}
+    </Link>
   );
-}
-
-function Sitemap() {
-  return (
-    <>
-      <div>
-        <SitemapHeading>Product</SitemapHeading>
-        <SitemapLinks>
-          <SitemapLink href="/pricing">Pricing</SitemapLink>
-          <SitemapLink href="#">Analysis</SitemapLink>
-          <SitemapLink href="#">API</SitemapLink>
-        </SitemapLinks>
-      </div>
-      <div>
-        <SitemapHeading>Company</SitemapHeading>
-        <SitemapLinks>
-          <SitemapLink href="#">Careers</SitemapLink>
-          <SitemapLink href="/blog">Blog</SitemapLink>
-          <SitemapLink href="/company">Company</SitemapLink>
-        </SitemapLinks>
-      </div>
-      <div>
-        <SitemapHeading>Support</SitemapHeading>
-        <SitemapLinks>
-          <SitemapLink href="#">Help center</SitemapLink>
-          <SitemapLink href="#">Community</SitemapLink>
-        </SitemapLinks>
-      </div>
-      <div>
-        <SitemapHeading>Company</SitemapHeading>
-        <SitemapLinks>
-          <SitemapLink href="#">Terms of service</SitemapLink>
-          <SitemapLink href="#">Privacy policy</SitemapLink>
-        </SitemapLinks>
-      </div>
-    </>
-  );
-}
-
-function SocialIconX(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg viewBox="0 0 16 16" fill="currentColor" {...props}>
-      <path d="M12.6 0h2.454l-5.36 6.778L16 16h-4.937l-3.867-5.594L2.771 16H.316l5.733-7.25L0 0h5.063l3.495 5.114L12.6 0zm-.86 14.376h1.36L4.323 1.539H2.865l8.875 12.837z" />
-    </svg>
-  );
-}
-
-function SocialIconFacebook(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg viewBox="0 0 16 16" fill="currentColor" {...props}>
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M16 8.05C16 3.603 12.418 0 8 0S0 3.604 0 8.05c0 4.016 2.926 7.346 6.75 7.95v-5.624H4.718V8.05H6.75V6.276c0-2.017 1.194-3.131 3.022-3.131.875 0 1.79.157 1.79.157v1.98h-1.008c-.994 0-1.304.62-1.304 1.257v1.51h2.219l-.355 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.95z"
-      />
-    </svg>
-  );
-}
-
-function SocialIconLinkedIn(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg viewBox="0 0 16 16" fill="currentColor" {...props}>
-      <path d="M14.82 0H1.18A1.169 1.169 0 000 1.154v13.694A1.168 1.168 0 001.18 16h13.64A1.17 1.17 0 0016 14.845V1.15A1.171 1.171 0 0014.82 0zM4.744 13.64H2.369V5.996h2.375v7.644zm-1.18-8.684a1.377 1.377 0 11.52-.106 1.377 1.377 0 01-.527.103l.007.003zm10.075 8.683h-2.375V9.921c0-.885-.015-2.025-1.234-2.025-1.218 0-1.425.966-1.425 1.968v3.775H6.233V5.997H8.51v1.05h.032c.317-.601 1.09-1.235 2.246-1.235 2.405-.005 2.851 1.578 2.851 3.63v4.197z" />
-    </svg>
-  );
-}
-
-function SocialLinks() {
-  return (
-    <>
-      <Link
-        href="https://facebook.com"
-        target="_blank"
-        aria-label="Visit us on Facebook"
-        className="text-gray-950 data-[hover]:text-gray-950/75"
-      >
-        <SocialIconFacebook className="size-4" />
-      </Link>
-      <Link
-        href="https://x.com"
-        target="_blank"
-        aria-label="Visit us on X"
-        className="text-gray-950 data-[hover]:text-gray-950/75"
-      >
-        <SocialIconX className="size-4" />
-      </Link>
-      <Link
-        href="https://linkedin.com"
-        target="_blank"
-        aria-label="Visit us on LinkedIn"
-        className="text-gray-950 data-[hover]:text-gray-950/75"
-      >
-        <SocialIconLinkedIn className="size-4" />
-      </Link>
-    </>
-  );
-}
-
-function Copyright() {
-  return (
-    <div className="text-sm/6 text-gray-950">
-      &copy; {new Date().getFullYear()} Gigflow.
-    </div>
-  );
-}
-
-export function Footer() {
-  return (
-    <footer>
-      <Gradient className="relative">
-        <div className="absolute inset-2 rounded-3xl bg-white/70" />
-        <Container>
-          <CallToAction />
-          <PlusGrid className="pb-16">
-            <PlusGridRow>
-              <div className="grid grid-cols-2 gap-y-10 pb-6 lg:grid-cols-6 lg:gap-8">
-                <div className="col-span-2 flex">
-                  <PlusGridItem className="pt-6 lg:pb-6">
-                    <Logo className="h-9" />
-                  </PlusGridItem>
-                </div>
-                <div className="col-span-2 grid grid-cols-2 gap-x-8 gap-y-12 lg:col-span-4 lg:grid-cols-subgrid lg:pt-6">
-                  <Sitemap />
-                </div>
-              </div>
-            </PlusGridRow>
-            <PlusGridRow className="flex justify-between">
-              <div>
-                <PlusGridItem className="py-3">
-                  <Copyright />
-                </PlusGridItem>
-              </div>
-              <div className="flex">
-                <PlusGridItem className="flex items-center gap-8 py-3">
-                  <SocialLinks />
-                </PlusGridItem>
-              </div>
-            </PlusGridRow>
-          </PlusGrid>
-        </Container>
-      </Gradient>
-    </footer>
-  );
-}
+};

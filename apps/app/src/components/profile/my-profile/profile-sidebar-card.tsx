@@ -11,9 +11,12 @@ import { AvatarForm } from "./forms/avatar-form";
 import { FullNameForm } from "./forms/full-name-form";
 import { ProfileSideBarAvatar } from "./profile-sidebar-avatar";
 
-export function ProfileSidebarCard({
-  user,
-}: { user: Database["public"]["Tables"]["users"]["Row"] }) {
+type Props = {
+  daily_rate: string;
+  user: Database["public"]["Tables"]["users"]["Row"];
+};
+
+export function ProfileSidebarCard({ user, daily_rate }: Props) {
   console.log(user);
   return (
     <aside
@@ -42,7 +45,7 @@ md:rounded-[20px] md:border md:border-[#E5E7EB] md:p-8 md:px-6"
       <div className="mt-6">
         <ProfileSideBarSection
           title="Rate"
-          content={<Badge>Unavailable</Badge>}
+          content={<Badge>{daily_rate}</Badge>}
         />
         <ProfileSideBarSection
           title="Skills and Tools"

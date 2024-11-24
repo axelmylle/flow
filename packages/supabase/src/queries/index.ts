@@ -897,6 +897,158 @@ export async function getTransactionsQuery(
   };
 }
 
+export type GetFreelancersParams = {
+  companyId: string;
+
+  to: number;
+  from: number;
+  sort?: string[];
+  searchQuery?: string;
+  filter?: {
+    statuses?: string[];
+    attachments?: "include" | "exclude";
+    categories?: string[];
+    accounts?: string[];
+    assignees?: string[];
+    type?: "income" | "expense";
+    start?: string;
+    end?: string;
+    recurring?: string[];
+  };
+};
+
+export async function getFreelancersQuery(
+  supabase: Client,
+  params: GetFreelancersParams,
+) {
+  const { from = 0, to, filter, sort, searchQuery } = params;
+
+  const {
+    statuses,
+    attachments,
+    categories,
+    type,
+    accounts,
+    start,
+    end,
+    assignees,
+    recurring,
+  } = filter || {};
+
+  const columns = [
+    "id",
+    "headline",
+    "user:public_freelancers_user_id_fkey(id, full_name, avatar_url, email)", // Related user fields
+    "*",
+  ];
+
+  const query = supabase
+    .from("freelancers")
+    .select(columns.join(","), { count: "exact" });
+
+  // console.log("query", query);
+  // if (sort) {
+  //   const [column, value] = sort;
+  //   const ascending = value === "asc";
+
+  //   if (column === "attachment") {
+  //     query.order("is_fulfilled", { ascending });
+  //   } else if (column === "assigned") {
+  //     query.order("assigned(full_name)", { ascending });
+  //   } else if (column === "bank_account") {
+  //     query.order("bank_account(name)", { ascending });
+  //   } else if (column === "category") {
+  //     query.order("category(name)", { ascending });
+  //   } else {
+  //     query.order(column, { ascending });
+  //   }
+  // } else {
+  //   query
+  //     .order("date", { ascending: false })
+  //     .order("created_at", { ascending: false });
+  // }
+
+  // if (start && end) {
+  //   const fromDate = new UTCDate(start);
+  //   const toDate = new UTCDate(end);
+
+  //   query.gte("date", fromDate.toISOString());
+  //   query.lte("date", toDate.toISOString());
+  // }
+
+  // if (searchQuery) {
+  //   if (!Number.isNaN(Number.parseInt(searchQuery))) {
+  //     query.like("amount_text", `%${searchQuery}%`);
+  //   } else {
+  //     query.textSearch("fts_vector", `'${searchQuery}'`);
+  //   }
+  // }
+
+  // if (statuses?.includes("fullfilled") || attachments === "include") {
+  //   query.eq("is_fulfilled", true);
+  // }
+
+  // if (statuses?.includes("unfulfilled") || attachments === "exclude") {
+  //   query.eq("is_fulfilled", false);
+  // }
+
+  // if (statuses?.includes("excluded")) {
+  //   query.eq("status", "excluded");
+  // } else {
+  //   query.or("status.eq.pending,status.eq.posted,status.eq.completed");
+  // }
+
+  // if (categories) {
+  //   const matchCategory = categories
+  //     .map((category) => {
+  //       if (category === "uncategorized") {
+  //         return "category_slug.is.null";
+  //       }
+  //       return `category_slug.eq.${category}`;
+  //     })
+  //     .join(",");
+
+  //   query.or(matchCategory);
+  // }
+
+  // if (recurring) {
+  //   if (recurring.includes("all")) {
+  //     query.eq("recurring", true);
+  //   } else {
+  //     query.in("frequency", recurring);
+  //   }
+  // }
+
+  // if (type === "expense") {
+  //   query.lt("amount", 0);
+  //   query.neq("category_slug", "transfer");
+  // }
+
+  // if (type === "income") {
+  //   query.eq("category_slug", "income");
+  // }
+
+  // if (accounts?.length) {
+  //   query.in("bank_account_id", accounts);
+  // }
+
+  // if (assignees?.length) {
+  //   query.in("assigned_id", assignees);
+  // }
+
+  const { data, count, error } = await query.range(from, to);
+  console.log("data", data);
+  console.log("data", error);
+  return {
+    meta: {
+      count,
+    },
+    data: data?.map((freelancer) => ({
+      ...freelancer,
+    })),
+  };
+}
+
 export type GetTeamBankAccountsParams = {
   teamId: string;
   enabled?: boolean;
@@ -992,8 +1144,6 @@ export async function getTeamUserQuery(
 }
 
 export async function getSkillByIdQuery(supabase: Client, skillId: string) {
-  console.log("hi");
-
   const { data, error } = await supabase
     .schema("skill_assessment")
     .from("skills")

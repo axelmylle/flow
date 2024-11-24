@@ -10,100 +10,57 @@ import { Button } from "@gigflow/ui/button";
 import { Icons } from "@gigflow/ui/icons";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { JobCard } from "./job-card";
 import { JobList } from "./list";
 // ... existing imports ...
 
-const mockJobs = [
+export const mockJobs = [
   {
     id: "1",
-    title: "Senior Product Designer",
-    company: "TechInnovate",
-    companyLogo: "https://logo.clearbit.com/techinnovate.com",
-    location: "San Francisco, CA (Remote)",
-    salary: "$120,000 - $160,000",
-    contractType: "Full-time",
-    postedDate: "2023-07-15",
-    requiredSkills: ["UI/UX", "Figma", "User Research"],
+    title: "Senior Frontend Developer",
     description:
-      "Lead the design process for innovative tech products, creating intuitive and engaging user experiences.",
-    // ... other fields
+      "We're looking for an experienced Frontend Developer proficient in React, TypeScript, and Next.js. Must have 5+ years of experience building scalable applications and leading teams.",
+    applicantsCount: 12,
+    createdAt: new Date("2024-03-15"),
+    status: "open" as const,
   },
   {
     id: "2",
-    title: "Full Stack Developer",
-    company: "WebSolutions",
-    companyLogo: "https://logo.clearbit.com/websolutions.com",
-    location: "New York, NY (Hybrid)",
-    salary: "$100,000 - $140,000",
-    contractType: "Full-time",
-    postedDate: "2023-07-14",
-    requiredSkills: ["React", "Node.js", "MongoDB"],
+    title: "UI/UX Designer",
     description:
-      "Develop and maintain full-stack web applications, working with both front-end and back-end technologies.",
-    // ... other fields
+      "Seeking a creative UI/UX Designer to join our product team. Experience with Figma, user research, and design systems required. Healthcare industry experience is a plus.",
+    applicantsCount: 8,
+    createdAt: new Date("2024-03-10"),
+    status: "open" as const,
   },
   {
     id: "3",
-    title: "Data Scientist",
-    company: "AnalyticsPro",
-    companyLogo: "https://logo.clearbit.com/analyticspro.com",
-    location: "Boston, MA (On-site)",
-    salary: "$110,000 - $150,000",
-    contractType: "Full-time",
-    postedDate: "2023-07-13",
-    requiredSkills: ["Python", "Machine Learning", "SQL"],
+    title: "DevOps Engineer",
     description:
-      "Apply advanced analytics and machine learning techniques to derive insights from complex datasets.",
-    // ... other fields
+      "Looking for a DevOps Engineer to help scale our cloud infrastructure. Experience with AWS, Kubernetes, and CI/CD pipelines is essential.",
+    applicantsCount: 5,
+    createdAt: new Date("2024-03-01"),
+    status: "closed" as const,
   },
   {
     id: "4",
-    title: "DevOps Engineer",
-    company: "CloudTech",
-    companyLogo: "https://logo.clearbit.com/cloudtech.com",
-    location: "Seattle, WA (Remote)",
-    salary: "$115,000 - $155,000",
-    contractType: "Full-time",
-    postedDate: "2023-07-12",
-    requiredSkills: ["AWS", "Docker", "Kubernetes"],
+    title: "Backend Developer",
     description:
-      "Implement and maintain cloud infrastructure, focusing on automation, scalability, and reliability.",
-    // ... other fields
+      "Backend Developer needed for building robust APIs and microservices. Strong knowledge of Node.js, PostgreSQL, and API design principles required.",
+    applicantsCount: 0,
+    createdAt: new Date("2024-03-18"),
+    status: "draft" as const,
   },
   {
     id: "5",
-    title: "Mobile App Developer",
-    company: "AppWizards",
-    companyLogo: "https://logo.clearbit.com/appwizards.com",
-    location: "Austin, TX (Hybrid)",
-    salary: "$90,000 - $130,000",
-    contractType: "Full-time",
-    postedDate: "2023-07-11",
-    requiredSkills: ["iOS", "Android", "React Native"],
+    title: "Product Manager",
     description:
-      "Design and develop cross-platform mobile applications with a focus on performance and user experience.",
-    // ... other fields
-  },
-  {
-    id: "6",
-    title: "Cybersecurity Analyst",
-    company: "SecureNet",
-    companyLogo: "https://logo.clearbit.com/securenet.com",
-    location: "Washington, D.C. (On-site)",
-    salary: "$105,000 - $145,000",
-    contractType: "Full-time",
-    postedDate: "2023-07-10",
-    requiredSkills: [
-      "Network Security",
-      "Penetration Testing",
-      "Incident Response",
-    ],
-    description:
-      "Protect organizational assets by identifying and mitigating security threats and vulnerabilities.",
-    // ... other fields
+      "Experienced Product Manager needed to lead our core product initiatives. Must have experience in B2B SaaS products and agile methodologies.",
+    applicantsCount: 15,
+    createdAt: new Date("2024-03-05"),
+    status: "open" as const,
   },
 ];
-// ... rest of the component ...
 function PageClient() {
   const router = useRouter();
 
@@ -201,13 +158,11 @@ function PageClient() {
           />
         </div>
       </div>
-      <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div className="col-span-1">
-          <JobList jobs={mockJobs} />
-        </div>
-        <div className="col-span-2">
-          {/* <JobDetail job={mockJobs[0]} /> */}
-        </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {mockJobs.map((job) => (
+          <JobCard key={job.id} job={job} />
+        ))}
       </div>
     </>
   );

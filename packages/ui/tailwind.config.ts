@@ -21,7 +21,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        departure: ["var(--font-departure-mono)"],
+        kompleks: ["var(--font-kompleks)"],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -1,3 +1,4 @@
+import { Card, CardContent } from "@gigflow/ui/card";
 import { ClientOnly } from "@gigflow/ui/client-only";
 import { cn } from "@gigflow/ui/cn";
 import { Wordmark } from "@gigflow/ui/wordmark";
@@ -57,7 +58,7 @@ export function SidebarNav({
               {...{ inert: area !== currentArea ? "" : undefined }}
             >
               {area === "default" ? (
-                <Wordmark className="h-8" />
+                <Wordmark className="h-6" />
               ) : (
                 <div className="py group -my-1 -ml-1 flex items-center gap-2 py-2 pr-1 text-sm font-medium text-neutral-900">
                   <ChevronLeft className="size-4 text-neutral-500 transition-transform duration-100 group-hover:-translate-x-0.5" />
@@ -109,6 +110,12 @@ export function SidebarNav({
       </nav>
       <div className="relative mt-6 flex grow flex-col justify-end">
         <UserSurveyButton />
+        <Card className="mx-4">
+          <CardContent>
+            <h1>release gigflow</h1>
+            <div>dfklmsdflksdjfmls</div>
+          </CardContent>
+        </Card>
         {/* <Usage /> */}
       </div>
     </ClientOnly>

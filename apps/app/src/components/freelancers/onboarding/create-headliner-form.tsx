@@ -55,13 +55,10 @@ export function CreateHeadlinerForm({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="block text-sm font-medium text-gray-700">
-                    Subject
+                    Add up to 3 titles
                   </FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Summary of the problem you have"
-                      {...field}
-                    />
+                    <Input placeholder="frontend developer" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -70,11 +67,7 @@ export function CreateHeadlinerForm({
           </div>
         </div>
 
-        <Button
-          type="submit"
-          loading={action.isExecuting}
-          text="Create workspace"
-        >
+        <Button type="submit" loading={action.isExecuting}>
           Continue
         </Button>
       </form>
