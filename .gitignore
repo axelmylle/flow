@@ -52,8 +52,6 @@ packages/email/public
 # Scraper
 packages/scraper
 
-apps/web
-
 # Storybook
 storybook-static
 tailwind.css
