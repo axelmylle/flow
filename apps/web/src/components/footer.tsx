@@ -29,56 +29,32 @@ const Footer = ({ wide }: { wide?: boolean }) => {
           <div className="flex flex-col gap-y-4">
             <h3 className="text-base dark:text-white">Platform</h3>
             <div className="flex flex-col gap-y-2">
-              <FooterLink href="https://api.polar.sh/v1/integrations/github/authorize?return_to=%2Fmaintainer&user_signup_type=maintainer">
-                Create an Account
-              </FooterLink>
-              <FooterLink href="https://polar.sh/products">
-                Products & Subscriptions
-              </FooterLink>
-              <FooterLink href="https://polar.sh/donations">
-                Donations
-              </FooterLink>
-              <FooterLink href="https://polar.sh/issue-funding">
-                Issue Funding
-              </FooterLink>
+              <FooterLink href="/">Coming soon</FooterLink>
             </div>
           </div>
+
           <div className="flex flex-col gap-y-4">
-            <h3 className="text-base dark:text-white">Company</h3>
+            {/* <h3 className="text-lg dark:text-white">Community</h3> */}
             <div className="flex flex-col gap-y-2">
-              <FooterLink href="https://polar.sh/careers">Careers</FooterLink>
-              <FooterLink href="https://blog.polar.sh">Blog</FooterLink>
-              <FooterLink href="https://polar.sh/assets/brand/polar_brand.zip">
-                Brand Assets
-              </FooterLink>
-              <FooterLink href="https://polar.sh/legal/terms">
-                Terms of Service
-              </FooterLink>
-              <FooterLink href="https://polar.sh/legal/privacy">
-                Privacy Policy
-              </FooterLink>
-            </div>
-          </div>
-          <div className="flex flex-col gap-y-4">
-            <h3 className="text-lg dark:text-white">Community</h3>
-            <div className="flex flex-col gap-y-2">
-              <FooterLink href="https://discord.gg/Pnhfz3UThd">
+              {/* <FooterLink href="https://discord.gg/Pnhfz3UThd">
                 Join our Discord
               </FooterLink>
               <FooterLink href="https://github.com/polarsource">
                 GitHub
-              </FooterLink>
-              <FooterLink href="https://x.com/polar_sh">X / Twitter</FooterLink>
+              </FooterLink> */}
+              {/* <FooterLink href="https://x.com/polar_sh">X / Twitter</FooterLink> */}
             </div>
           </div>
           <div className="flex flex-col gap-y-4">
-            <h3 className="text-base dark:text-white">Support</h3>
+            {/* <h3 className="text-lg dark:text-white">Community</h3> */}
             <div className="flex flex-col gap-y-2">
-              <FooterLink href="https://docs.polar.sh">Docs</FooterLink>
-              <FooterLink href="https://docs.polar.sh/support/faq">
-                FAQ
+              {/* <FooterLink href="https://discord.gg/Pnhfz3UThd">
+                Join our Discord
               </FooterLink>
-              <FooterLink href="mailto:support@polar.sh">Contact</FooterLink>
+              <FooterLink href="https://github.com/polarsource">
+                GitHub
+              </FooterLink> */}
+              {/* <FooterLink href="https://x.com/polar_sh">X / Twitter</FooterLink> */}
             </div>
           </div>
         </div>

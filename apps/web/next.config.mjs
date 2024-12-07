@@ -6,6 +6,9 @@ const config = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: ["assets.dub.co"],
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

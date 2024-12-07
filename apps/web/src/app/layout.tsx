@@ -2,6 +2,7 @@
 
 import { TopbarNavigation } from "@/components/TopbarNavigation";
 import Footer from "@/components/footer";
+import { Header } from "@/components/header";
 import { Provider as AnalyticsProvider } from "@gigflow/analytics/client";
 import { Button } from "@gigflow/ui/button";
 import { cn } from "@gigflow/ui/cn";
@@ -28,11 +29,11 @@ export default function RootLayout({
         className={cn(
           `${FontKompleks.variable} ${GeistSans.variable} ${GeistMono.variable}`,
           "antialiased light",
-          "relative flex w-full flex-col items-center",
-          "bg-gray-100 dark:bg-black dark:bg-[radial-gradient(800px_at_top,rgba(20,20,25,1)_0%,rgba(0,0,0,1)_100%)] overflow-x-hidden",
+          "flex flex-col min-h-screen ",
+          "bg-gray-50  overflow-x-hidden",
         )}
       >
-        <LandingPageTopbar />
+        <Header />
         <main className="container mx-auto px-4 overflow-hidden md:overflow-visible">
           {children}
         </main>
