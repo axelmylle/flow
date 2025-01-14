@@ -245,7 +245,6 @@ export const Features = () => (
                     <div className="relative">
                       <img
                         alt="Profile"
-                        fetchpriority="high"
                         width="40"
                         height="40"
                         decoding="async"
