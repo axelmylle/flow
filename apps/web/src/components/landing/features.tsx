@@ -188,7 +188,6 @@ export const Features = () => (
                         width="40"
                         height="40"
                         decoding="async"
-                        data-nimg="1"
                         class="rounded-full bg-[rgba(128,128,128,0.14)] h-10 w-10 object-cover border-2 border-white"
                         srcset="https://useliftoff.com/_next/image?url=https%3A%2F%2Fimagedelivery.net%2F2eE23pchqRpk1E3L_rf21w%2Fa748725e-c191-47e4-738a-4295ca2d9300%2Fpublic&amp;w=48&amp;q=75 1x, https://useliftoff.com/_next/image?url=https%3A%2F%2Fimagedelivery.net%2F2eE23pchqRpk1E3L_rf21w%2Fa748725e-c191-47e4-738a-4295ca2d9300%2Fpublic&amp;w=96&amp;q=75 2x"
                         src="https://useliftoff.com/_next/image?url=https%3A%2F%2Fimagedelivery.net%2F2eE23pchqRpk1E3L_rf21w%2Fa748725e-c191-47e4-738a-4295ca2d9300%2Fpublic&amp;w=96&amp;q=75"
