@@ -244,7 +244,7 @@ export const Features = () => (
                   <div className="flex items-center gap-3 text-neutral-800">
                     <div className="relative">
                       <img
-                        alt="Profile"
+                        alt="Pofile"
                         width="40"
                         height="40"
                         decoding="async"

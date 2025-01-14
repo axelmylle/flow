@@ -1,10 +1,9 @@
-name: Production Deployment - Website
+name: Production Deployment - Domotica Architect Website
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
   TURBO_TOKEN: ${{ secrets.VERCEL_TOKEN }}
   TURBO_TEAM: ${{ secrets.VERCEL_ORG_ID }}
-  NODE_OPTIONS: --max-old-space-size=4096
 on:
   push:
     branches:
@@ -12,7 +11,6 @@ on:
     paths:
       - apps/web/**
       - packages/**
-      - "!packages/email/**"
 jobs:
   deploy-production:
     runs-on: ubuntu-latest
@@ -28,18 +26,19 @@ jobs:
       # - name: 🪐 Check TypeScript
       #   run: bun run typecheck --filter=@midday/website
       - name: 📤 Pull Vercel Environment Information
-        run: bunx vercel env pull .env --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: 📤 Pull Vercel Environment Information
         run: bunx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: 🏗 Build Project Artifacts
-        run: bunx vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - name: 🔄 Deploy Background Jobs
-        env:
-          TRIGGER_ACCESS_TOKEN: ${{ secrets.TRIGGER_ACCESS_TOKEN }}
-        run: |
-          TRIGGER_PROJECT_ID=${{ secrets.TRIGGER_PROJECT_ID }} bunx trigger.dev@3.3.7 deploy
-        working-directory: apps/dashboard
+        run: bunx vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
-        run: |
-          bunx vercel deploy --prebuilt --prod --archive=tgz --token=${{ secrets.VERCEL_TOKEN }} > domain.txt
-          bunx vercel alias --scope=${{ secrets.VERCEL_ORG_ID }} --token=${{ secrets.VERCEL_TOKEN }} set `cat domain.txt` midday.ai
+        run: bunx vercel deploy --prebuilt --archive=tgz --token=${{ secrets.VERCEL_TOKEN }}
+
+      # - name: 🔄 Deploy Background Jobs
+      #   env:
+      #     TRIGGER_ACCESS_TOKEN: ${{ secrets.TRIGGER_ACCESS_TOKEN }}
+      #   run: |
+      #     TRIGGER_PROJECT_ID=${{ secrets.TRIGGER_PROJECT_ID }} bunx trigger.dev@3.3.7 deploy
+      #   working-directory: apps/dashboard
+      # - name: Deploy Project Artifacts to Vercel
+      #   run: |
+      #     bunx vercel deploy --prebuilt --prod --archive=tgz --token=${{ secrets.VERCEL_TOKEN }} > domain.txt
+      #     bunx vercel alias --scope=${{ secrets.VERCEL_ORG_ID }} --token=${{ secrets.VERCEL_TOKEN }} set `cat domain.txt` midday.ai
