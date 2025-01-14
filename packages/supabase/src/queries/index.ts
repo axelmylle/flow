@@ -432,6 +432,7 @@ export type GetJobsParams = {
   from: number;
   sort?: string[];
   searchQuery?: string;
+  id?: string;
   // filter?: {
   //   statuses?: string[];
   //   attachments?: "include" | "exclude";
@@ -451,6 +452,10 @@ export async function getJobsByQuery(supabase: Client, params: GetJobsParams) {
     .select("*")
     .eq("status", "active")
     .order("created_at");
+
+  if (params.id) {
+    query.eq("id", params.id);
+  }
 
   const { data } = await query;
 

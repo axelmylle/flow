@@ -2,12 +2,12 @@
 const config = {
   poweredByHeader: false,
   reactStrictMode: true,
-  transpilePackages: ["@gigflow/ui"],
+  transpilePackages: ["@gigflow/ui", "next-mdx-remote"],
   eslint: {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["assets.dub.co"],
+    domains: ["assets.dub.co", "pbs.twimg.com", "logo.clearbit.com"],
   },
   typescript: {
     ignoreBuildErrors: true,

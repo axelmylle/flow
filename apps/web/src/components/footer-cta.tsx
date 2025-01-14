@@ -34,11 +34,11 @@ function FooterCTA() {
         </div>
         <div className="relative mx-auto flex w-full max-w-lg flex-col items-center">
           <h2 className="font-display text-4xl font-medium text-neutral-900 sm:text-5xl sm:leading-[1.15]">
-            Join the beta.
+            Your Career, Simplified
           </h2>
           <p className="mt-5 text-balance text-base text-neutral-500 sm:text-xl">
-            Be among the first to experience a platform designed to empower
-            Belgian freelancers.
+            Stop searching, start thriving. With Gigflow, every opportunity
+            comes to you.
           </p>
         </div>
         <div className="relative mx-auto mt-10 flex max-w-fit space-x-4">

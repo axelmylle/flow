@@ -1,3 +1,4 @@
+import { Button } from "@gigflow/ui/button";
 import React from "react";
 
 function FeatureFullRowCard() {
@@ -60,8 +61,9 @@ function FeatureFullRowCard() {
         </h3>
         <div className="mt-2 text-neutral-500 transition-colors [&amp;_a]:font-medium [&amp;_a]:text-neutral-600 [&amp;_a]:underline [&amp;_a]:decoration-dotted [&amp;_a]:underline-offset-2 hover:[&amp;_a]:text-neutral-800">
           <p>
-            Offers a personalized guide for starting and scaling a freelance
-            career, covering admin, taxes, and client acquisition.
+            Grow your freelancing career and your income by helping others do
+            the same. Gigflow supports you with centralized tools and
+            opportunities to thrive in the freelance world.
           </p>
         </div>
         <a
@@ -70,6 +72,7 @@ function FeatureFullRowCard() {
         >
           Explore analytics
         </a>
+        <Button variant="outline">Explore</Button>
       </div>
     </div>
   );

@@ -20,23 +20,23 @@ export async function GlobalSheets({ defaultCurrency }: Props) {
 
   return (
     <div className="relative">
-      <Suspense fallback={null}>
+      {/* <Suspense fallback={null}>
         <TrackerSheetsServer
           teamId={userData?.team_id}
           userId={userData?.id}
           timeFormat={userData?.time_format}
           defaultCurrency={defaultCurrency}
         />
-      </Suspense>
+      </Suspense> */}
 
       <CustomerCreateSheet />
       <CustomerEditSheet />
-      <InvoiceCommentsSheet />
+      {/* <InvoiceCommentsSheet />
 
       <Suspense fallback={null}>
-        {/* We preload the invoice data (template, invoice number etc) */}
+  
         <InvoiceCreateSheetServer teamId={userData?.team_id} />
-      </Suspense>
+      </Suspense> */}
     </div>
   );
 }

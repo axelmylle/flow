@@ -14,7 +14,9 @@ export default function ChooseRole() {
 
   return (
     <div className="flex flex-col items-center justify-center p-4">
-      <h1 className="text-3xl font-bold mb-8">Choose your path</h1>
+      <h1 className="font-display text-3xl font-medium mb-8">
+        What brings you to gigflow?
+      </h1>
       <div className="grid md:grid-cols-2 gap-6  w-full">
         <Card
           className="group cursor-pointer min-w-52 relative overflow-hidden h-[300px] transition-transform duration-500 hover:scale-[1.02]"

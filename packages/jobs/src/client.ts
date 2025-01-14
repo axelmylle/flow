@@ -13,15 +13,10 @@ export const client = new TriggerClient({
 });
 
 export const supabase = new Supabase<Database>({
-  id: "create-v1",
-  supabaseUrl: "http://127.0.0.1:54321",
-  supabaseKey:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0",
+  id: "gigflow",
+  supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
 });
-
-// const supabaseManagement = new SupabaseManagement({
-//   id: "gigflow-supabase-management",
-// });
 
 export const resend = new Resend({
   id: "resend",

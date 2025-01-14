@@ -41,9 +41,6 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  console.log("-----------------code----------------", { code });
-  console.log("-----------------code----------------", { userType });
-
   if (code) {
     const supabase = createClient(cookieStore);
     await supabase.auth.exchangeCodeForSession(code);
@@ -51,9 +48,6 @@ export async function GET(req: NextRequest) {
     const {
       data: { session },
     } = await getSession();
-    console.log("-----------------code----------------", {
-      id: session?.user?.id,
-    });
 
     if (!session?.user.user_metadata.isOnboarded) {
       await supabase
