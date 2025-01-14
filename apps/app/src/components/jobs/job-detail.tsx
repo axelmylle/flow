@@ -103,7 +103,7 @@ export function JobDetail({ job }: JobDetailProps) {
           <p className="text-[#888] text-sm font-normal">Tech stack</p>
           <div className="flex flex-wrap items-center gap-1.5 ml-4 md:ml-0">
             {job.requiredSkills?.map((skill, index) => (
-              <Badge key={index} variant="outline">
+              <Badge key={index} variant="default">
                 {skill}
               </Badge>
             ))}
