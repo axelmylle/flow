@@ -39,7 +39,7 @@ jobs:
       TF_VAR_linked_project: ${{ secrets.SUPABASE_PROJECT_ID }}
     defaults:
       run:
-        working-directory: supabase/remotes
+        working-directory: ./apps/api/supabase/remotes
 
     steps:
       - uses: actions/checkout@v4
