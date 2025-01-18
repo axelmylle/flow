@@ -10,7 +10,6 @@ jobs:
   migrate:
     runs-on: ubuntu-latest
     environment: Production
-
     env:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
       SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
@@ -27,10 +26,12 @@ jobs:
       - uses: supabase/setup-cli@v1
         with:
           version: latest
-
-      - run: supabase link --project-ref $SUPABASE_PROJECT_ID
-      - run: supabase db push
-
+      - name: Link Supabase
+        run: supabase link --project-ref $SUPABASE_PROJECT_ID
+        working-directory: ./apps/api/supabase
+      - name: Push Supabase
+        run: supabase db push
+        working-directory: ./apps/api/supabase
   apply:
     runs-on: ubuntu-latest
     env:
