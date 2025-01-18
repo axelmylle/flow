@@ -1,5 +1,5 @@
 export const MicroFeatures = () => (
   <div>
-    <h1>Micro Feasssstssssures</h1>
+    <h1>Micro Feasssstssssuress</h1>
   </div>
 );
