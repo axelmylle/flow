@@ -1,7 +1,8 @@
 "use client";
 
-import type { updateClientFormValues } from "@/actions/client/schema";
-import { updateClientAction } from "@/actions/client/update-client-action";
+import type { updateCompanyFormValues } from "@/actions/company/schema";
+import { updateCompanyAction } from "@/actions/company/update-company-action";
+
 import { Button } from "@gigflow/ui/button";
 import { cn } from "@gigflow/ui/cn";
 import { Combobox } from "@gigflow/ui/combobox";
@@ -23,7 +24,7 @@ import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 
-type FormData = updateClientFormValues;
+type FormData = updateCompanyFormValues;
 
 export function SetupCompanyForm({
   onSuccess,
@@ -35,7 +36,7 @@ export function SetupCompanyForm({
   className?: string;
 }) {
   const form = useForm<FormData>();
-  const action = useAction(updateClientAction);
+  const action = useAction(updateCompanyAction);
   const [showCreateClient, setShowCreateClient] = useState<boolean>(false);
 
   const { isMobile } = useMediaQuery();

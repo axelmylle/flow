@@ -1,11 +1,11 @@
 "use client";
 
-import { useOnboardingProgress } from "@/app/[locale]/(onboarding)/onboarding/use-onboarding-progress";
 import { Card, CardContent } from "@gigflow/ui/card";
 import { useEffect, useState } from "react";
+import { useClientOnboardingProgress } from "./onboarding/use-onboarding-progress";
 
 export function OnboardingSummaryCard() {
-  const { continueTo, isLoading, isSuccessful } = useOnboardingProgress();
+  const { continueTo, isLoading, isSuccessful } = useClientOnboardingProgress();
   const [onboardingData, setOnboardingData] = useState(null);
 
   useEffect(() => {

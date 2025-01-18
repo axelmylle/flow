@@ -1,5 +1,5 @@
-import { setClientOnboardingProgress } from "@/actions/client/set-onboarding-progress";
-import type { ClientOnboardingStep } from "@/actions/client/types";
+import { setClientOnboardingProgress } from "@/actions/company/set-onboarding-progress";
+import type { ClientOnboardingStep } from "@/actions/company/types";
 import { useAction } from "next-safe-action/hooks";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
