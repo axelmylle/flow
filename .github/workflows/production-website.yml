@@ -10,11 +10,7 @@ on:
       - main
     paths:
       - apps/web/**
-      - packages/jobs/**
-      - packages/supabase/**
-      - packages/ui/**
-      - packages/utils/**
-      - packages/typescript/**
+      - packages/**
       - "!packages/email/**"
 jobs:
   deploy-production:
@@ -30,20 +26,19 @@ jobs:
       #   run: bun run lint --filter=@midday/website
       # - name: 🪐 Check TypeScript
       #   run: bun run typecheck --filter=@midday/website
-      - name: 📤 Pull Vercel Environment Information
-        run: bunx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: 🏗 Build Project Artifacts
-        run: bunx turbo build --filter=@gigflow/web... --token=${{ secrets.VERCEL_TOKEN }} && bunx vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy Project Artifacts to Vercel
-        run: bunx vercel deploy --prebuilt --archive=tgz --token=${{ secrets.VERCEL_TOKEN }}
-
-      # - name: 🔄 Deploy Background Jobs
-      #   env:
-      #     TRIGGER_ACCESS_TOKEN: ${{ secrets.TRIGGER_ACCESS_TOKEN }}
-      #   run: |
-      #     TRIGGER_PROJECT_ID=${{ secrets.TRIGGER_PROJECT_ID }} bunx trigger.dev@3.3.7 deploy
-      #   working-directory: apps/dashboard
+      # - name: 📤 Pull Vercel Environment Information
+      #   run: bunx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      # - name: 🏗 Build Project Artifacts
+      #   run: bunx vercel build --token=${{ secrets.VERCEL_TOKEN }}
       # - name: Deploy Project Artifacts to Vercel
+      #   run: bunx vercel deploy --prebuilt --archive=tgz --token=${{ secrets.VERCEL_TOKEN }}
+      - name: 🔄 Deploy Background Jobs
+        env:
+          TRIGGER_ACCESS_TOKEN: ${{ secrets.TRIGGER_ACCESS_TOKEN }}
+        run: |
+          TRIGGER_PROJECT_ID=${{ secrets.TRIGGER_PROJECT_ID }} bunx trigger.dev@3.3.7 deploy
+        working-directory: apps/dashboard
+      # - name: 🚀 Deploy to Vercel
       #   run: |
       #     bunx vercel deploy --prebuilt --prod --archive=tgz --token=${{ secrets.VERCEL_TOKEN }} > domain.txt
-      #     bunx vercel alias --scope=${{ secrets.VERCEL_ORG_ID }} --token=${{ secrets.VERCEL_TOKEN }} set `cat domain.txt` midday.ai
+      #     bunx vercel alias --scope=${{ secrets.VERCEL_ORG_ID }} --token=${{ secrets.VERCEL_TOKEN }} set `cat domain.txt` app.midday.ai
