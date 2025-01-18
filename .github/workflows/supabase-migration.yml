@@ -15,6 +15,12 @@ jobs:
       SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PROJECT_ID }}
 
     steps:
+      # Add these debug steps
+      - name: Debug
+        run: |
+          echo "Project ID length: ${#SUPABASE_PROJECT_ID}"
+          echo "DB Password length: ${#SUPABASE_DB_PASSWORD}"
+          echo "Access Token length: ${#SUPABASE_ACCESS_TOKEN}"
       - uses: actions/checkout@v4
       - uses: supabase/setup-cli@v1
         with:
